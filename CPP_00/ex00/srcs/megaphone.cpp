@@ -6,23 +6,24 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 06:22:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/01/13 12:34:15 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:51:14 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cctype>
+#include <string>
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-    if (argc < 2)
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-    for (int i = 1; i < argc; i++)
+    if (ac == 1)
+	{
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+        return(1);
+    }
+    for (int i = 1; av[i]; i++)
     {
-        for (size_t j = 0; argv[i][j]; j++)
-            std::cout << static_cast<char>(std::toupper(static_cast<unsigned char>(argv[i][j])));
-        if (i < argc - 1)
-            std::cout << ' ';
+        for (int j = 0; av[i][j]; j++)
+            std::cout << (char)toupper(av[i][j]);
     }
     std::cout << std::endl;
     return (0);

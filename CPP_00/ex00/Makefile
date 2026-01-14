@@ -1,33 +1,25 @@
 NAME     := megaphone
-CXX      := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98
-
-OBJ_DIR  := obj/
-
+CPP      := c++
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/megaphone.cpp
-
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
-
 all: $(NAME)
-	@echo "$(NAME) built successfully!"
 
 $(NAME): $(OBJS)
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $@
-	@echo "$(NAME) object files compiled."
+	@$(CPP) $(CPPFLAGS) $(OBJS) -o $@
 	@echo "$(NAME) created!"
 
-$(OBJ_DIR)%.o: %.cpp
-	@mkdir -p $(dir $@)
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
+%.o: %.cpp
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJS)
 	@echo "$(NAME) object files removed."
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(NAME) and $(NAME) object files removed."
+	@echo "$(NAME) removed."
 
 re: fclean all
 
