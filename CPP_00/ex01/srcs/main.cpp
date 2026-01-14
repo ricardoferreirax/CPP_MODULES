@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:03:05 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/01/14 16:14:39 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:47:33 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,25 @@
 #include <cctype>
 #include <cstdlib>
 
-std::string handleLine()
+// Validate phone number (digits only, optional leading '+')
+static bool	validatePhoneNumber(const std::string &value)
+{
+	if (value.empty())
+		return (false);
+	for (size_t i = 0; i < value.length(); i++)
+	{
+		if (value[i] == '+' && i == 0)
+			continue ;
+		if (value[i] == '+' && i != 0)
+			return (false);
+		if (!std::isdigit(static_cast<unsigned char>(value[i])))
+			return (false);
+	}
+	return (true);
+}
+
+// Read a non-empty line from stdin
+static std::string readUserInput()
 {
 	std::string line;
 	while (true)
@@ -34,71 +52,53 @@ std::string handleLine()
 	}
 }
 
-static bool	isDigit(std::string value)
+// Handle ADD command
+static void	executeAddCommand(PhoneBook &pb)
 {
-	if (value.empty())
-		return (false);
-	for (size_t i = 0; i < value.length(); i++)
-	{
-		if (value[i] == '+' && i == 0)
-			continue ;
-		if (value[i] == '+' && i != 0)
-			return (false);
-		if (!std::isdigit(static_cast<unsigned char>(value[i])))
-			return (false);
-	}
-	return (true);
-}
-
-static void	addNewContact(PhoneBook &myPhoneBook)
-{
-	Contact	newContact;
+	Contact	c;
 
 	std::string input;
 	std::cout << "First Name: ";
-	input = handleLine();
-	newContact.setFirstName(input);
+	c.setFirstName(readUserInput());
 	std::cout << "Last Name: ";
-	input = handleLine();
-	newContact.setLastName(input);
+	c.setLastName(readUserInput());
 	std::cout << "Nick Name: ";
-	input = handleLine();
-	newContact.setNickName(input);
+	c.setNickName(readUserInput());
 	std::cout << "Phone Number: ";
-	input = handleLine();
-	while (!isDigit(input))
+	input = readUserInput();
+	while (!validatePhoneNumber(input))
 	{
 		std::cout << "Phone Number must contain only digits. Try again: ";
-		input = handleLine();
+		input = readUserInput();
 	}
-	newContact.setPhoneNumber(input);
+	c.setPhoneNumber(input);
 	std::cout << "Darkest Secret: ";
-	input = handleLine();
-	newContact.setDarkestSecret(input);
-	myPhoneBook.addContact(newContact);
+	c.setDarkestSecret(readUserInput());
+	pb.storeContact(c);
 	std::cout << "Contact added!" << std::endl;
 }
 
-static void	showAllContacts(PhoneBook &myPhoneBook)
+// Handle SEARCH command
+static void	executeSearchCommand(PhoneBook &pb)
 {
 	int	index;
 
-	if (!myPhoneBook.displayAllContacts())
+	if (!pb.printContactsTable())
 		return ;
 	std::cout << "Enter index to view details: ";
-	std::string input = handleLine();
-	while (!isDigit(input))
+	std::string input = readUserInput();
+	while (!validatePhoneNumber(input))
 	{
 		std::cout << "Index must contain only digits. Try again: ";
-		input = handleLine();
+		input = readUserInput();
 	}
 	index = std::atoi(input.c_str());
-	myPhoneBook.searchContact(index);
+	pb.printContactDetails(index);
 }
 
 int	main(int ac, char **av)
 {
-	PhoneBook	myPhoneBook;
+	PhoneBook	phonebook;
 
 	(void)av;
 	if (ac != 1)
@@ -110,11 +110,11 @@ int	main(int ac, char **av)
 	while (true)
 	{
 		std::cout << "Enter command (ADD, SEARCH, EXIT): " << std::endl;
-		command = handleLine();
+		command = readUserInput();
 		if (command == "ADD")
-			addNewContact(myPhoneBook);
+			executeAddCommand(phonebook);
 		else if (command == "SEARCH")
-			showAllContacts(myPhoneBook);
+			executeSearchCommand(phonebook);
 		else if (command == "EXIT")
 		{
 			std::cout << "Exiting program ..." << std::endl;

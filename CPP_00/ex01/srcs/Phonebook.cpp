@@ -6,55 +6,63 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/01/14 16:14:30 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:44:13 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Phonebook.hpp"
+# include "../includes/Phonebook.hpp"
 
+// Initialize empty phonebook
 PhoneBook::PhoneBook()
 {
-	this->totalContacts = 0;
+	totalContacts = 0;
 }
 
-void PhoneBook::incrementTotalContacts()
+// Increase total stored contacts
+void PhoneBook::updateContactCount()
 {
-	this->totalContacts++;
+	totalContacts++;
 }
 
+// Return max capacity (8)
 int PhoneBook::getMaxContacts() const
 {
-	return (PhoneBook::maxContacts);
+	return (maxContacts);
 }
+
+// Return total number of added contacts
 int PhoneBook::getTotalContacts() const
 {
-	return (this->totalContacts);
+	return (totalContacts);
 }
 
-std::string PhoneBook::formatField(std::string str)
+// Truncate a field to fit 10 characters
+std::string PhoneBook::truncateForDisplay(std::string field)
 {
-	if (str.length() > 10)
-		return (str.substr(0, 9) + ".");
-	return (str);
+	if (field.length() > 10)
+		return (field.substr(0, 9) + ".");
+	return (field);
 }
 
-void PhoneBook::addContact(Contact contact)
+// Store a contact using circular buffer logic
+void PhoneBook::storeContact(Contact contact)
 {
 	int	slot;
 
-	slot = this->getTotalContacts() % this->getMaxContacts();
-	this->contacts[slot] = contact;
-	this->incrementTotalContacts();
+	slot = totalContacts % maxContacts;
+	contacts[slot] = contact;
+	updateContactCount();
 }
 
-void PhoneBook::searchContact(int index)
+// Print full information of one contact
+void PhoneBook::printContactDetails(int index)
 {
-	int	count;
+	int	visible;
 
-	count = this->getTotalContacts();
-	if (count > this->getMaxContacts())
-		count = this->getMaxContacts();
-	if (index < 0 || index >= count)
+	visible = totalContacts;
+	if (visible > maxContacts)
+		visible = maxContacts;
+	if (index < 0 || index >= visible)
 	{
 		std::cout << "Invalid index!" << std::endl;
 		return ;
@@ -67,22 +75,30 @@ void PhoneBook::searchContact(int index)
 	std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
 }
 
-bool PhoneBook::displayAllContacts()
+// Print contacts table (SEARCH view)
+bool PhoneBook::printContactsTable()
 {
-	int count = this->getTotalContacts();
-	if (count <= 0)
+	int	visible;
+
+	visible = totalContacts;
+	if (visible <= 0)
 	{
 		std::cout << "There are no contacts to display!" << std::endl;
 		return (false);
 	}
-	if (count > this->getMaxContacts())
-		count = this->getMaxContacts();
+	if (visible > maxContacts)
+		visible = maxContacts;
 	std::cout << "+----------+----------+----------+----------+" << std::endl;
 	std::cout << "|     Index|First Name| Last Name| Nickname |" << std::endl;
 	std::cout << "+----------+----------+----------+----------+" << std::endl;
-	for (int i = 0; i < count; i++)
-		std::cout << "|" << std::setw(10) << i << "|" << std::setw(10) << formatField(contacts[i].getFirstName()) << "|" << std::setw(10) << formatField(contacts[i].getLastName()) << "|" << std::setw(10) << formatField(contacts[i].getNickName()) << "|" << std::endl;
-
+	for (int i = 0; i < visible; i++)
+	{
+		std::cout << "|" << std::setw(10) << i;
+		std::cout << "|" << std::setw(10) << truncateForDisplay(contacts[i].getFirstName());
+		std::cout << "|" << std::setw(10) << truncateForDisplay(contacts[i].getLastName());
+		std::cout << "|" << std::setw(10) << truncateForDisplay(contacts[i].getNickName());
+		std::cout << "|" << std::endl;
+	}
 	std::cout << "+----------+----------+----------+----------+" << std::endl;
 	return (true);
 }

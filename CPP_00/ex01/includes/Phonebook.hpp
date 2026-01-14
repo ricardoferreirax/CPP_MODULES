@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:23:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/01/14 16:28:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:43:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <iostream>
 # include <iomanip>
 # include <string>
-#include "../includes/Contact.hpp"
+# include "../includes/Contact.hpp"
 
 class PhoneBook
 {
@@ -26,17 +26,17 @@ class PhoneBook
     int totalContacts;
 
   public:
-	// Constructor (starts empty)
+    // 
     PhoneBook();
 
-    void incrementTotalContacts();
+    void updateContactCount();
     int getMaxContacts() const;
     int getTotalContacts() const;
 
-    std::string formatField(std::string str);
-    void addContact(Contact contact);
-    void searchContact(int index);
-    bool displayAllContacts();
+    std::string truncateForDisplay(std::string field);
+    void storeContact(Contact contact);
+    void printContactDetails(int index);
+    bool printContactsTable();
 };
 
 #endif
