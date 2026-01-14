@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:21:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/01/14 16:05:58 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:22:16 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ class Contact
     std::string darkestSecret;
 
   public:
+	// setters (store one field of the contact)
     void setFirstName(std::string value);
     void setLastName(std::string value);
     void setNickName(std::string value);
     void setPhoneNumber(std::string value);
     void setDarkestSecret(std::string value);
 
+	// getters (retrieve one field of the contact)
     std::string getFirstName();
     std::string getLastName();
     std::string getNickName();
