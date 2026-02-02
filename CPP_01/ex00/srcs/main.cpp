@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 23:20:18 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/02 23:44:16 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/02 23:53:54 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,4 @@ int main(void)
 	delete(z1);
 	randomChump("Mercury");
 }
+

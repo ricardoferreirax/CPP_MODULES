@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 23:41:20 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/02 23:42:04 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/02 23:50:19 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void randomChump(std::string name)
 {
-    Zombie z(name);
-    z.announce();
+    Zombie stackZombie(name);
+    stackZombie.announce();
 }
