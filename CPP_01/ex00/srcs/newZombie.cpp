@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   newZombie.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 12:59:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/02 23:33:19 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/02/02 23:31:45 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/02/02 23:33:43 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-#define ZOMBIE_HPP
+#include "../includes/Zombie.hpp"
 
-#include <iostream>
-#include <string>
-
-class Zombie 
+Zombie* newZombie(std::string name)
 {
-	private:
-		std::string name;
-	public:
-		Zombie( std::string name );
-		~Zombie();
-		void	announce( void );
-};
-
-Zombie*	newZombie( std::string name );
-
-#endif
+    // * return pointer the location of the object in the heap.
+    return (new Zombie(name));
+}

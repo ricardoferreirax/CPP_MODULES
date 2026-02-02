@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 12:59:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/02 23:33:19 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/01/15 23:20:18 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/02/02 23:31:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-#define ZOMBIE_HPP
+#include "../includes/Zombie.hpp"
 
-#include <iostream>
-#include <string>
-
-class Zombie 
+int main(void)
 {
-	private:
-		std::string name;
-	public:
-		Zombie( std::string name );
-		~Zombie();
-		void	announce( void );
-};
+	Zombie*	z1;
 
-Zombie*	newZombie( std::string name );
+	z1 = newZombie("Ricardo");
+	z1->announce();
+}
 
-#endif
