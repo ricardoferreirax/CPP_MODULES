@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:48:41 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/02 23:16:51 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/02 23:56:25 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Zombie::Zombie(std::string name)
 
 Zombie::~Zombie()
 {
-    std::cout << name << " was destroyed!" << std::endl;
+    std::cout << name << " has been destroyed" << std::endl;
 }
 
 void Zombie::announce(void)
