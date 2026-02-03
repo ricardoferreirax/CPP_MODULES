@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 12:59:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/03 22:38:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:03:20 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 #include <iostream>
 #include <string>
+
+#define BLUE    "\033[1;34m"
+#define RED     "\033[1;31m"
+#define GREEN   "\033[1;32m"
+#define YELLOW  "\033[1;33m"
+#define RESET   "\033[0m"
 
 class Zombie 
 {
