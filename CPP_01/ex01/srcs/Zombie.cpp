@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:23:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/03 23:21:01 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:42:22 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ void Zombie::announce( void )
 
 void Zombie::setName(std::string name)
 {
-	std::cout << "Setting zombie name to: " << name << std::endl;
 	this->_name = name;
 }

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 16:56:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/03 16:56:54 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:48:51 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 
 int main(void)
 {
-    Zombie zombie;
+	Zombie *horde;
+	int Nb;
 
-    zombie.setName("Ricardo");
-    zombie.announce();
-    return (0);
+	Nb = 10;
+    std::cout << "Zombie Horde Creation: " << std::endl;
+	horde = zombieHorde(Nb, "Zombies");
+	std::cout << "\n";
+	std::cout << "Zombies Announce Themselves: " << std::endl;
+	for (int i = 0; i < Nb; i++)
+	{
+		std::cout << "[" << i << "] ";
+		horde[i].announce();
+	}
+	std::cout << "\n";
+	std::cout << "Zombie Horde Destruction: " << std::endl;
+	delete [] horde;
+	return (0);
 }
