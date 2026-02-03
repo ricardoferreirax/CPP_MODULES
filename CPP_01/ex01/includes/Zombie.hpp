@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:25:27 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/03 16:49:26 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:14:33 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 class Zombie 
 {
 	private:
-		std::string name;
+		std::string _name;
 	public:
         Zombie( void ); // * Default Constructor
-		~Zombie(); // * Destructor
-		void	setName(std::string name);
+		~Zombie( void ); // * Destructor
 		void	announce( void );
+		void	setName(std::string name);
 };
 
 
