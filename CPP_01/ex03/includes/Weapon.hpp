@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:34:28 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/04 20:04:45 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/04 20:21:06 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ class Weapon
 	private:
 		std::string _type;
 	public:
+		Weapon(void);
 		Weapon(std::string _type);
 		~Weapon(void);
-		Weapon(void);
+		const std::string &getType();
+		void setType(std::string newType);
 };
 
 #endif
