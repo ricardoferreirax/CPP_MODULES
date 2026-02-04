@@ -2,7 +2,8 @@ NAME     := Unnecessary_violence
 CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
-			srcs/Weapon.cpp
+			srcs/Weapon.cpp \
+			srcs/HumanA.cpp
 			
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 

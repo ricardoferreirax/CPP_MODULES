@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 16:37:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/04 20:47:42 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/02/04 20:24:12 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/02/04 20:42:37 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Weapon.hpp"
+#include "Weapon.hpp"
 
-Weapon::Weapon(void)
+#ifndef HUMANA_HPP
+#define HUMANA_HPP
+
+class HumanA
 {
-	this->_type = "Without a Weapon";
-}
+	private:
+		std::string _name;
+		Weapon &_weapon;
+	public:
+		HumanA(std::string name, Weapon &wp);
+		~HumanA(void);
+		void attack(void);
+};
 
-Weapon::Weapon(std::string type)
-{
-	this->_type = type;
-}
-
-Weapon::~Weapon(void)
-{	
-	std::cout << "Weapon [" << _type << "] has been destroyed" << std::endl;
-}
-
-const std::string &Weapon::getType(void)
-{
-	return (this->_type);
-}
-
-void Weapon::setType(std::string newType)
-{
-	this->_type = newType;
-}
+#endif
