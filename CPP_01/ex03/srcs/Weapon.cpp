@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:37:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/04 20:47:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/04 23:22:24 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 Weapon::Weapon(void)
 {
-	this->_type = "Without a Weapon";
+	this->_type = "Unassigned Weapon";
+	std::cout << this->_type << ": Weapon created with no assigned type\n" << std::endl;
 }
 
 Weapon::Weapon(std::string type)
 {
 	this->_type = type;
+	std::cout << "Weapon [" << this->_type << "] has been created!" << std::endl;
 }
 
 Weapon::~Weapon(void)
 {	
-	std::cout << "Weapon [" << _type << "] has been destroyed" << std::endl;
+	std::cout << "Weapon [" << this->_type << "] has been destroyed!\n" << std::endl;
 }
 
 const std::string &Weapon::getType(void)
@@ -35,4 +37,5 @@ const std::string &Weapon::getType(void)
 void Weapon::setType(std::string newType)
 {
 	this->_type = newType;
+	std::cout << "Weapon [" << this->_type << "] has been equipped!"<<std::endl;
 }
