@@ -1,4 +1,4 @@
-NAME     := zombie
+NAME     := BraiiiiiiinnnzzzZ
 CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
