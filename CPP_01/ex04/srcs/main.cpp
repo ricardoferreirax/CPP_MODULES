@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:07:53 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/05 14:25:08 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/05 22:28:51 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ int main(int ac, char **av)
 	if (ac != 4)
 	{
 		std::cerr << "Run: " << av[0] << " <filename> <s1> <s2>" << std::endl;
-		return 1;
+		return (1);
+	}
+	if (std::string(av[2]).empty())
+	{
+		std::cerr << "Error: s1 should not be empty" << std::endl;
+		return (1);
 	}
 	Sed sed(av[1], av[2], av[3]);
 	std::cout << "Input:  " << sed.getInputFilename() << std::endl;
 	std::cout << "Output: " << sed.getOutputFilename() << std::endl;
 	std::cout << "s1:     " << sed.getSearchString() << std::endl;
 	std::cout << "s2:     " << sed.getReplaceString() << std::endl;
-
-	return 0;
+	sed.processFile();
+	std::cout << "Done: created " << sed.getOutputFilename() << std::endl;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:25:16 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/05 14:25:01 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/05 22:24:37 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ class Sed
 		std::string _outputFilename;
 	public:
 		Sed(char *inputFilename, char *searchString, char *replaceString);
-
 		const std::string& getSearchString(void) const;
 		const std::string& getReplaceString(void) const;
 		const std::string& getInputFilename(void) const;
 		const std::string& getOutputFilename(void) const;
+		void processFile(void) const; 
 };
 
 #endif
