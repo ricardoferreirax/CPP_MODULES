@@ -6,15 +6,19 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 23:16:38 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/05 23:16:50 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/06 19:12:36 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Harl.hpp"
 
-int main(void)
+int main()
 {
-	Harl harl;
+	Harl	harl;
 
+	harl.complain("DEBUG");
+	harl.complain("INFO");
+	harl.complain("WARNING");
+	harl.complain("ERROR");
 	return (0);
 }

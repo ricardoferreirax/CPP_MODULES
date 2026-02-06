@@ -2,7 +2,7 @@ NAME     := Harl
 CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
-			srcs/Harl.cpp
+			srcs/Harl.cpp 
 			
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
