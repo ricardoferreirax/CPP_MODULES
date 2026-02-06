@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 23:15:21 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/05 23:16:19 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:41:02 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 Harl::Harl(void)
 {
-	return ;
+	std::cout << "Harl has been created!" << std::endl;
 }
 
 Harl::~Harl(void)
 {
-	return ;
+	std::cout << "Harl has been destroyed!" << std::endl;
 }
