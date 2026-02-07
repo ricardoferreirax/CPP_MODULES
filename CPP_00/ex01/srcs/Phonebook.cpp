@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 23:28:31 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:38:10 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int PhoneBook::_validateText(const std::string s)
 	int i;
 	int spaces;
 
-	i = 0;
-	spaces = 0;
 	if (s.empty())
 		return (1);
+	i = 0;
+	spaces = 0;
 	while (i < (int)s.length())
 	{
-		if (!std::isprint(s[i]))
+		if (s[i] < 32 || s[i] > 126)
 			return (1);
-		if (std::isspace(s[i]))
+		if (s[i] == ' ')
 			spaces++;
 		i++;
 	}
@@ -48,12 +48,12 @@ int PhoneBook::_validatePhoneDigits(std::string s)
 {
 	int i;
 
-	i = 0;
 	if (s.empty())
 		return (1);
+	i = 0;
 	while (i < (int)s.length())
 	{
-		if (!std::isdigit(s[i]))
+		if (s[i] < '0' || s[i] > '9')
 			return (1);
 		i++;
 	}
@@ -67,7 +67,7 @@ void PhoneBook::addContact(void)
 	std::cout << "First name: ";
 	if (!std::getline(std::cin, first))
 		return ;
-	while (!this->_validateText(first))
+	while (this->_validateText(first) == 1)
 	{
 		std::cout << "First name cannot be empty! Please try again!\n";
 		std::cout << "First name: ";
@@ -78,7 +78,7 @@ void PhoneBook::addContact(void)
 	std::cout << "Last name: ";
 	if (!std::getline(std::cin, last))
 		return ;
-	while (!this->_validateText(last))
+	while (this->_validateText(last) == 1)
 	{
 		std::cout << "Last name cannot be empty! Please try again!\n";
 		std::cout << "Last name: ";
@@ -89,7 +89,7 @@ void PhoneBook::addContact(void)
 	std::cout << "Nickname: ";
 	if (!std::getline(std::cin, nick))
 		return ;
-	while (!this->_validateText(nick))
+	while (this->_validateText(nick) == 1)
 	{
 		std::cout << "Nickname cannot be empty! Please try again!\n";
 		std::cout << "Nickname: ";
@@ -97,21 +97,21 @@ void PhoneBook::addContact(void)
 			return ;
 	}
 
-	std::cout << "📞 Phone number: ";
+	std::cout << "Phone number: ";
 	if (!std::getline(std::cin, phone))
 		return ;
-	while (!this->_validatePhoneDigits(phone))
+	while (this->_validatePhoneDigits(phone) == 1)
 	{
 		std::cout << "Phone number must contain digits only! Try again!\n";
-		std::cout << "📞 Phone number: ";
+		std::cout << "Phone number: ";
 		if (!std::getline(std::cin, phone))
 			return ;
 	}
 
-	std::cout << "🕵️ Darkest secret: ";
+	std::cout << "Darkest secret: ";
 	if (!std::getline(std::cin, secret))
 		return ;
-	while (!this->_validateText(secret))
+	while (this->_validateText(secret) == 1)
 	{
 		std::cout << "Darkest secret cannot be empty! Please try again!\n";
 		std::cout << "Darkest secret: ";
