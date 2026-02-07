@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:09:39 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 22:17:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:30:51 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 Contact::Contact(void)
 {
-	std::cout << "Contact created!" << std::endl;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "Contact destroyed!" << std::endl;
 }
 
 void Contact::setFirstName(std::string &firstName)

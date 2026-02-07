@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 23:22:03 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:28:31 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int PhoneBook::_validateText(const std::string s)
 	spaces = 0;
 	if (s.empty())
 		return (1);
-	while (i < s.length())
+	while (i < (int)s.length())
 	{
 		if (!std::isprint(s[i]))
 			return (1);
@@ -39,7 +39,7 @@ int PhoneBook::_validateText(const std::string s)
 			spaces++;
 		i++;
 	}
-	if (spaces == s.length())
+	if (spaces == (int)s.length())
 		return (1);
 	return (0);
 }

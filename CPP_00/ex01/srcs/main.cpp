@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:03:05 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 22:20:37 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:26:32 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,34 @@
 #include <cctype>
 #include <cstdlib>
 
-int	main(int ac, char **av)
+int main(int argc, char **argv)
 {
-	PhoneBook	phonebook;
+	PhoneBook   phonebook;
+	std::string cmd;
 
-	(void)av;
-	if (ac != 1)
+	(void)argv;
+
+	if (argc != 1)
 	{
-		std::cout << "Please enter only name of program [phonebook]" << std::endl;
-		return (1);
+		std::cout << "This program does not accept arguments." << std::endl;
+		return 1;
 	}
-	std::string command;
-	while (true)
+	std::cout << "Available commands: ADD | SEARCH | EXIT" << std::endl;
+
+	std::cout << "> ";
+	while (std::getline(std::cin, cmd))
 	{
-		std::cout << "Enter command (ADD, SEARCH, EXIT): " << std::endl;
-		command = readUserInput();
-		if (command == "ADD")
-			executeAddCommand(phonebook);
-		else if (command == "SEARCH")
-			executeSearchCommand(phonebook);
-		else if (command == "EXIT")
+		if (cmd == "ADD")
+			phonebook.addContact();
+		else if (cmd == "SEARCH")
+			phonebook.searchContacts();
+		else if (cmd == "EXIT")
 		{
-			std::cout << "Exiting program ..." << std::endl;
-			break ;
+			std::cout << "Goodbye! Contacts are lost forever." << std::endl;
+			return 0;
 		}
-		else
-			std::cout << "Invalid command! Please enter ADD, SEARCH, or EXIT" << std::endl;
+		std::cout << "> ";
 	}
-	return (0);
+	std::cout << std::endl << "Input ended. Exiting." << std::endl;
+	return 0;
 }
