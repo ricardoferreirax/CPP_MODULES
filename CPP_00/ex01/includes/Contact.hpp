@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:21:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/06 23:48:43 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:17:07 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CONTACT_HPP
 
 #include <iostream>
-#include <string>
+#include <iomanip>
 
 class Contact
 {
@@ -25,21 +25,25 @@ class Contact
 		std::string _phoneNumber;
 		std::string _darkestSecret;
 
+		std::string _formatField(const std::string &content) const;
 	public:
 		Contact(void);
 		~Contact(void);
 
-		void setFirstName(const std::string &firstName);
-		void setLastName(const std::string &lastName);
-		void setNickName(const std::string &nickName);
-		void setPhoneNumber(const std::string &phoneNumber);
-		void setDarkestSecret(const std::string &darkestSecret);
+		void setFirstName(std::string &firstName);
+		void setLastName(std::string &lastName);
+		void setNickName(std::string &nickName);
+		void setPhoneNumber(std::string &phoneNumber);
+		void setDarkestSecret(std::string &darkestSecret);
 
 		std::string getFirstName(void) const;
 		std::string getLastName(void) const;
 		std::string getNickName(void) const;
 		std::string getPhoneNumber(void) const;
 		std::string getDarkestSecret(void) const;
+
+		void printRow(int index) const;
+		void displayContact(void) const;
 };
 
 #endif
