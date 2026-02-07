@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:23:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/06 23:51:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:26:56 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ class PhoneBook
 {
 	private:
     Contact _contacts[8];
-    int _contactCount;
-    int _oldestContact;
+    int _totalContacts;
+    int _lastAdded;
 
-    std::string _truncateString(const std::string &str) const;
-    void _displayContact(int index) const;
+    int _validateText(std::string s);
+	int _validatePhoneDigits(std::string s);
 
-public:
-    PhoneBook();
-    ~PhoneBook();
+	public:
+    	PhoneBook( void );
+    	~PhoneBook( void );
 
-    void addContact();
-    void searchContacts() const;
+    	void addContact( void );
+    	void searchContacts( void );
 };
 
 #endif

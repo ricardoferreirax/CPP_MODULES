@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:21:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 22:17:07 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:27:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ class Contact
 
 		std::string _formatField(const std::string &content) const;
 	public:
-		Contact(void);
-		~Contact(void);
+		Contact( void );
+		~Contact( void );
 
 		void setFirstName(std::string &firstName);
 		void setLastName(std::string &lastName);
