@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 22:39:08 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:22:03 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ PhoneBook::~PhoneBook(void)
 	std::cout << "PhoneBook destroyed!" << std::endl;
 }
 
-int PhoneBook::_validateText(const std::string &s) const
+int PhoneBook::_validateText(const std::string s)
 {
-	int i = 0;
-	int spaces = 0;
+	int i;
+	int spaces;
 
+	i = 0;
+	spaces = 0;
 	if (s.empty())
 		return (1);
 	while (i < s.length())
@@ -44,79 +46,97 @@ int PhoneBook::_validateText(const std::string &s) const
 
 int PhoneBook::_validatePhoneDigits(std::string s)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	if (s.empty())
-		return 1;
+		return (1);
 	while (i < (int)s.length())
 	{
 		if (!std::isdigit(s[i]))
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 void PhoneBook::addContact(void)
 {
-	std::string input;
-	int i;
+	std::string first, last, nick, phone, secret;
 
-	i = this->_lastAdded;
-
-	std::cout << "Enter first name: ";
-	std::getline(std::cin, input);
-	if (this->_validateText(input) != 0)
-	{
-		std::cout << "Contact cannot have empty fields." << std::endl;
+	std::cout << "First name: ";
+	if (!std::getline(std::cin, first))
 		return ;
-	}
-	this->_contacts[i].setFirstName(input);
-
-	std::cout << "Enter last name: ";
-	std::getline(std::cin, input);
-	if (this->_validateText(input) != 0)
+	while (!this->_validateText(first))
 	{
-		std::cout << "Contact cannot have empty fields." << std::endl;
-		return ;
+		std::cout << "First name cannot be empty! Please try again!\n";
+		std::cout << "First name: ";
+		if (!std::getline(std::cin, first))
+			return ;
 	}
-	this->_contacts[i].setLastName(input);
-	
-	std::cout << "Enter nickname: ";
-	std::getline(std::cin, input);
-	if (this->_validateText(input) != 0)
-	{
-		std::cout << "Contact cannot have empty fields." << std::endl;
-		return ;
-	}
-	this->_contacts[i].setNickName(input);
 
-	std::cout << "Enter phone number (digits only): ";
-	std::getline(std::cin, input);
-	if (this->_validatePhoneDigits(input) != 0)
-	{
-		std::cout << "Error: phone number must contain only digits." << std::endl;
+	std::cout << "Last name: ";
+	if (!std::getline(std::cin, last))
 		return ;
-	}
-	this->_contacts[i].setPhoneNumber(input);
-
-	std::cout << "Enter darkest secret: ";
-	std::getline(std::cin, input);
-	if (this->_validateText(input) != 0)
+	while (!this->_validateText(last))
 	{
-		std::cout << "Contact cannot have empty fields." << std::endl;
-		return ;
+		std::cout << "Last name cannot be empty! Please try again!\n";
+		std::cout << "Last name: ";
+		if (!std::getline(std::cin, last))
+			return ;
 	}
-	this->_contacts[i].setDarkestSecret(input);
 
-	this->_lastAdded++;
-	if (this->_lastAdded >= 8)
-		this->_lastAdded = 0;
+	std::cout << "Nickname: ";
+	if (!std::getline(std::cin, nick))
+		return ;
+	while (!this->_validateText(nick))
+	{
+		std::cout << "Nickname cannot be empty! Please try again!\n";
+		std::cout << "Nickname: ";
+		if (!std::getline(std::cin, nick))
+			return ;
+	}
+
+	std::cout << "📞 Phone number: ";
+	if (!std::getline(std::cin, phone))
+		return ;
+	while (!this->_validatePhoneDigits(phone))
+	{
+		std::cout << "Phone number must contain digits only! Try again!\n";
+		std::cout << "📞 Phone number: ";
+		if (!std::getline(std::cin, phone))
+			return ;
+	}
+
+	std::cout << "🕵️ Darkest secret: ";
+	if (!std::getline(std::cin, secret))
+		return ;
+	while (!this->_validateText(secret))
+	{
+		std::cout << "Darkest secret cannot be empty! Please try again!\n";
+		std::cout << "Darkest secret: ";
+		if (!std::getline(std::cin, secret))
+			return ;
+	}
+
+	this->_contacts[this->_lastAdded].setFirstName(first);
+	this->_contacts[this->_lastAdded].setLastName(last);
+	this->_contacts[this->_lastAdded].setNickName(nick);
+	this->_contacts[this->_lastAdded].setPhoneNumber(phone);
+	this->_contacts[this->_lastAdded].setDarkestSecret(secret);
+
 	if (this->_totalContacts < 8)
 		this->_totalContacts++;
 
-	std::cout << "Contact added successfully!" << std::endl;
+	this->_lastAdded++;
+	if (this->_lastAdded == 8)
+		this->_lastAdded = 0;
+
+	std::cout << "Contact saved!\n";
+	if (this->_totalContacts == 8)
+		std::cout << "PhoneBook is full: new contacts will replace the oldest one.\n";
 }
+
 
 void PhoneBook::searchContacts(void)
 {
