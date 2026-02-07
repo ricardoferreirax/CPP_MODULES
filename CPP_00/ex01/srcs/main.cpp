@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:03:05 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 23:43:36 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:54:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@ int main(int ac, char **av)
 	PhoneBook phoneBook;
 	std::string command;
 
-	(void)av;
-	if (ac != 1)
+	if (ac > 1)
 	{
-		std::cout << "This program does not take any arguments." << std::endl;
+		std::cout << "Error: this program does not accept arguments." << std::endl;
+		std::cout << "Usage: " << av[0] << std::endl;
 		return (1);
 	}
+	std::cout << "-------------- PhoneBook --------------" << std::endl;
+	std::cout << "- 1. Add a Contact" << std::endl;
+	std::cout << "- 2. Search for a Contact" << std::endl;
+	std::cout << "- 3. Exit" << std::endl;
+	std::cout << "----------------------------------------\n" << std::endl;
+	std::cout << "Enter Your Option: (ADD, SEARCH, EXIT)\n" << std::endl;
 
-	std::cout << "Welcome to My Awesome PhoneBook!" << std::endl;
-
-	std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+	std::cout << "> ";
 	while (std::getline(std::cin, command))
 	{
 		if (command == "ADD")
@@ -40,8 +44,16 @@ int main(int ac, char **av)
 			std::cout << "Goodbye!" << std::endl;
 			return (0);
 		}
-		std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+		else if (!command.empty())
+		{
+			std::cout << "\nInvalid command!" << std::endl;
+			std::cout << "Please use: ADD, SEARCH or EXIT.\n" << std::endl;
+		}
+		std::cout << "> ";
 	}
 	std::cout << std::endl;
 	return (0);
 }
+
+
+
