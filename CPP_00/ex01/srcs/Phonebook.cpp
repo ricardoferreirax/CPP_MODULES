@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 22:37:08 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:39:08 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,37 @@ void PhoneBook::addContact(void)
 		this->_totalContacts++;
 
 	std::cout << "Contact added successfully!" << std::endl;
+}
+
+void PhoneBook::searchContacts(void)
+{
+	if (this->_totalContacts == 0)
+	{
+		std::cout << "No contacts" << std::endl;
+		return ;
+	}
+	std::cout << "     index|first name| last name|  nickname|" << std::endl;
+	for (int i = 0; i < this->_totalContacts; i++)
+		this->_contacts[i].printRow(i);
+
+	std::string input;
+	int i;
+
+	std::cout << "Enter index: ";
+	if (!std::getline(std::cin, input))
+		return;
+
+	if (input.length() != 1 || input[0] < '0' || input[0] > '7')
+	{
+		std::cout << "Invalid index" << std::endl;
+		return;
+	}
+
+	i = input[0] - '0';
+	if (i >= this->_totalContacts)
+	{
+		std::cout << "Index does not exist" << std::endl;
+		return;
+	}
+	this->_contacts[i].displayContact();
 }
