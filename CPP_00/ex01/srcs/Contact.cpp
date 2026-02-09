@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:09:39 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/07 23:30:51 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/02/09 00:45:33 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,9 @@ std::string Contact::getDarkestSecret(void) const
 	return (this->_darkestSecret);
 }
 
-std::string Contact::_formatField(const std::string &content) const
+void Contact::displayContact(void)
 {
-	if (content.length() > 10)
-		return (content.substr(0, 9) + ".");
-	return (std::string(10 - content.length(), ' ') + content);
-}
-
-void Contact::printRow(int index) const
-{
-	std::cout << "|" << std::setw(10) << index << "|" 
-	          << this->_formatField(this->_firstName) << "|"
-	          << this->_formatField(this->_lastName) << "|" 
-			  << this->_formatField(this->_nickName) << "|" << std::endl;
-}
-
-void Contact::displayContact(void) const
-{
-	std::cout << "First Name: " << this->_firstName << std::endl;
+	std::cout << "\nFirst Name: " << this->_firstName << std::endl;
 	std::cout << "Last Name: " << this->_lastName << std::endl;
 	std::cout << "Nickname: " << this->_nickName << std::endl;
 	std::cout << "Phone Number: " << this->_phoneNumber << std::endl;
