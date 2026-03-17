@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/17 11:47:22 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/17 14:45:28 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/03/17 14:39:58 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/03/17 14:44:55 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#include "Fixed.hpp"
 
-# include <iostream>
-
-class Fixed
+int	main()
 {
-  private:
-	int _fixedPointNbr;
-	static const int _fractBits;
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
 
-  public:
-	Fixed(void);
-	Fixed(const Fixed &src);
-	Fixed &operator=(const Fixed &src);
-	~Fixed(void);
-
-	int getRawBits(void) const;
-	void setRawBits(int const raw);
-};
-
-#endif
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return (0);
+}
