@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 11:47:22 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/17 14:45:28 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:23:18 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ class Fixed
 	Fixed &operator=(const Fixed &src);
 	~Fixed(void);
 
-	int getRawBits(void) const;
-	void setRawBits(int const raw);
+	/* int getRawBits(void) const;
+	void setRawBits(int const raw); */
 };
 
 #endif
