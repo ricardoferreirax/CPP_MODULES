@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:33:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/18 13:57:31 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/18 14:45:04 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,15 @@ Fixed::Fixed(const int nbr)
 	this->_fixedPointNbr = nbr << this->_fractBits;
 }
 
-// (1 << this->fractBits) = 2^8 = 256
-Fixed::Fixed(const float nbr)
+Fixed::Fixed(float const inputFloat)
 {
-	std::cout << "Float constructor called" << std::endl;
-	this->_fixedPointNbr = roundf(nbr * (1 << this->_fractBits));
+    std::cout << "Float constructor called" << std::endl;
+	float input = inputFloat;
+	for (int i = 0; i < this->_fractBits; i++)
+	{
+		input *= 2;
+	}
+	this->_fixedPointNbr = roundf(input);
 }
 
 Fixed::Fixed(const Fixed &src)
@@ -48,7 +52,28 @@ Fixed &Fixed::operator=(const Fixed &src)
 	return (*this);
 }
 
+std::ostream &operator<<(std::ostream &out, const Fixed &src)
+{
+	out << src.toFloat();
+	return (out);
+}
+
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
+}
+
+int Fixed::toInt(void) const
+{
+	return (this->_fixedPointNbr >> this->_fractBits);
+}
+
+float Fixed::toFloat(void) const
+{
+	float res = this->_fixedPointNbr;
+	for (int i = 0; i < this->_fractBits; i++)
+	{
+		res /= 2;
+	}
+    return (res);
 }
