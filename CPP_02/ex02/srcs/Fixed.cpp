@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:33:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/19 23:06:20 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/19 23:12:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,37 @@ float Fixed::toFloat(void) const
 		res /= 2;
 	}
     return (res);
+}
+
+// comparison operators
+bool Fixed::operator>(const Fixed &src) const
+{
+	return (this->toFloat() > src.toFloat());
+}
+
+bool Fixed::operator<(const Fixed &src) const
+{
+	return (this->toFloat() < src.toFloat());
+}
+
+bool Fixed::operator>=(const Fixed &src) const
+{
+	return (this->toFloat() >= src.toFloat());
+}
+
+bool Fixed::operator<=(const Fixed &src) const
+{
+	return (this->toFloat() <= src.toFloat());
+}
+
+bool Fixed::operator==(const Fixed &src) const
+{
+	return (this->toFloat() == src.toFloat());
+}
+
+bool Fixed::operator!=(const Fixed &src) const
+{
+	return (this->toFloat() != src.toFloat());
 }
 
 // aritmetic operators
