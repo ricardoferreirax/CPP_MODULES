@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:33:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/19 23:12:09 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/19 23:17:20 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,31 @@ Fixed Fixed::operator*(const Fixed &src) const
 Fixed Fixed::operator/(const Fixed &src) const
 {
 	return (this->toFloat() / src.toFloat());
+}
+
+// increment/decrement operators
+Fixed &Fixed::operator++(void)
+{
+	this->_fixedPointNbr++;
+	return (*this);
+}
+
+Fixed &Fixed::operator--(void)
+{
+	this->_fixedPointNbr--;
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed temp = *this;
+	this->_fixedPointNbr++;
+	return (temp);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp = *this;
+	this->_fixedPointNbr--;
+	return (temp);
 }
