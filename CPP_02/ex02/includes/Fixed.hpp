@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:26:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/19 22:49:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/19 23:02:08 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ class Fixed
 	
 	int toInt(void) const;
 	float toFloat(void) const;
+
+	Fixed				operator+(const Fixed &src) const;
+	Fixed				operator-(const Fixed &src) const;
+	Fixed				operator*(const Fixed &src) const;
+	Fixed				operator/(const Fixed &src) const;
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &src);

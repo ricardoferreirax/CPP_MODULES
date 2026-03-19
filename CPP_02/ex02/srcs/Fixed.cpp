@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:33:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/19 22:52:31 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/19 23:06:20 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,25 @@ const int Fixed::_fractBits = 8;
 Fixed::Fixed(void) : _fixedPointNbr(0)
 {
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const Fixed &src)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	*this = src;
+}
+
+Fixed &Fixed::operator=(const Fixed &src)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &src)
+		this->_fixedPointNbr = src._fixedPointNbr;
+	return (*this);
+}
+
+Fixed::~Fixed(void)
+{
+	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const int nbr)
@@ -38,29 +57,10 @@ Fixed::Fixed(float const inputFloat)
 	this->_fixedPointNbr = roundf(input);
 }
 
-Fixed::Fixed(const Fixed &src)
-{
-	std::cout << "Copy constructor called" << std::endl;
-	*this = src;
-}
-
-Fixed &Fixed::operator=(const Fixed &src)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &src)
-		this->_fixedPointNbr = src._fixedPointNbr;
-	return (*this);
-}
-
 std::ostream &operator<<(std::ostream &out, const Fixed &src)
 {
 	out << src.toFloat();
 	return (out);
-}
-
-Fixed::~Fixed(void)
-{
-	std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::toInt(void) const
@@ -76,4 +76,25 @@ float Fixed::toFloat(void) const
 		res /= 2;
 	}
     return (res);
+}
+
+// aritmetic operators
+Fixed Fixed::operator+(const Fixed &src) const
+{
+	return (this->toFloat() + src.toFloat());
+}
+
+Fixed Fixed::operator-(const Fixed &src) const
+{
+	return (this->toFloat() - src.toFloat());
+}
+
+Fixed Fixed::operator*(const Fixed &src) const
+{
+	return (this->toFloat() * src.toFloat());
+}
+
+Fixed Fixed::operator/(const Fixed &src) const
+{
+	return (this->toFloat() / src.toFloat());
 }
