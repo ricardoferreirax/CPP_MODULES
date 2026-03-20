@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 13:14:40 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/20 13:23:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/20 14:50:32 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ class Point
 		Point(const Point &src);
 		Point &operator=(const Point &src);
 		~Point(void);
+
+		Fixed getX(void) const;
+		Fixed getY(void) const;
+
+		static Fixed triangleArea(Point const a, Point const b, Point const c);
 };
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif

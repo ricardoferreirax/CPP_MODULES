@@ -4,6 +4,7 @@ CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
 			srcs/Fixed.cpp \
 			srcs/Point.cpp \
+			srcs/bsp.cpp \
 
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
