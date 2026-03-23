@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 16:02:50 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 13:41:36 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/23 22:30:56 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints
 	std::cout << "ClapTrap [ " << this->_name << " ] constructed!" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &src): _name(src._name), _hitPoints(src._hitPoints), _energyPoints(src._energyPoints), _attackDamage(src._attackDamage)
+ClapTrap::ClapTrap(const ClapTrap &src): 
+	_name(src._name), _hitPoints(src._hitPoints), _energyPoints(src._energyPoints), _attackDamage(src._attackDamage)
 {
 	std::cout << "ClapTrap [ " << this->_name << " ] copy constructed!" << std::endl;
 }
@@ -43,4 +44,19 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 ClapTrap::~ClapTrap(void)
 {
 	std::cout << "ClapTrap [ " << this->_name << " ] destructed!" << std::endl;
+}
+
+void ClapTrap::attack(const std::string& target)
+{
+	if (this->_energyPoints > 0 && this->_hitPoints > 0)
+	{
+		this->_energyPoints--;
+		std::cout << "ClapTrap [ " << this->_name << " ] attacks [ " << target 
+			<< " ], causing ( " << this->_attackDamage << " ) points of damage!" << std::endl;
+	}
+	else if (this->_hitPoints <= 0)
+		std::cout << "ClapTrap [ " << this->_name << " ] is dead! No hit points left!" << std::endl;
+	else if (this->_energyPoints <= 0)
+		std::cout << "ClapTrap [ " << this->_name << " ] has no energy left, so he cannot attack the " 
+			<< target << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 15:58:52 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 13:27:38 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/23 22:13:49 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ class ClapTrap
 		ClapTrap(const ClapTrap &src);
 		ClapTrap& operator=(const ClapTrap &src);
 		~ClapTrap(void);
+
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
 };
 
 #endif
