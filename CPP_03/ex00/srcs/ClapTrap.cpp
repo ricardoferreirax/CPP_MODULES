@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 16:02:50 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 22:30:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/23 22:47:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,26 @@ void ClapTrap::attack(const std::string& target)
 	else if (this->_energyPoints <= 0)
 		std::cout << "ClapTrap [ " << this->_name << " ] has no energy left, so he cannot attack the " 
 			<< target << std::endl;
+}
+
+void ClapTrap::takeDamage(unsigned int amount)
+{
+	if (this->_hitPoints > 0)
+	{
+		if (amount >= this->_hitPoints)
+		{
+			this->_hitPoints = 0;
+			std::cout << "ClapTrap [ " << this->_name << " ] takes ( " << amount 
+				<< " ) points of damage and dies! Remaining hit points: ( " << this->_hitPoints << " )" 
+				<< std::endl;
+		}
+		else if (amount < this->_hitPoints)
+		{
+			this->_hitPoints -= amount;
+			std::cout << "ClapTrap [ " << this->_name << " ] takes ( " << amount 
+				<< " ) points of damage! Remaining hit points: ( " << this->_hitPoints << " )" << std::endl;
+		}
+	}
+	else if (this->_hitPoints <= 0)
+		std::cout << "ClapTrap [ " << this->_name << " ] is already dead! No hit points left!" << std::endl;
 }

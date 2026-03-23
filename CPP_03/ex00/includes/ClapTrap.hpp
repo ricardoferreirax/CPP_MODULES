@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 15:58:52 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 22:13:49 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/23 22:51:11 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ class ClapTrap
 {
 	private:
 		std::string	_name;
-		int			_hitPoints;
-		int			_energyPoints;
-		int			_attackDamage;
+		unsigned int			_hitPoints;
+		unsigned int			_energyPoints;
+		unsigned int			_attackDamage;
 	public:
 		ClapTrap(void);
 		ClapTrap(std::string name);
