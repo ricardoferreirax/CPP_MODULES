@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 16:02:50 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 22:47:45 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/23 23:05:20 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints
 ClapTrap::ClapTrap(const ClapTrap &src): 
 	_name(src._name), _hitPoints(src._hitPoints), _energyPoints(src._energyPoints), _attackDamage(src._attackDamage)
 {
-	std::cout << "ClapTrap [ " << this->_name << " ] copy constructed!" << std::endl;
+	std::cout << "ClapTrap [ " << this->_name << " ] copy constructed!" << "\n" << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &src)
@@ -69,16 +69,33 @@ void ClapTrap::takeDamage(unsigned int amount)
 		{
 			this->_hitPoints = 0;
 			std::cout << "ClapTrap [ " << this->_name << " ] takes ( " << amount 
-				<< " ) points of damage and dies! Remaining hit points: ( " << this->_hitPoints << " )" 
+				<< " ) points of damage and dies! Current HP: ( " << this->_hitPoints << " )" 
 				<< std::endl;
 		}
 		else if (amount < this->_hitPoints)
 		{
 			this->_hitPoints -= amount;
 			std::cout << "ClapTrap [ " << this->_name << " ] takes ( " << amount 
-				<< " ) points of damage! Remaining hit points: ( " << this->_hitPoints << " )" << std::endl;
+				<< " ) points of damage! Current HP: ( " << this->_hitPoints << " )" << std::endl;
 		}
 	}
 	else if (this->_hitPoints <= 0)
 		std::cout << "ClapTrap [ " << this->_name << " ] is already dead! No hit points left!" << std::endl;
+}
+
+void ClapTrap::beRepaired(unsigned int amount)
+{
+	if (this->_energyPoints > 0 && this->_hitPoints > 0)
+	{
+		this->_hitPoints += amount;
+		this->_energyPoints--;
+		std::cout << "ClapTrap [ " << this->_name << " ] repairs itself, recovering ( " << amount 
+			<< " ) hit points! Current HP: ( " << this->_hitPoints << " )" << "\n" << std::endl;
+	}
+	else if (this->_hitPoints <= 0)
+		std::cout << "ClapTrap [ " << this->_name << " ] has no hit points left and cannot be repaired!" 
+		<< "\n" << std::endl;
+	else if (this->_energyPoints <= 0)
+		std::cout << "ClapTrap [ " << this->_name << " ] has no energy points left, so he cannot be repaired!" 
+			<< "\n" << std::endl;
 }

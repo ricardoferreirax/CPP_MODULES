@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 13:18:19 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 22:48:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/23 23:08:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int main()
 	ClapTrap c(a);
 
 	a.attack("Mercury");
-	b.takeDamage(0);
-	//b.beRepaired(0);
+	b.takeDamage(10);
+	b.beRepaired(0);
 	c.attack("Mercury");
-	c.takeDamage(0);
-	//c.beRepaired(0);
+	c.takeDamage(15);
+	c.beRepaired(6);
 	return (0);
 }
