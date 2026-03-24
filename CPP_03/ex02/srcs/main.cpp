@@ -6,12 +6,13 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:04:45 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 15:06:18 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:14:13 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ClapTrap.hpp"
 #include "../includes/ScavTrap.hpp"
+#include "../includes/FragTrap.hpp"
 
 int main(void)
 {
@@ -28,11 +29,11 @@ int main(void)
 	b.beRepaired(10);
 	b.guardGate();
 	std::cout << std::endl;
-/* 	std::cout << "----- FragTrap -----" << std::endl;
+ 	std::cout << "----- FragTrap -----" << std::endl;
 	FragTrap c("Venus");
 	c.attack("boss");
 	c.takeDamage(20);
 	c.beRepaired(15);
-	c.highFivesGuys(); */
+	//c.highFivesGuys();
 	return (0);
 }

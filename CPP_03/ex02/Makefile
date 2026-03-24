@@ -4,6 +4,7 @@ CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
 			srcs/ClapTrap.cpp \
 			srcs/ScavTrap.cpp \
+			srcs/FragTrap.cpp \
 
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
