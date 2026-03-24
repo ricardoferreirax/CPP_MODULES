@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:50:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 14:25:21 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 14:26:52 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class ScavTrap : public ClapTrap
 		~ScavTrap(void);
 
 		void attack(const std::string &target);
+		void guardGate(void);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 16:02:50 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/23 23:20:22 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 14:53:29 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ ClapTrap::ClapTrap(void): _name("Default"), _hitPoints(10), _energyPoints(10), _
 
 ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap [ " << this->_name << " ] constructed!" << std::endl;
+	std::cout << "\n" << "ClapTrap [ " << this->_name << " ] constructed!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src): 
@@ -51,7 +51,7 @@ void ClapTrap::attack(const std::string& target)
 	if (this->_energyPoints > 0 && this->_hitPoints > 0)
 	{
 		this->_energyPoints--;
-		std::cout << "ClapTrap [ " << this->_name << " ] attacks [ " << target 
+		std::cout << "\n" << "ClapTrap [ " << this->_name << " ] attacks [ " << target 
 			<< " ], causing ( " << this->_attackDamage << " ) points of damage!" << std::endl;
 	}
 	else if (this->_hitPoints == 0)
@@ -90,11 +90,11 @@ void ClapTrap::beRepaired(unsigned int amount)
 		this->_hitPoints += amount;
 		this->_energyPoints--;
 		std::cout << "ClapTrap [ " << this->_name << " ] repairs itself, recovering ( " << amount 
-			<< " ) hit points! Current HP: ( " << this->_hitPoints << " )" << "\n" << std::endl;
+			<< " ) hit points! Current HP: ( " << this->_hitPoints << " )" << std::endl;
 	}
 	else if (this->_hitPoints == 0)
 		std::cout << "ClapTrap [ " << this->_name << " ] has no hit points left and cannot be repaired!" 
-		<< "\n" << std::endl;
+		<< std::endl;
 	else if (this->_energyPoints == 0)
 		std::cout << "ClapTrap [ " << this->_name << " ] has no energy points left, so he cannot be repaired!" 
 			<< "\n" << std::endl;
