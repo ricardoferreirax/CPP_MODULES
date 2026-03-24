@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:52:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 15:04:04 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:28:46 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &src)
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "\n"<< "ScavTrap [ " << this->_name << " ] destructed!" << std::endl;
+	std::cout << "ScavTrap [ " << this->_name << " ] destructed!" << std::endl;
 }
 
 void ScavTrap::attack(const std::string& target)

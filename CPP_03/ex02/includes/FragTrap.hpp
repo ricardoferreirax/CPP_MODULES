@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:08:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 15:08:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:21:42 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ class FragTrap : public ClapTrap
 		FragTrap(const FragTrap &src);
 		FragTrap& operator=(const FragTrap &src);
 		~FragTrap(void);
+
+		void highFivesGuys(void);
 };
 
 #endif

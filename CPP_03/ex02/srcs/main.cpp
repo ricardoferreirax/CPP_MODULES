@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:04:45 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 15:14:13 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:30:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@
 
 int main(void)
 {
-	std::cout << "----- ClapTrap -----" << std::endl;
 	ClapTrap a("Ricky");
-	a.attack("enemy");
+	a.attack("Mercury");
 	a.takeDamage(5);
-	a.beRepaired(2);
-	std::cout << std::endl;
-	std::cout << "----- ScavTrap -----" << std::endl;
-	ScavTrap b("Mercury");
-	b.attack("target");
+	a.beRepaired(3);
+	std::cout << "\n--------------------------------------------------------------------------------------" << std::endl;
+	ScavTrap b("Blinky");
+	b.attack("Inky");
 	b.takeDamage(30);
 	b.beRepaired(10);
 	b.guardGate();
-	std::cout << std::endl;
- 	std::cout << "----- FragTrap -----" << std::endl;
-	FragTrap c("Venus");
-	c.attack("boss");
-	c.takeDamage(20);
-	c.beRepaired(15);
-	//c.highFivesGuys();
+	std::cout << "--------------------------------------------------------------------------------------" << std::endl;
+	FragTrap c("Clyde");
+	c.attack("Pinky");
+	c.takeDamage(30);
+	c.beRepaired(10);
+	c.highFivesGuys();
+	std::cout << "--------------------------------------------------------------------------------------\n" << std::endl;
 	return (0);
 }

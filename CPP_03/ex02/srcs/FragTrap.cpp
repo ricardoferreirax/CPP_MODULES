@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:08:54 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 15:13:13 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:31:25 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ FragTrap &FragTrap::operator=(const FragTrap &src)
 FragTrap::~FragTrap(void)
 {
 	std::cout << "FragTrap [ " << this->_name << " ] destructed!" << std::endl;
+}
+
+void FragTrap::highFivesGuys(void)
+{
+	if (this->_hitPoints == 0)
+		std::cout << "FragTrap [ " << this->_name << " ] is dead! Cannot give a high five!" << "\n" << std::endl;
+	else
+		std::cout << "FragTrap [ " << this->_name << " ] gives a high five!" << "\n" << std::endl;
 }
