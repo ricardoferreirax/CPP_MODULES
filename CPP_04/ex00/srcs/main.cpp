@@ -6,13 +6,14 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:30:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:39:19 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:54:57 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Animal.hpp"
 #include "../includes/Dog.hpp"
 #include "../includes/Cat.hpp"
+#include "../includes/WrongAnimal.hpp"
 
 int main()
 {
@@ -29,17 +30,15 @@ int main()
 	delete j;
 	delete i;
 	
-	std::cout << std::endl;
-	
 	const WrongAnimal* wa = new WrongAnimal();
-	const WrongAnimal* wc = new WrongCat();
+	//const WrongAnimal* wc = new WrongCat();
 
 	std::cout << wa->getType() << std::endl;
-	std::cout << wc->getType() << std::endl;
+	//std::cout << wc->getType() << std::endl;
 	wa->makeSound();
-	wc->makeSound();
+	//wc->makeSound();
 	delete wa;
-	delete wc;
+	//delete wc;
 
     return 0;
 }

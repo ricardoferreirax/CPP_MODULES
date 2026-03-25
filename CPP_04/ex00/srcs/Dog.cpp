@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:46:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:32:04 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:44:57 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Dog::Dog(const Dog &src): Animal(src)
 Dog &Dog::operator=(const Dog &src)
 {
 	if (this != &src)
-		this->_type = src._type;
+		Animal::operator=(src);
 	std::cout << "Dog copy assignment operator created!" << std::endl;
 	return (*this);
 }

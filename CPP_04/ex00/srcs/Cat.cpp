@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:31:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:34:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:49:53 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Cat::Cat(void): Animal()
 {
 	this->_type = "Cat";
-	std::cout << "Cat default constructor created!" << std::endl;
+	std::cout << "Cat default constructor created!\n" << std::endl;
 }
 
 Cat::Cat(const Cat &src): Animal(src)
@@ -26,7 +26,7 @@ Cat::Cat(const Cat &src): Animal(src)
 Cat& Cat::operator=(const Cat &src)
 {
 	if (this != &src)
-		this->_type = src._type;
+		Animal::operator=(src);
 	std::cout << "Cat copy assignment operator created!" << std::endl;
 	return (*this);
 }
