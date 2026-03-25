@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:30:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 21:29:46 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 22:13:52 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,36 @@
 
 int main()
 {
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-	
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound();
-    j->makeSound();
-    meta->makeSound();
-	std::cout << std::endl;
-	delete meta;
-	delete j;
-	delete i;
-	std::cout << "\n---------------------------------------------------------------" << std::endl;
-	const WrongAnimal* wa = new WrongAnimal();
-	const WrongAnimal* wc = new WrongCat();
+	Animal *animals[6];
 
-	std::cout << wa->getType() << std::endl;
-	std::cout << wc->getType() << std::endl;
-	wa->makeSound();
-	wc->makeSound();
+	for (int i = 0; i < 3; i++)
+		animals[i] = new Dog();
+	for (int i = 3; i < 6; i++)
+		animals[i] = new Cat();
 	std::cout << std::endl;
-	delete wa;
-	delete wc;
+	for (int i = 0; i < 6; i++)
+		delete animals[i];
+	std::cout << "\n---------------------------------------------------------------" << std::endl;
+	
+	Cat cat_orginal;
+	std::cout << std::endl;
+	cat_orginal.setIdea(0, "I want a fish");
+	Cat copy_cat = cat_orginal;
+	copy_cat.setIdea(0, "I want to sleep");
+	std::cout << std::endl;
+	std::cout << "Original cat idea: " << cat_orginal.getIdea(0) << std::endl;
+	std::cout << "Copy cat idea: " << copy_cat.getIdea(0) << std::endl;
+	std::cout << "\n---------------------------------------------------------------" << std::endl;	
+
+	Dog dog_original;
+	std::cout << std::endl;
+	dog_original.setIdea(0, "I want a bone");
+	Dog dog_copy = dog_original;
+	dog_copy.setIdea(0, "I want to bark");
+	std::cout << std::endl;
+	std::cout << "Original idea: " << dog_original.getIdea(0) << std::endl;
+	std::cout << "Copy idea: " << dog_copy.getIdea(0) << std::endl;
+	std::cout << "\n---------------------------------------------------------------\n" << std::endl;	
 
     return 0;
 }
