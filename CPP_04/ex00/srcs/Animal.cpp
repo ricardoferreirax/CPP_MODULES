@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:25:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:49:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:14:15 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Animal &Animal::operator=(const Animal &src)
 
 Animal::~Animal(void)
 {
-	std::cout << "Animal destructor called!" << std::endl;
+	std::cout << "Animal destructed!" << std::endl;
 }
 
 std::string Animal::getType(void) const

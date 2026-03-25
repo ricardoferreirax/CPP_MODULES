@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:46:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:44:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:10:58 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Dog &Dog::operator=(const Dog &src)
 
 Dog::~Dog(void)
 {
-	std::cout << "Dog destructor called!" << std::endl;
+	std::cout << "Dog destructed!" << std::endl;
 }
 
 void Dog::makeSound(void) const

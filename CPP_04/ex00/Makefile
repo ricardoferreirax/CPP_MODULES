@@ -6,6 +6,7 @@ SRCS     := srcs/main.cpp \
 			srcs/Dog.cpp \
 			srcs/Cat.cpp \
 			srcs/WrongAnimal.cpp \
+			srcs/WrongCat.cpp \
 
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:52:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:53:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:12:47 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &src)
 
 WrongAnimal::~WrongAnimal(void)
 {
-	std::cout << "WrongAnimal destructor called!" << std::endl;
+	std::cout << "WrongAnimal destructed!" << std::endl;
 }
 
 std::string WrongAnimal::getType(void) const
