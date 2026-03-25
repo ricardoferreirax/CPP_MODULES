@@ -6,13 +6,14 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:09:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 16:11:25 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 15:05:55 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ClapTrap.hpp"
 #include "../includes/ScavTrap.hpp"
 #include "../includes/FragTrap.hpp"
+#include "../includes/DiamondTrap.hpp"
 
 int main(void)
 {
@@ -33,12 +34,12 @@ int main(void)
 	c.beRepaired(10);
 	c.highFivesGuys();
 	std::cout << "--------------------------------------------------------------------------------------\n" << std::endl;
-/* 	DiamondTrap d("Diamond");
+	DiamondTrap d("Diamond");
 	d.attack("Diamond");
 	d.takeDamage(50);
 	d.beRepaired(20);
 	d.guardGate();
 	d.highFivesGuys();
-	d.WhoAmI(); */
+	//d.WhoAmI();
 	return (0);
 }

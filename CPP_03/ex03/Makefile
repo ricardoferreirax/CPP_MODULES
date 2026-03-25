@@ -5,6 +5,7 @@ SRCS     := srcs/main.cpp \
 			srcs/ClapTrap.cpp \
 			srcs/ScavTrap.cpp \
 			srcs/FragTrap.cpp \
+			srcs/DiamondTrap.cpp \
 
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
