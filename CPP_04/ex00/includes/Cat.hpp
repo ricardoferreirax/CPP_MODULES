@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 16:43:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 20:32:14 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/03/25 20:30:44 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/03/25 20:32:21 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef CAT_HPP
+#define CAT_HPP
 
 #include "Animal.hpp"
 
-class Dog : public Animal
+class Cat : public Animal
 {
 	public:
-		Dog(void);
-		Dog(const Dog &src);
-		Dog &operator=(const Dog &src);
-		virtual ~Dog(void);
+		Cat(void);
+		Cat(const Cat &src);
+		Cat &operator=(const Cat &src);
+		virtual ~Cat(void);
 
 		virtual void makeSound(void) const;
 };
