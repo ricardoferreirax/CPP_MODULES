@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:42:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 15:04:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 15:12:43 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src)
 DiamondTrap::~DiamondTrap(void)
 {
 	std::cout << "DiamondTrap [ " << this->_name << " ] destructed!" << std::endl;
+}
+
+void DiamondTrap::WhoAmI(void)
+{
+	if (this->_hitPoints == 0)
+	{
+		std::cout << "DiamondTrap [ " << this->_name << " ] is dead! Cannot identify itself!\n" << std::endl;
+		return ;
+	}
+	std::cout << "DiamondTrap name: [ " << this->_name << " ], ClapTrap name: [ " << ClapTrap::_name << " ]\n" << std::endl;
 }

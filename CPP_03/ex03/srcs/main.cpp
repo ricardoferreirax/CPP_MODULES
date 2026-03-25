@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:09:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 15:05:55 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 15:14:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int main(void)
 	c.takeDamage(30);
 	c.beRepaired(10);
 	c.highFivesGuys();
-	std::cout << "--------------------------------------------------------------------------------------\n" << std::endl;
-	DiamondTrap d("Diamond");
-	d.attack("Diamond");
+	std::cout << "--------------------------------------------------------------------------------------" << std::endl;
+	DiamondTrap d("Pacman");
+	d.attack("Brian");
 	d.takeDamage(50);
 	d.beRepaired(20);
 	d.guardGate();
 	d.highFivesGuys();
-	//d.WhoAmI();
+	d.WhoAmI();
+	std::cout << "--------------------------------------------------------------------------------------\n" << std::endl;
 	return (0);
 }
