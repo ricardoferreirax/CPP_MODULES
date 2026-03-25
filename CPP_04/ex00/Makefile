@@ -3,6 +3,7 @@ CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
 			srcs/Animal.cpp \
+			srcs/Dog.cpp \
 
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 

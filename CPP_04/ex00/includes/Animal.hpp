@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:19:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 16:30:04 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:58:06 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 class Animal
 {
 	protected:
-		std::string type;
+		std::string _type;
 	public:
 		Animal(void);
 		Animal(const Animal &src);
 		Animal& operator=(const Animal &src);
 		virtual ~Animal(void);
+
+		std::string getType(void) const;
+		virtual void makeSound(void) const;
 };
 
 #endif
