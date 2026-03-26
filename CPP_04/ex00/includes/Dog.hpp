@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:43:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 21:21:51 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:24:52 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ class Dog : public Animal
 		Dog(void);
 		Dog(const Dog &src);
 		Dog &operator=(const Dog &src);
-		virtual ~Dog(void);
+		~Dog(void);
 
-		virtual void makeSound(void) const;
+		void makeSound(void) const;
 };
 
 #endif

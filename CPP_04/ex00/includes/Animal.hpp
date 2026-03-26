@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:19:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 21:21:32 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:24:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #define ANIMAL_HPP
 
 #include <iostream>
+#include <string>
 
 class Animal
 {
 	protected:
 		std::string _type;
+		
 	public:
 		Animal(void);
 		Animal(const Animal &src);
