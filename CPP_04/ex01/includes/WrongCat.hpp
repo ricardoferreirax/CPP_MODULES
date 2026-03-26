@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:57:17 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 22:18:48 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:18:10 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class WrongCat : public WrongAnimal
 		WrongCat(void);
 		WrongCat(const WrongCat &src);
 		WrongCat &operator=(const WrongCat &src);
-		virtual ~WrongCat(void);
+		~WrongCat(void);
 
 		void makeSound(void) const;
 };

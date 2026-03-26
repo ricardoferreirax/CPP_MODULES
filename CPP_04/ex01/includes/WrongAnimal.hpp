@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:51:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 22:18:44 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:17:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ class WrongAnimal
 {
 	protected:
 		std::string _type;
+		
 	public:
 		WrongAnimal(void);
 		WrongAnimal(const WrongAnimal &src);
 		WrongAnimal &operator=(const WrongAnimal &src);
-		virtual ~WrongAnimal(void);
+		~WrongAnimal(void);
 
 		std::string getType(void) const;
 		void makeSound(void) const;

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:32:02 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 22:18:34 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:15:57 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ class Brain
 {
 	private:
 		std::string _ideas[100];
+		
 	public:
 		Brain(void);
 		Brain(const Brain &src);
 		Brain &operator=(const Brain &src);
-		virtual ~Brain(void);
+		~Brain(void);
 
 		std::string getIdea(int index) const;
 		void setIdea(int index, const std::string &idea);

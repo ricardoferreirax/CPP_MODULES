@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:19:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 22:18:31 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:15:37 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ class Animal
 {
 	protected:
 		std::string _type;
+		
 	public:
 		Animal(void);
 		Animal(const Animal &src);
