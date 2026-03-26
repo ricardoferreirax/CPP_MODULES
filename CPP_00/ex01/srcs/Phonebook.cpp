@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/09 00:45:22 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 15:18:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 PhoneBook::PhoneBook(void) : _totalContacts(0), _lastAdded(0) 
 {
-	std::cout << "PhoneBook created!\n" << std::endl;
+	std::cout << "PhoneBook created!" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void) 
 {
-	std::cout << "\nPhoneBook destroyed!" << std::endl;
+	std::cout << "PhoneBook destroyed!" << std::endl;
 }
 
 std::string PhoneBook::_formatField(const std::string &s)
 {
 	if (s.length() > 10)
-		return s.substr(0, 9) + ".";
+		return (s.substr(0, 9) + ".");
 	return (std::string(10 - s.length(), ' ') + s);
 }
 

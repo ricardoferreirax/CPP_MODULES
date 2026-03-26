@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:21:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/08 00:13:51 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:42:53 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Contact
 		std::string _nickName;
 		std::string _phoneNumber;
 		std::string _darkestSecret;
+		
 	public:
 		Contact( void );
 		~Contact( void );

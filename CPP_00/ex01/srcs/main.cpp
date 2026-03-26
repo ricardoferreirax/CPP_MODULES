@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:03:05 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/09 00:26:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 15:23:46 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int ac, char **av)
 		std::cout << "Usage: " << av[0] << std::endl;
 		return (1);
 	}
+	std::cout << "--------------------------------------\n" << std::endl;
 	std::cout << "-> [ADD]: To Add a Contact!" << std::endl;
 	std::cout << "-> [SEARCH]: To Search for a Contact!" << std::endl;
 	std::cout << "-> [EXIT]: Exit the Phonebook!" << std::endl;
@@ -39,7 +40,9 @@ int main(int ac, char **av)
 			phoneBook.searchContacts();
 		else if (command == "EXIT")
 		{
-			std::cout << "\nGoodbye!" << std::endl;
+			std::cout << "\nGoodbye!\n" << std::endl;
+			std::cout << "--------------------------------------" << std::endl;
+
 			return (0);
 		}
 		else if (!command.empty())
@@ -47,6 +50,7 @@ int main(int ac, char **av)
 		std::cout << "> ";
 	}
 	std::cout << std::endl;
+	std::cout << "\n--------------------------------------" << std::endl;
 	return (0);
 }
 
