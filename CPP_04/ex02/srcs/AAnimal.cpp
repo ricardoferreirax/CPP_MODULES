@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   AAnimal.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:25:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 11:02:07 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:01:25 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Animal.hpp"
+#include "../includes/AAnimal.hpp"
 
-Animal::Animal(void)
+AAnimal::AAnimal(void)
 {
 	this->_type = "Abstract_Animal";
 	std::cout << "\nAbstract Animal default constructor created!" << std::endl;
 }
 
-Animal::Animal(const Animal &src)
+AAnimal::AAnimal(const AAnimal &src)
 {
 	this->_type = src._type;
 	std::cout << "Abstract Animal copy constructor created!" << std::endl;
 }
 
-Animal &Animal::operator=(const Animal &src)
+AAnimal &AAnimal::operator=(const AAnimal &src)
 {
 	if (this != &src)
 		this->_type = src._type;
 	std::cout << "Abstract Animal copy assignment operator created!" << std::endl;
 	return (*this);
 }
-
-Animal::~Animal(void)
+	
+AAnimal::~AAnimal(void)
 {
 	std::cout << "Abstract Animal destructed!" << std::endl;
 }
 
-std::string Animal::getType(void) const
+std::string AAnimal::getType(void) const
 {
 	return (this->_type);
 }

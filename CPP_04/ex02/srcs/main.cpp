@@ -6,11 +6,11 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:30:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 10:34:14 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:12:06 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Animal.hpp"
+#include "../includes/AAnimal.hpp"
 #include "../includes/Dog.hpp"
 #include "../includes/Cat.hpp"
 #include "../includes/WrongAnimal.hpp"
@@ -18,7 +18,7 @@
 
 int main()
 {
-	Animal *animals[6];
+	AAnimal *animals[6];
 
 	for (int i = 0; i < 3; i++)
 		animals[i] = new Dog();

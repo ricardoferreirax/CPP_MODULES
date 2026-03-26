@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:19:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 13:49:23 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:01:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef AANIMAL_HPP
+#define AANIMAL_HPP
 
 // Abstract Class Rules:
 
@@ -20,20 +20,21 @@
 // * Without (= 0), it's a normal function, so class is not abstract.
 // * We can't create an object from an abstract class.
 // * We can create a pointer or reference to an abstract class.
-// * But we cannot instantiate it directly: Animal a; or new Animal(); is forbidden.
+// * But we cannot instantiate it directly: AAnimal a; or new AAnimal(); is forbidden.
 
 #include <string>
 #include <iostream>
 
-class Animal
+class AAnimal
 {
 	protected:
 		std::string _type;
+		
 	public:
-		Animal(void);
-		Animal(const Animal &src);
-		Animal &operator=(const Animal &src);
-		virtual ~Animal(void);
+		AAnimal(void);
+		AAnimal(const AAnimal &src);
+		AAnimal &operator=(const AAnimal &src);
+		virtual ~AAnimal(void);
 
 		std::string getType(void) const;
 		virtual void makeSound(void) const = 0;

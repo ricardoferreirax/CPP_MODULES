@@ -6,20 +6,20 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:31:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 10:33:22 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/26 14:10:05 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cat.hpp"
 
-Cat::Cat(void): Animal()
+Cat::Cat(void): AAnimal()
 {
 	this->_type = "Cat";
 	std::cout << "Cat default constructor created!" << std::endl;
 	this->_brain = new Brain();
 }
 
-Cat::Cat(const Cat &src): Animal(src)
+Cat::Cat(const Cat &src): AAnimal(src)
 {
 	std::cout << "Cat copy constructor created!" << std::endl;
 	this->_brain = new Brain(*src._brain);
@@ -29,7 +29,7 @@ Cat &Cat::operator=(const Cat &src)
 {
 	if (this != &src)
 	{
-		Animal::operator=(src);
+		AAnimal::operator=(src);
 		delete this->_brain;
 		this->_brain = new Brain(*src._brain);
 	}
