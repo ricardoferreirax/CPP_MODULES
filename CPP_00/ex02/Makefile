@@ -1,4 +1,4 @@
-NAME     := account
+NAME     := Account
 CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/Account.cpp srcs/tests.cpp
