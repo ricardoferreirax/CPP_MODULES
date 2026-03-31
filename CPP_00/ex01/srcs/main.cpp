@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:03:05 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 15:23:46 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/31 15:54:49 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 
 int main(int ac, char **av)
 {
-	PhoneBook phoneBook;
-	std::string command;
-
 	if (ac > 1)
 	{
 		std::cout << "Error: this program does not accept arguments." << std::endl;
 		std::cout << "Usage: " << av[0] << std::endl;
 		return (1);
 	}
+
+	PhoneBook phoneBook;
+	std::string command;
+	
 	std::cout << "--------------------------------------\n" << std::endl;
 	std::cout << "-> [ADD]: To Add a Contact!" << std::endl;
 	std::cout << "-> [SEARCH]: To Search for a Contact!" << std::endl;
@@ -53,6 +54,3 @@ int main(int ac, char **av)
 	std::cout << "\n--------------------------------------" << std::endl;
 	return (0);
 }
-
-
-
