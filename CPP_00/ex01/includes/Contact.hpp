@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:21:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 14:42:53 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/30 14:39:32 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <iomanip>
 
+// store one contact's data
 class Contact
 {
 	private:
