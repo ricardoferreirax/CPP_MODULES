@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:12:49 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 15:18:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/31 14:52:56 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ PhoneBook::~PhoneBook(void)
 	std::cout << "PhoneBook destroyed!" << std::endl;
 }
 
+// Format the field to be displayed on the search table.
+// Truncate it if it's longer than 10 characters and adding spaces if it's shorter
 std::string PhoneBook::_formatField(const std::string &s)
 {
 	if (s.length() > 10)
@@ -29,6 +31,7 @@ std::string PhoneBook::_formatField(const std::string &s)
 	return (std::string(10 - s.length(), ' ') + s);
 }
 
+// Validate that the text is not empty and does not contain only spaces or non-printable characters.
 int PhoneBook::_validateText(const std::string s)
 {
 	int i;
@@ -51,6 +54,7 @@ int PhoneBook::_validateText(const std::string s)
 	return (0);
 }
 
+// Validate that the name starts with a capital letter and contains only letters and spaces.
 int PhoneBook::_validateName(std::string s)
 {
 	int i;
@@ -76,6 +80,7 @@ int PhoneBook::_validateName(std::string s)
 	return (0);
 }
 
+// Validate that the phone number contains at least 9 digits and only digits and spaces.
 int PhoneBook::_validatePhoneDigits(std::string s)
 {
 	int i;
@@ -98,9 +103,16 @@ int PhoneBook::_validatePhoneDigits(std::string s)
 	return (0);
 }
 
+
+// Ask user for contact details, validate these details and store them on phonebook. 
+// Replace the oldest one if it's full
 void PhoneBook::addContact(void)
 {
-	std::string first, last, nick, phone, secret;
+	std::string first; 
+	std::string last; 
+	std::string nick; 
+	std::string phone; 
+	std::string secret;
 
 	std::cout << "\nFirst name: ";
 	if (!std::getline(std::cin, first))
@@ -176,6 +188,7 @@ void PhoneBook::addContact(void)
 		std::cout << "PhoneBook is full: new contacts will replace the oldest one.\n";
 }
 
+// Display a table with all contacts and ask user for an index to display the contact's details.
 int PhoneBook::displayAllContacts(void)
 {
 	int i;

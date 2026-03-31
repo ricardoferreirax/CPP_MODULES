@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:23:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/30 14:39:16 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/31 13:31:44 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class PhoneBook
 	int _validatePhoneDigits(std::string s);
 	int _validateName(std::string s);
 	std::string _formatField(const std::string &s);
+	
 	public:
     	PhoneBook( void );
     	~PhoneBook( void );

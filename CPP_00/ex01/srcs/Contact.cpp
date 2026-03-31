@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:09:39 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 15:08:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/03/31 14:53:11 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ std::string Contact::getDarkestSecret(void) const
 	return (this->_darkestSecret);
 }
 
+// Display all contact's details
 void Contact::displayContact(void)
 {
 	std::cout << "\nFirst Name: " << this->_firstName << std::endl;
