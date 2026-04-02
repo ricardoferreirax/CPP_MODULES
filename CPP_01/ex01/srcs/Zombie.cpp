@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:23:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/01 15:32:44 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/02 13:58:13 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ Zombie::Zombie( void )
 	std::cout << "Default zombie created!" << std::endl;
 }
 
-Zombie::Zombie(std::string name)
+Zombie::Zombie(std::string name) : _name(name)
 {
-    this->_name = name;
 	std::cout << this->_name << " created!" << std::endl;
 }
 
