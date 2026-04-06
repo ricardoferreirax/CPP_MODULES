@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 22:49:59 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/06 22:50:01 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/06 22:37:46 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ class Harl
 		void info( void );
 		void warning( void );
 		void error( void );
+		
 	public:
 		Harl( void );
 		~Harl( void );
+		
 		void complain( std::string level );
 };
 

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 22:51:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/06 23:30:01 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/06 22:43:55 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,38 @@ void Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-void Harl::complain(std::string level)
+void	Harl::complain(std::string level)
 {
-	std::string levels[4] = 
-	{
-		"DEBUG",
-		"INFO",
-		"WARNING",
-		"ERROR"
-	};
-
+	std::string levels[4];
 	int i;
+
+	levels[0] = "DEBUG";
+	levels[1] = "INFO";
+	levels[2] = "WARNING";
+	levels[3] = "ERROR";
 
 	for (i = 0; i < 4; i++)
 	{
-		if (level == levels[i])
-			break;
+		if (levels[i] == level)
+			break ;
 	}
 
 	switch (i)
 	{
 		case 0:
-			this->debug();
+			debug();
 			/* fall through */
 		case 1:
-			this->info();
+			info();
 			/* fall through */
 		case 2:
-			this->warning();
+			warning();
 			/* fall through */
 		case 3:
-			this->error();
-			break;
+			error();
+			break ;
 		default:
-			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+			std::cout << "[ Probably complaining about insignificant problems ]"
+				<< std::endl;
 	}
 }
