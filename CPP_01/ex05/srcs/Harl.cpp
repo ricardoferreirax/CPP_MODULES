@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 23:15:21 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/06 23:33:00 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/06 22:31:51 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +46,30 @@ void Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-void Harl::complain(std::string level)
+void	Harl::complain(std::string level)
 {
-	int i;
+	std::string	levels[4];
+	void		(Harl::*functions[4])(void);
+	int			i;
 
-	std::string levels[4] = 
-	{
-		"DEBUG", 
-		"INFO", 
-		"WARNING", 
-		"ERROR" 
-	};
-	void (Harl::*funcs[4])(void) = 
-	{ 
-		&Harl::debug, 
-		&Harl::info, 
-		&Harl::warning, 
-		&Harl::error 
-	};
-	if (level.empty())
-	{
-		std::cout << "No level provided!" << std::endl;
-		return ;
-	}
+	levels[0] = "DEBUG";
+	levels[1] = "INFO";
+	levels[2] = "WARNING";
+	levels[3] = "ERROR";
+
+	functions[0] = &Harl::debug;
+	functions[1] = &Harl::info;
+	functions[2] = &Harl::warning;
+	functions[3] = &Harl::error;
+
 	for (i = 0; i < 4; i++)
 	{
-		if (level == levels[i])
+		if (levels[i] == level)
 		{
-			(this->*funcs[i])();
+			(this->*functions[i])();
 			return ;
 		}
 	}
-	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	std::cout << "[ Probably complaining about insignificant problems ]"
+		<< std::endl;
 }
