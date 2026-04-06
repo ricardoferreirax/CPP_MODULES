@@ -1,7 +1,8 @@
 NAME     := Sed_is_for_losers
 CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
-SRCS     := main.cpp \
+SRCS     := srcs/main.cpp \
+		    srcs/Sed.cpp \
 			
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
