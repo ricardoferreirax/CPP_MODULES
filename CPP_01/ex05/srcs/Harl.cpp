@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 23:15:21 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/06 22:31:51 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:58:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
+// Takes a string representing the complaint level and calls the corresponding member function 
+// to print the appropriate message. If the level does not match, it prints a default message.
 void	Harl::complain(std::string level)
 {
 	std::string	levels[4];
