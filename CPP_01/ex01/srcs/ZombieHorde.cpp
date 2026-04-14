@@ -6,12 +6,13 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 23:26:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/02/04 16:06:18 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:47:33 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Zombie.hpp"
 
+// This function creates an array of N Zombies on the heap, each initialized with the same name.
 Zombie* zombieHorde( int N, std::string name )
 {
     Zombie *horde;
