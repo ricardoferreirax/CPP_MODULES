@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 13:16:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/16 23:06:39 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/16 23:24:26 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ Point::~Point(void)
 	// std::cout << "Destructor called" << std::endl;
 }
 
-Fixed Point::getX(void) const
+const Fixed &Point::getX(void) const
 {
 	return (this->_x);
 }
 
-Fixed Point::getY(void) const
+const Fixed &Point::getY(void) const
 {
 	return (this->_y);
 }
