@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 13:14:40 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/15 22:46:34 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/16 23:06:53 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Point
 	private:
 		const Fixed _x;
 		const Fixed _y;
+		
 	public:
 		Point(void);
 		Point(const float x, const float y);

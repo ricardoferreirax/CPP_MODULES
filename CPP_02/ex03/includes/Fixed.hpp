@@ -6,19 +6,21 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:26:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/15 22:46:30 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/16 23:04:59 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
-# include <iostream>
+#include <iostream>
+#include <string>
+#include <cmath>
 
 class Fixed
 {
   private:
-	int _fixedPointNbr;
+	int _rawValue;
 	static const int _fractBits;
 
   public:
@@ -29,6 +31,9 @@ class Fixed
 	Fixed &operator=(const Fixed &src);
 	~Fixed(void);
 
+	int getRawBits(void) const;
+	void setRawBits(int const raw);
+	
 	int toInt(void) const;
 	float toFloat(void) const;
 

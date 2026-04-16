@@ -6,24 +6,22 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 13:57:40 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/15 22:48:43 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/16 23:10:58 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Point.hpp"
 
-/* 
-Area for Triangle
-Area = | Ax(By - Cy) + Bx(Cy - Ay) + Cx(Ay - By) | * 1/2 
+// A = | ax(by - cy) + bx(cy - ay) + cx(ay - by)| * 1/2 
 
-Ax = X coordinate of point A
-Ay = Y coordinate of point A
-Bx = X coordinate of point B
-By = Y coordinate of point B
-Cx = X coordinate of point C
-Cy = Y coordinate of point C
-| | = Absolute value (ensure area is positive)
-*/
+//ax = coord x of point A
+//ay = coord y of point A
+//bx = coord x of point B
+//by = coord y of point B
+//cx = coord x of point C
+//cy = coord y of point C
+//| | = absolute value (ensure area is positive)
+
 
 Fixed Point::triangleArea(const Point a, const Point b, const Point c)
 {

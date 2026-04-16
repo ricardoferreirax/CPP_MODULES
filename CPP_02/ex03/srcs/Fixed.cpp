@@ -6,18 +6,17 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:33:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/15 22:48:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/16 23:05:34 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Fixed.hpp"
-#include <iostream>
-#include <cmath>
 
 const int Fixed::_fractBits = 8;
 
-Fixed::Fixed(void) : _fixedPointNbr(0)
+Fixed::Fixed(void)
 {
+	this->_rawValue = 0;
 	// std::cout << "Default constructor called" << std::endl;
 }
 
@@ -27,34 +26,70 @@ Fixed::Fixed(const Fixed &src)
 	*this = src;
 }
 
+// Converts integer to fixed-point by left bit shifting (multiplying by 256).
+// rawValue = nbr << this->_fractBits = nbr * 256
+Fixed::Fixed(const int nbr)
+{
+	// std::cout << "Int constructor called" << std::endl;
+	this->_rawValue = nbr << this->_fractBits;
+}
+
+// Convert float to fixed-point multiplying by 256 to move the fractional part into the integer
+// and rounding it to the nearest integer.
+// rawValue = roundf(nbr * (1 << this->_fractBits)) = roundf(nbr * 256)
+Fixed::Fixed(const float nbr)
+{
+    //std::cout << "Float constructor called" << std::endl;
+	
+	float input;
+
+	input = nbr;
+	for (int i = 0; i < this->_fractBits; i++)
+		input *= 2;
+	this->_rawValue = roundf(input);
+}
+
 Fixed &Fixed::operator=(const Fixed &src)
 {
 	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &src)
-		this->_fixedPointNbr = src._fixedPointNbr;
+		this->_rawValue = src.getRawBits();
 	return (*this);
 }
 
 Fixed::~Fixed(void)
 {
-	//std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed(const int nbr)
+int Fixed::getRawBits(void) const
 {
-	// std::cout << "Int constructor called" << std::endl;
-	this->_fixedPointNbr = nbr << this->_fractBits;
+	return (this->_rawValue);
 }
 
-Fixed::Fixed(float const inputFloat)
+void Fixed::setRawBits(int const raw)
 {
-    // std::cout << "Float constructor called" << std::endl;
-	float input = inputFloat;
+	this->_rawValue = raw;
+}
+
+// Convert fixed-point to an integer by right bit shifting by _fractBits (dividing by 256), removing the fractional part.
+// int = rawValue / 256
+int Fixed::toInt(void) const
+{
+	return (this->_rawValue >> this->_fractBits);
+}
+
+// Convert fixed-point to a float by dividing the raw fixed-point value by 256 to restore the original float value.
+// float = rawValue / 256
+// (float)this->_rawValue / (1 << this->_fractBits) = rawValue / 256
+float Fixed::toFloat(void) const
+{
+	float res;
+
+	res = this->_rawValue;
 	for (int i = 0; i < this->_fractBits; i++)
-	{
-		input *= 2;
-	}
-	this->_fixedPointNbr = roundf(input);
+		res /= 2;
+    return (res);
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &src)
@@ -63,97 +98,110 @@ std::ostream &operator<<(std::ostream &out, const Fixed &src)
 	return (out);
 }
 
-int Fixed::toInt(void) const
-{
-	return (this->_fixedPointNbr >> this->_fractBits);
-}
-
-float Fixed::toFloat(void) const
-{
-	float res = this->_fixedPointNbr;
-	for (int i = 0; i < this->_fractBits; i++)
-	{
-		res /= 2;
-	}
-    return (res);
-}
-
 // comparison operators
 bool Fixed::operator>(const Fixed &src) const
 {
-	return (this->toFloat() > src.toFloat());
+	return (this->_rawValue > src.getRawBits());
 }
 
 bool Fixed::operator<(const Fixed &src) const
 {
-	return (this->toFloat() < src.toFloat());
+	return (this->_rawValue < src.getRawBits());
 }
 
 bool Fixed::operator>=(const Fixed &src) const
 {
-	return (this->toFloat() >= src.toFloat());
+	return (this->_rawValue >= src.getRawBits());
 }
 
 bool Fixed::operator<=(const Fixed &src) const
 {
-	return (this->toFloat() <= src.toFloat());
+	return (this->_rawValue <= src.getRawBits());
 }
 
 bool Fixed::operator==(const Fixed &src) const
 {
-	return (this->toFloat() == src.toFloat());
+	return (this->_rawValue == src.getRawBits());
 }
 
 bool Fixed::operator!=(const Fixed &src) const
 {
-	return (this->toFloat() != src.toFloat());
+	return (this->_rawValue != src.getRawBits());
 }
 
 // aritmetic operators
+
+// Both numbers are in fixed-point representation, so we can directly add their raw values to get the result in fixed-point.
+// a + b = (a.rawValue + b.rawValue) / 256
 Fixed Fixed::operator+(const Fixed &src) const
 {
-	return (this->toFloat() + src.toFloat());
+	Fixed res;
+
+	res.setRawBits(this->_rawValue + src.getRawBits());
+	return (res);
 }
 
+// a - b = (a.rawValue - b.rawValue) / 256
 Fixed Fixed::operator-(const Fixed &src) const
 {
-	return (this->toFloat() - src.toFloat());
+	Fixed res;
+	res.setRawBits(this->_rawValue - src.getRawBits());
+	return (res);
 }
 
+// Multiply the raw values and then right shift by _fractBits (divide by 256)to correct the fixed-point position.
+// a * b = (a.rawValue * b.rawValue) / 256
 Fixed Fixed::operator*(const Fixed &src) const
 {
-	return (this->toFloat() * src.toFloat());
+	Fixed res;
+	long long temp;
+
+	temp = static_cast<long long>(this->_rawValue) * static_cast<long long>(src.getRawBits());
+	res.setRawBits(static_cast<int>(temp >> this->_fractBits));
+	return (res);
 }
 
+// Divide the raw values and then left shift by _fractBits (multiply by 256) to correct the fixed-point position.
+// a / b = (a.rawValue * 256) / b.rawValue
 Fixed Fixed::operator/(const Fixed &src) const
 {
-	return (this->toFloat() / src.toFloat());
+	Fixed res;
+
+	long long temp;
+
+	temp = (static_cast<long long>(this->_rawValue) << this->_fractBits) / src.getRawBits();
+	res.setRawBits(static_cast<int>(temp));
+	return (res);
 }
 
 // increment/decrement operators
 Fixed &Fixed::operator++(void)
 {
-	this->_fixedPointNbr++;
+	this->_rawValue++;
 	return (*this);
 }
 
 Fixed &Fixed::operator--(void)
 {
-	this->_fixedPointNbr--;
+	this->_rawValue--;
 	return (*this);
 }
 
 Fixed Fixed::operator++(int)
 {
-	Fixed temp = *this;
-	this->_fixedPointNbr++;
+	Fixed temp;
+
+	temp = *this;
+	this->_rawValue++;
 	return (temp);
 }
 
 Fixed Fixed::operator--(int)
 {
-	Fixed temp = *this;
-	this->_fixedPointNbr--;
+	Fixed temp;
+
+	temp = *this;
+	this->_rawValue--;
 	return (temp);
 }
 
