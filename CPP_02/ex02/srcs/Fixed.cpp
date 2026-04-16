@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:33:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/16 22:15:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/16 23:02:46 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ const int Fixed::_fractBits = 8;
 Fixed::Fixed(void)
 {
 	this->_rawValue = 0;
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
@@ -30,7 +30,7 @@ Fixed::Fixed(const Fixed &src)
 // rawValue = nbr << this->_fractBits = nbr * 256
 Fixed::Fixed(const int nbr)
 {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	this->_rawValue = nbr << this->_fractBits;
 }
 
@@ -39,7 +39,7 @@ Fixed::Fixed(const int nbr)
 // rawValue = roundf(nbr * (1 << this->_fractBits)) = roundf(nbr * 256)
 Fixed::Fixed(const float nbr)
 {
-    std::cout << "Float constructor called" << std::endl;
+    //std::cout << "Float constructor called" << std::endl;
 	
 	float input;
 
@@ -51,7 +51,7 @@ Fixed::Fixed(const float nbr)
 
 Fixed &Fixed::operator=(const Fixed &src)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &src)
 		this->_rawValue = src.getRawBits();
 	return (*this);
@@ -59,12 +59,11 @@ Fixed &Fixed::operator=(const Fixed &src)
 
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->_rawValue);
 }
 
@@ -102,53 +101,77 @@ std::ostream &operator<<(std::ostream &out, const Fixed &src)
 // comparison operators
 bool Fixed::operator>(const Fixed &src) const
 {
-	return (this->toFloat() > src.toFloat());
+	return (this->_rawValue > src.getRawBits());
 }
 
 bool Fixed::operator<(const Fixed &src) const
 {
-	return (this->toFloat() < src.toFloat());
+	return (this->_rawValue < src.getRawBits());
 }
 
 bool Fixed::operator>=(const Fixed &src) const
 {
-	return (this->toFloat() >= src.toFloat());
+	return (this->_rawValue >= src.getRawBits());
 }
 
 bool Fixed::operator<=(const Fixed &src) const
 {
-	return (this->toFloat() <= src.toFloat());
+	return (this->_rawValue <= src.getRawBits());
 }
 
 bool Fixed::operator==(const Fixed &src) const
 {
-	return (this->toFloat() == src.toFloat());
+	return (this->_rawValue == src.getRawBits());
 }
 
 bool Fixed::operator!=(const Fixed &src) const
 {
-	return (this->toFloat() != src.toFloat());
+	return (this->_rawValue != src.getRawBits());
 }
 
 // aritmetic operators
+
+// Both numbers are in fixed-point representation, so we can directly add their raw values to get the result in fixed-point.
+// a + b = (a.rawValue + b.rawValue) / 256
 Fixed Fixed::operator+(const Fixed &src) const
 {
-	return (this->toFloat() + src.toFloat());
+	Fixed res;
+
+	res.setRawBits(this->_rawValue + src.getRawBits());
+	return (res);
 }
 
+// a - b = (a.rawValue - b.rawValue) / 256
 Fixed Fixed::operator-(const Fixed &src) const
 {
-	return (this->toFloat() - src.toFloat());
+	Fixed res;
+	res.setRawBits(this->_rawValue - src.getRawBits());
+	return (res);
 }
 
+// Multiply the raw values and then right shift by _fractBits (divide by 256)to correct the fixed-point position.
+// a * b = (a.rawValue * b.rawValue) / 256
 Fixed Fixed::operator*(const Fixed &src) const
 {
-	return (this->toFloat() * src.toFloat());
+	Fixed res;
+	long long temp;
+
+	temp = static_cast<long long>(this->_rawValue) * static_cast<long long>(src.getRawBits());
+	res.setRawBits(static_cast<int>(temp >> this->_fractBits));
+	return (res);
 }
 
+// Divide the raw values and then left shift by _fractBits (multiply by 256) to correct the fixed-point position.
+// a / b = (a.rawValue * 256) / b.rawValue
 Fixed Fixed::operator/(const Fixed &src) const
 {
-	return (this->toFloat() / src.toFloat());
+	Fixed res;
+
+	long long temp;
+
+	temp = (static_cast<long long>(this->_rawValue) << this->_fractBits) / src.getRawBits();
+	res.setRawBits(static_cast<int>(temp));
+	return (res);
 }
 
 // increment/decrement operators
@@ -166,14 +189,18 @@ Fixed &Fixed::operator--(void)
 
 Fixed Fixed::operator++(int)
 {
-	Fixed temp = *this;
+	Fixed temp;
+
+	temp = *this;
 	this->_rawValue++;
 	return (temp);
 }
 
 Fixed Fixed::operator--(int)
 {
-	Fixed temp = *this;
+	Fixed temp;
+
+	temp = *this;
 	this->_rawValue--;
 	return (temp);
 }
