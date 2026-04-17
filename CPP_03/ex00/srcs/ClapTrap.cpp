@@ -6,25 +6,36 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 16:02:50 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/17 22:22:32 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/17 22:29:34 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void): _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(void)
 {
+	this->_name = "Default";
+	this->_hitPoints = 10;
+	this->_energyPoints = 10;
+	this->_attackDamage = 0;
 	std::cout << "ClapTrap [ " << this->_name << " ] default constructed!" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(std::string name)
 {
+	this->_name = name;
+	this->_hitPoints = 10;
+	this->_energyPoints = 10;
+	this->_attackDamage = 0;
 	std::cout << "ClapTrap [ " << this->_name << " ] constructed!" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &src): 
-	_name(src._name), _hitPoints(src._hitPoints), _energyPoints(src._energyPoints), _attackDamage(src._attackDamage)
+ClapTrap::ClapTrap(const ClapTrap &src)
 {
+	this->_name = src._name;
+	this->_hitPoints = src._hitPoints;
+	this->_energyPoints = src._energyPoints;
+	this->_attackDamage = src._attackDamage;
 	std::cout << "ClapTrap [ " << this->_name << " ] copy constructed!" << "\n" << std::endl;
 }
 
