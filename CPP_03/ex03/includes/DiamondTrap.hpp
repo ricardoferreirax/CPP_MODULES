@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:40:23 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/17 22:27:32 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/18 22:29:07 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class DiamondTrap : public ScavTrap, public FragTrap
 {
 	private:
 		std::string _name;
+		
 	public:
 		DiamondTrap(void);
 		DiamondTrap(std::string name);
