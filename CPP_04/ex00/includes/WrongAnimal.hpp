@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:51:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 14:24:59 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/18 22:33:58 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ class WrongAnimal
 {
 	protected:
 		std::string _type;
+		
 	public:
 		WrongAnimal(void);
 		WrongAnimal(const WrongAnimal &src);
