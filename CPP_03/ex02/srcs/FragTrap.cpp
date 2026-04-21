@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:08:54 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/17 22:24:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/21 18:05:53 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ FragTrap::~FragTrap(void)
 void FragTrap::highFivesGuys(void)
 {
 	if (this->_hitPoints == 0)
-		std::cout << "FragTrap [ " << this->_name << " ] is dead! Cannot give a high five!" << "\n" << std::endl;
+		std::cout << "FragTrap [ " << this->_name << " ] is dead! Cannot give a high five!" << std::endl;
 	else
-		std::cout << "FragTrap [ " << this->_name << " ] gives a high five!" << "\n" << std::endl;
+		std::cout << "FragTrap [ " << this->_name << " ] gives a high five!" << std::endl;
 }
