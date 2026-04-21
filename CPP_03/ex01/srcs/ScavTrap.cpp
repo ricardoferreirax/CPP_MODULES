@@ -6,12 +6,11 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:52:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/17 22:23:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:53:38 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ScavTrap.hpp"
-#include <iostream>
 
 ScavTrap::ScavTrap(void): ClapTrap("Default")
 {
@@ -44,38 +43,34 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &src)
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "\n"<< "ScavTrap [ " << this->_name << " ] destructed!" << std::endl;
+	std::cout << "ScavTrap [ " << this->_name << " ] destructed!" << std::endl;
 }
 
-void ScavTrap::attack(const std::string& target)
-{
-	if (this->_energyPoints > 0 && this->_hitPoints > 0)
-	{
-		this->_energyPoints--;
-		std::cout << "\n"<< "ScavTrap [ " << this->_name << " ] attacks [ " << target 
-			<< " ], causing ( " << this->_attackDamage << " ) points of damage!" << std::endl;
-	}
-	else if (this->_hitPoints == 0)
-		std::cout << "ScavTrap [ " << this->_name << " ] is dead! No hit points left!" << std::endl;
-	else if (this->_energyPoints == 0)
-		std::cout << "ScavTrap [ " << this->_name << " ] has no energy left, so he cannot attack the "
-			<< target << "!" << std::endl;
-}
-
-void ScavTrap::guardGate(void)
+// If the ScavTrap has hit and energy points, it simulates an attack on a target. It takes only one energy point.
+void	ScavTrap::attack(const std::string &target)
 {
 	if (this->_hitPoints == 0)
 	{
-		std::cout << "ScavTrap [ " << this->_name
-			<< " ] is dead! Cannot enter Gate keeper mode!" << std::endl;
+		std::cout << "ScavTrap " << this->_name << " cannot attack because it has no HP left!" << std::endl;
 		return ;
 	}
 	if (this->_energyPoints == 0)
 	{
-		std::cout << "ScavTrap [ " << this->_name
-			<< " ] has no energy left! Cannot enter Gate keeper mode!" << std::endl;
+		std::cout << "ScavTrap " << this->_name << " cannot attack because it has no EP left!" << std::endl;
 		return ;
 	}
-	std::cout << "ScavTrap [ " << this->_name
-		<< " ] has entered Gate keeper mode!" << std::endl;
+	this->_energyPoints--;
+	std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage
+		<< " points of damage!" << std::endl;
+}
+
+// If the ScavTrap has hit and energy points, it simulates entering Gate keeper mode. It takes only one energy point.
+void	ScavTrap::guardGate(void)
+{
+	if (this->_hitPoints == 0)
+	{
+		std::cout << "ScavTrap " << this->_name << " cannot enter Gate keeper mode because it has no HP left!" << std::endl;
+		return ;
+	}
+	std::cout << "ScavTrap " << this->_name << " is now in Gate keeper mode!" << std::endl;
 }

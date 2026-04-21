@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:50:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/24 14:55:26 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:29:49 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define SCAVTRAP_HPP
 
 #include "ClapTrap.hpp"
-#include <string>
 
 class ScavTrap : public ClapTrap
 {
