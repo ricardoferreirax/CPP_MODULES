@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:52:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/21 17:53:38 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:57:07 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ScavTrap::attack(const std::string &target)
 		<< " points of damage!" << std::endl;
 }
 
-// If the ScavTrap has hit and energy points, it simulates entering Gate keeper mode. It takes only one energy point.
 void	ScavTrap::guardGate(void)
 {
 	if (this->_hitPoints == 0)
