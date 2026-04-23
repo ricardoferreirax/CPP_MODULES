@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:52:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/18 22:34:32 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:17:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 WrongAnimal::WrongAnimal(void)
 {
 	this->_type = "WrongAnimal";
-	std::cout << "\nWrongAnimal default constructor created!" << std::endl;
+	std::cout << "WrongAnimal default constructor created!" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal &src)

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:51:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/18 22:33:58 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 14:50:00 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define WRONGANIMAL_HPP
 
 #include <iostream>
+#include <string>
 
 class WrongAnimal
 {

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:46:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/18 22:34:24 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 14:48:58 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ Dog::~Dog(void)
 
 void Dog::makeSound(void) const
 {
-	std::cout << "Woof!" << std::endl;
+	std::cout << "Woof Woof!" << std::endl;
 }
