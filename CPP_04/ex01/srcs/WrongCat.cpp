@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:57:51 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/23 16:41:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:41:36 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 WrongCat::WrongCat(void): WrongAnimal()
 {
 	this->_type = "WrongCat";
-	std::cout << "WrongCat default constructor created!\n" << std::endl;
+	std::cout << "WrongCat default constructor created!" << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat &src): WrongAnimal(src)
@@ -35,8 +35,10 @@ WrongCat::~WrongCat(void)
 {
 	std::cout << "WrongCat destructed!" << std::endl;
 }
-	
+
+// as the makeSound() function in WrongAnimal is not declared as virtual, the WrongCat class 
+// cannot override it properly so, polymorphism does not work as expected through a WrongANimal pointer or reference
 void WrongCat::makeSound(void) const
 {
-	std::cout << "Meow" << std::endl;
+	std::cout << "Wrong Meow" << std::endl;
 }

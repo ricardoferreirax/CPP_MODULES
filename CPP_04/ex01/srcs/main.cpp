@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:30:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 10:00:12 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:42:16 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,21 @@ int main()
 	dog_copy.setIdea(0, "I want to bark");
 	std::cout << "Copy idea: " << dog_copy.getIdea(0) << std::endl;
 	std::cout << std::endl;
+
+	const WrongAnimal *wrong = new WrongCat();
+	std::cout << "WrongAnimal type: " << wrong->getType() << std::endl;
+	std::cout << "WrongAnimal sound: ";
+	wrong->makeSound();
+
+	// because makesound() in WrongAnimal is not virtual, this calls WrongAnimal::makesound() instead of WrongCat::makeSound()
+	std::cout << std::endl;
+
+	WrongCat wrong_cat;
+	std::cout << "WrongCat type: " << wrong_cat.getType() << std::endl;
+	std::cout << "WrongCat sound: ";
+	wrong_cat.makeSound();
+	std::cout << std::endl;
+	delete wrong;
+	
     return (0);
 }

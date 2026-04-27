@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:46:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 10:47:05 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:35:32 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ Dog::~Dog(void)
 }
 
 // Dog class overrides the makeSound() to print "Woof Woof!" instead of the default "Animal sound!" provided by the base class.
+// returns the specific sound for the Dog class, demonstrating polymorphism when called through a pointer or reference to the base Animal class.
 void Dog::makeSound(void) const
 {
 	std::cout << "Woof Woof!" << std::endl;
