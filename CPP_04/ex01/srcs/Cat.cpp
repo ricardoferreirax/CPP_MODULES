@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:31:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/18 22:36:13 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:23:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ Cat &Cat::operator=(const Cat &src)
 
 Cat::~Cat(void)
 {
-	std::cout << "Cat destructed!" << std::endl;
 	delete this->_brain;
+	std::cout << "Cat destructed!" << std::endl;
 }
 
 void Cat::makeSound(void) const
 {
-	std::cout << "Meow!" << std::endl;
+	std::cout << "Meow Meow!" << std::endl;
 }
 
 void Cat::setIdea(int index, const std::string &idea)

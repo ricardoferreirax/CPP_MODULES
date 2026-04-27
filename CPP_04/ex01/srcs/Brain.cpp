@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:34:36 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/18 22:36:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:59:48 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ Brain::~Brain(void)
 
 std::string Brain::getIdea(int index) const
 {
-	if (index >= 0 && index < 100)
-		return (this->_ideas[index]);
-	return ("");
+	if (index < 0 || index >= 100)
+		return ("");
+	return (this->_ideas[index]);
 }
 
 void Brain::setIdea(int index, const std::string &idea)
 {
-	if (index >= 0 && index < 100)
-		this->_ideas[index] = idea;
+	if (index < 0 || index >= 100)
+		return ;
+	this->_ideas[index] = idea;
 }

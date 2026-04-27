@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:25:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/25 22:18:52 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:40:03 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Animal::Animal(void)
 {
 	this->_type = "Animal";
-	std::cout << "\nAnimal default constructor created!" << std::endl;
+	std::cout << "Animal default constructor created!" << std::endl;
 }
 
 Animal::Animal(const Animal &src)

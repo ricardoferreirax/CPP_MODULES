@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:32:02 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/03/26 14:15:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:22:53 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define BRAIN_HPP
 
 #include <iostream>
+#include <string>
 
 class Brain
 {
