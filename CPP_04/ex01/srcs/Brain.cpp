@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:34:36 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/23 16:59:48 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:26:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ Brain::Brain(void)
 	std::cout << "Brain default constructor created!" << std::endl;
 }
 
+// copies all the 100 ideias from the source Brain into current Brain. Each idea string is copied individually 
+// to ensure that the new Brain has its own copy of the ideas, rather than just copying the pointer.
 Brain::Brain(const Brain &src)
 {
 	for (int i = 0; i < 100; i++)
@@ -24,6 +26,8 @@ Brain::Brain(const Brain &src)
 	std::cout << "Brain copy constructor created!" << std::endl;
 }
 
+// this is a deep copy which means that the new Brain will have its own separate memory for the ideas 
+// and changes to the ideas in one Brain will not affect the other Brain.
 Brain &Brain::operator=(const Brain &src)
 {
 	if (this != &src)
@@ -40,6 +44,7 @@ Brain::~Brain(void)
 	std::cout << "Brain destructed!" << std::endl;
 }
 
+// returns the idea stored at the specified index in the _ideas array
 std::string Brain::getIdea(int index) const
 {
 	if (index < 0 || index >= 100)
@@ -47,6 +52,7 @@ std::string Brain::getIdea(int index) const
 	return (this->_ideas[index]);
 }
 
+// sets/stores the new ideia in requested index of the _ideas array
 void Brain::setIdea(int index, const std::string &idea)
 {
 	if (index < 0 || index >= 100)
