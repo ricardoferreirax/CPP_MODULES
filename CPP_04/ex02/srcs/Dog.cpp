@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:46:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 10:57:53 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:18:07 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ Dog::Dog(void): AAnimal()
 
 // creates a new Dog object in heap using Brain's copy constructor.
 // this ensures that each Dog has its own separate Brain object, preventing shared state between different Dog instances.
-// src._brain points to the original Dog brain and *src._brain accesses the real Brain object.
 // original._brain (Brain A) and copy._brain (Brain B) are two different Brain objects in memory, 
 // but contain the same content ideas, stored separately.
 Dog::Dog(const Dog &src): AAnimal(src)
@@ -54,6 +53,7 @@ Dog::~Dog(void)
 }
 
 // Dog class overrides the makeSound() to print "Woof Woof!" instead of the default "Animal sound!" provided by the base class.
+// returns the specific sound for the Dog class, demonstrating polymorphism when called through a pointer or reference to the base AAnimal class.
 void Dog::makeSound(void) const
 {
 	std::cout << "Woof Woof!" << std::endl;

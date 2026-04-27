@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:31:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 10:57:14 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:17:01 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ Cat::~Cat(void)
 }
 
 // Cat class overrides the makeSound() to print "Meow Meow!" instead of the default "Animal sound!" provided by the base class.
+// returns the specific sound for the Cat class, demonstrating polymorphism when called through a pointer or reference to the Animal class.
 void Cat::makeSound(void) const
 {
 	std::cout << "Meow Meow!" << std::endl;

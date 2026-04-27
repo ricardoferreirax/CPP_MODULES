@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:30:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 11:00:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:33:50 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 int main()
 {
 	AAnimal *animals[6];
+
+	// this does not compile because AAnimal is an abstract class due to the presence of the pure virtual function makeSound().
+	
+	// AAnimal animal;
+	// AAnimal *meta = new AAnimal();
+
+	// but ppointers/references to AAnimal can be created and used to point to objects of derived classes like Dog and Cat, 
+	// allowing for polymorphic behavior when calling virtual functions through these pointers/references.
 	
 	for (int i = 0; i < 3; i++)
 		animals[i] = new Dog();
@@ -46,6 +54,16 @@ int main()
 	dog_copy.setIdea(0, "I want to bark");
 	std::cout << "Copy idea: " << dog_copy.getIdea(0) << std::endl;
 	std::cout << std::endl;
+
+	const WrongAnimal *wrong = new WrongCat();
+	std::cout << "WrongAnimal type: " << wrong->getType() << std::endl;
+	std::cout << "WrongAnimal sound: ";
+	wrong->makeSound();
+
+	// because makesound() in WrongAnimal is not virtual, this calls WrongAnimal::makesound() instead of WrongCat::makeSound()
+	std::cout << std::endl;
+	delete wrong;
+
     return (0);
 }
 
