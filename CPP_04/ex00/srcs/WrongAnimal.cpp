@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:52:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/23 16:17:12 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:45:27 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ std::string WrongAnimal::getType(void) const
 	return (this->_type);
 }
 
+// returns the default sound for the base WrongAnimal class. this function is not virtual, which means that
+// it cannot be overridden by derived classes to provide specific sounds for different types of animals.
 void WrongAnimal::makeSound(void) const
 {
 	std::cout << "WrongAnimal sound!" << std::endl;
