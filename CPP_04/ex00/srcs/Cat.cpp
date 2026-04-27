@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:31:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/23 14:49:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:52:00 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Cat::~Cat(void)
 	std::cout << "Cat destructed!" << std::endl;
 }
 
+// Cat class overrides the makeSound() to print "Meow Meow!" instead of the default "Animal sound!" provided by the base class.
 void Cat::makeSound(void) const
 {
 	std::cout << "Meow Meow!" << std::endl;

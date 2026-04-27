@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:46:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/23 14:48:58 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:52:23 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Dog::~Dog(void)
 	std::cout << "Dog destructed!" << std::endl;
 }
 
+// Dog class overrides the makeSound() to print "Woof Woof!" instead of the default "Animal sound!" provided by the base class.
 void Dog::makeSound(void) const
 {
 	std::cout << "Woof Woof!" << std::endl;
