@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:34:36 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 10:26:17 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/28 15:53:20 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ Brain::Brain(void)
 	std::cout << "Brain default constructor created!" << std::endl;
 }
 
-// copies all the 100 ideias from the source Brain into current Brain. Each idea string is copied individually 
-// to ensure that the new Brain has its own copy of the ideas, rather than just copying the pointer.
+// copies all the 100 ideias from the src Brain into current. 
+// Each idea string is copied individually to ensure that the new Brain has its own 
+// copy of the ideas, rather than just copying the pointer.
 Brain::Brain(const Brain &src)
 {
 	for (int i = 0; i < 100; i++)
@@ -26,8 +27,8 @@ Brain::Brain(const Brain &src)
 	std::cout << "Brain copy constructor created!" << std::endl;
 }
 
-// this is a deep copy which means that the new Brain will have its own separate memory for the ideas 
-// and changes to the ideas in one Brain will not affect the other Brain.
+// deep copy: the new Brain will have its own separate memory for the ideas and its changes
+// in one Brain will not affect the other Brain.
 Brain &Brain::operator=(const Brain &src)
 {
 	if (this != &src)
