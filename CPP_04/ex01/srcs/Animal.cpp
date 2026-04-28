@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:25:10 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/27 10:18:17 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/28 16:18:46 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ std::string Animal::getType(void) const
 	return (this->_type);
 }
 
-// returns the default sound for the base Animal class. this function is virtual, which means that 
-// it can be overridden by derived classes to provide specific sounds for different types of animals.
-// this allows us to have different behaviors for different types of animals while still using a common interface defined in the base class. 
+// returns the base Animal class sound. this function is virtual, which means that it can 
+// be overridden by derived classes to provide specific sounds for different types of animals.
+// this allows us to have different behaviours for different types while still using a common base class interface.
 void Animal::makeSound(void) const
 {
 	std::cout << "Animal sound!" << std::endl;
 }
+
