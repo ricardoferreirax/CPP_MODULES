@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:34:36 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/28 14:41:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/28 15:56:14 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Brain::Brain(void)
 
 // copies all the 100 ideias from the src Brain into current. 
 // Each idea string is copied individually to ensure that the new Brain has its own 
-//copy of the ideas, rather than just copying the pointer.
+// copy of the ideas, rather than just copying the pointer.
 Brain::Brain(const Brain &src)
 {
 	for (int i = 0; i < 100; i++)
