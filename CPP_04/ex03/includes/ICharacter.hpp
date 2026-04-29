@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/28 16:24:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/29 16:27:09 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/04/29 16:22:25 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/04/29 16:24:50 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
+#ifndef ICHARACTER_HPP
+#define ICHARACTER_HPP
 
 #include <iostream>
-#include <string>
-#include "ICharacter.hpp"
+#include "../includes/AMateria.hpp"
 
-class AMateria
+class ICharacter
 {
-	protected:
-		std::string _type;
-		
 	public:
-		AMateria(void);
-		AMateria(std::string const &type);
-		AMateria(const AMateria &src);
-		AMateria &operator=(const AMateria &src);
-		virtual ~AMateria(void);
-
-        std::string const &getType() const;
-        virtual AMateria *clone() const = 0;
-        virtual void use(ICharacter &target);
+		virtual ~ICharacter(void) {}
+		virtual std::string const &getName() const = 0;
+		virtual void equip(AMateria* m) = 0;
+		virtual void unequip(int idx) = 0;
+		virtual void use(int idx, ICharacter &target) = 0;
 };
 
 #endif
