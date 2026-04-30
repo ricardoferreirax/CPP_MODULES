@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 16:26:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/29 16:28:35 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/30 14:38:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ class Ice : public AMateria
 		Ice(void);
 		Ice(const Ice &src);
 		Ice &operator=(const Ice &src);
-		virtual ~Ice(void);
+		~Ice(void);
 
-		AMateria *clone() const;
+		AMateria *clone(void) const;
 		void use(ICharacter &target);
 };
 
