@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:21:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 16:43:20 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/30 16:55:23 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ Character::Character(const Character &src)
 	for (int i = 0; i < 4; i++)
 	{
 		if (src._inventory[i])
+		{
 			this->_inventory[i] = src._inventory[i]->clone();
+			std::cout << "Cloning materia in inventory slot " << i << " from source Character" << std::endl;
+		}
 		else
 			this->_inventory[i] = NULL;
 	}
@@ -58,7 +61,10 @@ Character &Character::operator=(const Character &src)
 				this->_inventory[i] = NULL;
 			}
 			if (src._inventory[i])
+			{
 				this->_inventory[i] = src._inventory[i]->clone();
+				std::cout << "Cloned materia in inventory slot " << i << " from source Character" << std::endl;
+			}
 			else
 				this->_inventory[i] = NULL;
 		}
