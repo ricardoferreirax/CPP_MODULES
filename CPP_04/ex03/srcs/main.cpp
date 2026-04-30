@@ -6,26 +6,26 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 14:48:09 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 14:49:12 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/04/30 16:44:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/AMateria.hpp"
 #include "../includes/ICharacter.hpp"
-// #include "../includes/IMateriaSource.hpp"
+//#include "../includes/IMateriaSource.hpp"
 #include "../includes/Ice.hpp"
 #include "../includes/Cure.hpp"
-// #include "../includes/Character.hpp"
-// #include "../includes/MateriaSource.hpp"
+#include "../includes/Character.hpp"
+//#include "../includes/MateriaSource.hpp"
 
 int main(void)
 {
-	// IMateriaSource *src = new MateriaSource();
+	IMateriaSource *src = new MateriaSource();
 
-	// src->learnMateria(new Ice());
-	// src->learnMateria(new Cure());
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
 
-	// ICharacter *me = new Character("me");
+	ICharacter *me = new Character("me");
 	AMateria *tmp;
 
 	tmp = src->createMateria("ice");

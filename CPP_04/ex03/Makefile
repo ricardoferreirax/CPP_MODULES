@@ -5,6 +5,7 @@ SRCS     := srcs/main.cpp \
 			srcs/AMateria.cpp \
 			srcs/Ice.cpp \
 			srcs/Cure.cpp \
+			srcs/Character.cpp \
 			
 			
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
