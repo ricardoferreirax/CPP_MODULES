@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:21:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/02 11:32:31 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:57:08 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,10 @@ Character::Character(const Character &src)
 	for (int i = 0; i < 4; i++)
 	{
 		if (src._inventory[i])
-		{
 			this->_inventory[i] = src._inventory[i]->clone();
-			std::cout << "Cloning materia in inventory slot " << i << " from source Character" << std::endl;
-		}
 		else
 			this->_inventory[i] = NULL;
 	}
-	std::cout << "Character copy constructor called" << std::endl;
 }
 
 Character &Character::operator=(Character const &src)
@@ -84,11 +80,7 @@ Character &Character::operator=(Character const &src)
 		for (int i = 0; i < 4; i++)
 		{
 			if (src._inventory[i])
-			{
 				this->_inventory[i] = src._inventory[i]->clone();
-				std::cout << "Cloned materia in inventory slot " << i 
-						  << " from source Character" << std::endl;
-			}
 		}
 	}
 	return (*this);
@@ -97,40 +89,12 @@ Character &Character::operator=(Character const &src)
 Character::~Character(void)
 {
 	for (int i = 0; i < 4; i++)
+	{
 		delete this->_inventory[i];
+		this->_inventory[i] = NULL;
+	}
 	deleteUnequippedMateria(&this->_unequipMateria);
 }
-
-/* Character::~Character(void)
-{
-	t_floor *current;
-	t_floor *next;
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (this->_inventory[i])
-		{
-			std::cout << this->_name << ": Deleting equipped materia "
-					  << this->_inventory[i]->getType() << " from slot " << i << std::endl;
-			delete this->_inventory[i];
-			this->_inventory[i] = NULL;
-		}
-	}
-	current = this->_unequipMateria;
-	while (current)
-	{
-		next = current->next;
-		if (current->materia)
-		{
-			std::cout << this->_name << ": Deleting unequipped materia "
-					  << current->materia->getType() << " from floor" << std::endl;
-			delete current->materia;
-		}
-		delete current;
-		current = next;
-	}
-	std::cout << "Character destructor called" << std::endl;
-} */
 
 std::string const &Character::getName(void) const
 {
@@ -153,7 +117,7 @@ void Character::equip(AMateria* m)
 			return ;
 		}
 	}
-	std::cout << this->_name << ": Inventory is full!" << std::endl;
+	delete m;
 }
 
 void Character::unequip(int idx)
@@ -182,5 +146,4 @@ void Character::use(int idx, ICharacter &target)
 		this->_inventory[idx]->use(target);
 		return ;
 	}
-	std::cout << this->_name << ": No materia equipped in this slot! Slot: " << idx << " is empty!" << std::endl;
 }
