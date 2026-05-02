@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 16:00:06 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 14:31:52 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:14:28 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,4 @@ std::string const &AMateria::getType(void) const
 void AMateria::use(ICharacter &target)
 {
 	(void)target;
-	std::cout << "AMateria used on " << target.getName() << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:21:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 16:55:23 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:10:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,26 @@ Character::~Character(void)
 	t_floor *current;
 	t_floor *next;
 
-	current = this->_unequipMateria;	
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_inventory[i])
+		{
+			std::cout << this->_name << ": Deleting equipped materia "
+					  << this->_inventory[i]->getType() << " from slot " << i << std::endl;
+			delete this->_inventory[i];
+			this->_inventory[i] = NULL;
+		}
+	}
+	current = this->_unequipMateria;
 	while (current)
 	{
 		next = current->next;
-		delete current->materia;
+		if (current->materia)
+		{
+			std::cout << this->_name << ": Deleting unequipped materia "
+					  << current->materia->getType() << " from floor" << std::endl;
+			delete current->materia;
+		}
 		delete current;
 		current = next;
 	}
