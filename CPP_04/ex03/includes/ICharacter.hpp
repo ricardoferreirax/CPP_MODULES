@@ -6,14 +6,13 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 16:22:25 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 14:33:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:18:57 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 #define ICHARACTER_HPP
 
-#include <iostream>
 #include <string>
 #include "../includes/AMateria.hpp"
 

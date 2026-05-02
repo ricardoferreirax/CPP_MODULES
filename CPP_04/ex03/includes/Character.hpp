@@ -6,14 +6,13 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 14:51:01 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 16:21:35 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:20:05 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include <iostream>
 #include <string>
 #include "ICharacter.hpp"
 #include "AMateria.hpp"

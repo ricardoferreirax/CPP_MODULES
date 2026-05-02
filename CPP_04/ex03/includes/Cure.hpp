@@ -6,14 +6,13 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 14:45:47 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/04/30 14:46:39 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/02 11:18:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CURE_HPP
 #define CURE_HPP
 
-#include <iostream>
 #include "AMateria.hpp"
 
 class Cure : public AMateria
