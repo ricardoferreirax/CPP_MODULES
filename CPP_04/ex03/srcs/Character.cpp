@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:21:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/03 23:30:25 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/03 23:34:47 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ Character::Character(std::string name)
 	std::cout << "Character constructor called" << std::endl;
 }
 
-// creates a new Character using deep copy to another Character.
-// Each Materia is cloned so both Characters have their own independent Materia instances in memory.
+// creates a new Character by deep copying from another Character.
+// Each stored Materia is cloned, so both Characters have their own independent Materia instances in memory.
 Character::Character(const Character &src)
 {
 	this->_name = src._name;
