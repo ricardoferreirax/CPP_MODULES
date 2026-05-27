@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 17:41:43 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/27 18:26:47 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/27 18:53:41 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,15 @@ class Bureaucrat
 
 		void incrementGrade(void);
 		void decrementGrade(void);
+
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char *what(void) const throw();
+		};
 		
 };
+
+std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat);
 
 #endif
