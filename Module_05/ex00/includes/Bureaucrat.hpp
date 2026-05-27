@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 17:41:43 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/27 04:49:43 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/27 18:26:47 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ class Bureaucrat
 
 		std::string getName(void) const;
 		int getGrade(void) const;
+
+		void incrementGrade(void);
+		void decrementGrade(void);
 		
 };
 

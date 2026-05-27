@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:25:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/27 04:49:17 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/27 18:26:34 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ std::string Bureaucrat::getName(void) const
 int Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
+}
+
+void Bureaucrat::incrementGrade(void)
+{
+	std::cout << "Increment grade" << std::endl;
+	if (this->_grade <= 1)
+		throw ;
+	this->_grade--;
+}
+
+void Bureaucrat::decrementGrade(void)
+{
+	std::cout << "Decrement grade" << std::endl;
+	if (this->_grade >= 150)
+		throw ;
+	this->_grade++;
 }
 
 std::ostream &operator<<(std::ostream &output, const Bureaucrat &src)

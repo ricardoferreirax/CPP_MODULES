@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:45:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/27 04:56:34 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/27 18:24:16 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(void)
 		c = a;
 		std::cout << "After assignment: " << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
 
-		// a.incrementGrade();
-		// std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
+		a.incrementGrade();
+		std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
 	}
 	catch (std::exception &e)
 	{
