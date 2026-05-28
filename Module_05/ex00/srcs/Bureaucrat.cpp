@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:25:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/28 22:51:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/28 23:14:20 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,13 @@ std::ostream &operator<<(std::ostream &output, const Bureaucrat &src)
 
 // Exception: An exception is a runtime error or an unexpected event that occurs during 
 // program execution.
-
 // Exception Handling: A mechanism that allows a program to detect, catch, and handle 
 // exceptions so that the program can continue executing or terminate instead of crashing.
+
+// When constructing a Bureaucrat with an invalid grade, the class must throw n appropriate 
+// exception. Two custom exception types are implemented: - GradeTooHighException
+// 														  - GradeTooLowException
+// 
+// The class also provides the member functions incrementGrade() and decrementGrade()
+// which they must check whether the resulting grade remains within the valid range. 
+// If not, the corresponding exception is thrown.
