@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:45:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/28 22:38:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/28 23:00:39 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,56 @@ int	main(void)
 	catch (std::exception &e)
 	{
 		std::cerr << "\nException: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << "---------------------------------------------------------------------" << std::endl;
+
+	try
+	{
+		Bureaucrat high("TooHigh", 0);
+		std::cout << high << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	try
+	{
+		Bureaucrat low("TooLow", 151);
+		std::cout << low << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	try
+	{
+		Bureaucrat top("Top", 1);
+		std::cout << top << std::endl;
+		top.incrementGrade();
+		std::cout << top << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	try
+	{
+		Bureaucrat bottom("Bottom", 150);
+		std::cout << bottom << std::endl;
+		bottom.decrementGrade();
+		std::cout << bottom << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:25:11 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/28 22:36:10 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/05/28 22:51:29 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Bureaucrat destructor called" << std::endl;
 }
 
-std::string Bureaucrat::getName(void) const
+const std::string Bureaucrat::getName(void) const
 {
 	return (this->_name);
 }
@@ -61,7 +61,7 @@ void Bureaucrat::incrementGrade(void)
 {
 	std::cout << "Increment grade" << std::endl;
 	if (this->_grade <= 1)
-		throw Bureaucrat::GradeTooHighException(); ;
+		throw Bureaucrat::GradeTooHighException();
 	this->_grade--;
 }
 
@@ -85,7 +85,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 
 std::ostream &operator<<(std::ostream &output, const Bureaucrat &src)
 {
-	output << src.getName() << ", bureaucrat grade " << src.getGrade();
+	output << src.getName() << ", bureaucrat grade " << src.getGrade() << ".";
 	return (output);
 }
 
