@@ -1,26 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/26 17:41:43 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/05/28 23:27:17 by rmedeiro         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include <iostream>
-#include <exception>
+# include <exception>
+# include <iostream>
+# include <string>
+
+class Form;
 
 class Bureaucrat
 {
 	private:
 		const std::string _name;
-		int _grade;
+		int	_grade;
 
 	public:
 		Bureaucrat(void);
@@ -29,25 +20,27 @@ class Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &src);
 		~Bureaucrat(void);
 
-		const std::string getName(void) const;
-		int getGrade(void) const;
+		const std::string &getName(void) const;
+		int	getGrade(void) const;
 
 		void incrementGrade(void);
 		void decrementGrade(void);
 
+		void signForm(Form &form) const;
+
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char *what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
-		
+
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char *what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
 };
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat);
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
 
 #endif
