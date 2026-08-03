@@ -1,8 +1,10 @@
-NAME     := Form
+NAME     := AForm
 CPP      := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS     := srcs/main.cpp \
-		   srcs/Bureaucrat.cpp
+		   srcs/Bureaucrat.cpp \
+		   srcs/AForm.cpp \
+		   srcs/ShrubberyCreationForm.cpp \
 			
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
