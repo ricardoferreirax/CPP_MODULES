@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/29 16:44:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/07/29 16:48:40 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/03 15:31:38 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/03 21:52:00 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
-// #include "../includes/AForm.hpp"
+#include "../includes/AForm.hpp"
 
 Bureaucrat::Bureaucrat(void) : _name("Default")
 {
@@ -72,7 +72,7 @@ void Bureaucrat::decrementGrade(void)
 	this->_grade++;
 }
 
-void Bureaucrat::signForm(Form &form) const
+void Bureaucrat::signForm(AForm &form) const
 {
 	try
 	{
@@ -113,4 +113,3 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
 	return (out);
 }
-

@@ -5,51 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 04:45:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/07/28 15:47:27 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/07/29 17:16:25 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/07/29 17:16:30 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
+#include "../includes/Form.hpp"
 
 int	main(void)
 {
 	try
 	{
-		Bureaucrat a("Ricky", 2);
-		std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		Bureaucrat b(a);
-		std::cout << b.getName() << ", bureaucrat grade " << b.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		Bureaucrat c("Default", 150);
-		std::cout << "Before assignment: " << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
-		c = a;
-		std::cout << "After assignment: " << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		a.incrementGrade();
-		std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		c.decrementGrade();
-		std::cout << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
-		std::cout << std::endl;
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << "\nException: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+		Bureaucrat a("Ricky", 10);
+		Form form("Contract", 20, 30);
 
-	std::cout << "---------------------------------------------------------------------" << std::endl;
-
-	try
-	{
-		Bureaucrat high("TooHigh", 0);
-		std::cout << high << std::endl;
+		std::cout << a << std::endl;
+		std::cout << form << std::endl;
 	}
 	catch (std::exception &e)
 	{
@@ -59,8 +31,12 @@ int	main(void)
 
 	try
 	{
-		Bureaucrat low("TooLow", 151);
+		Bureaucrat low("LowG", 100);
+		Form form("Important Form", 50, 50);
+
 		std::cout << low << std::endl;
+		std::cout << form << std::endl;
+		std::cout << form << std::endl;
 	}
 	catch (std::exception &e)
 	{
@@ -70,10 +46,8 @@ int	main(void)
 
 	try
 	{
-		Bureaucrat top("Top", 1);
-		std::cout << top << std::endl;
-		top.incrementGrade();
-		std::cout << top << std::endl;
+		Form invalidHigh("Invalid High", 0, 50);
+		std::cout << invalidHigh << std::endl;
 	}
 	catch (std::exception &e)
 	{
@@ -83,16 +57,13 @@ int	main(void)
 
 	try
 	{
-		Bureaucrat bottom("Bottom", 150);
-		std::cout << bottom << std::endl;
-		bottom.decrementGrade();
-		std::cout << bottom << std::endl;
+		Form invalidLow("Invalid Low", 151, 50);
+		std::cout << invalidLow << std::endl;
 	}
 	catch (std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
-
 	return (0);
 }
