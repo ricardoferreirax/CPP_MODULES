@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/03 15:30:46 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/03 15:31:24 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/04 11:45:28 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/04 11:46:03 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ class Bureaucrat
 	public:
 		Bureaucrat(void);
 		Bureaucrat(const std::string name, int grade);
-		Bureaucrat(const Bureaucrat &src);
-		Bureaucrat &operator=(const Bureaucrat &src);
+		Bureaucrat(const Bureaucrat &other);
+		Bureaucrat &operator=(const Bureaucrat &other);
 		~Bureaucrat(void);
 
 		const std::string &getName(void) const;

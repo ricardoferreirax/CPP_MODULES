@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/03 21:56:50 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/03 22:00:21 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/04 15:06:40 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/04 15:15:14 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,37 @@
 #include <iostream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(void) 
-	: AForm("ShrubberyCreationForm", 145, 137), _target("Default")
+	: AForm("Shrubbery creation request", 145, 137), _target("somewhere")
 {
-	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
+	std::cout << "[Shrubbery] A request for an unnamed place has been opened." << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
-	: AForm("ShrubberyCreationForm", 145, 137), _target(target)
+	: AForm("Shrubbery creation request", 145, 137), _target(target)
 {
-	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
+	std::cout << "[Shrubbery] A planting request has been opened for " << this->_target << "." << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) 
-	: AForm(src), _target(src._target)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+	: AForm(other), _target(other._target)
 {
-	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
+	std::cout << "[Shrubbery] Copied the planting request for " << this->_target << "." << std::endl;
 }
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &src)
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
-	std::cout << "ShrubberyCreationForm copy assignment operator called" << std::endl;
-	if (this != &src)
-		AForm::operator=(src);
+	if (this != &other)
+	{
+		AForm::operator=(other);
+		this->_target = other._target;
+	}
+	std::cout << "[Shrubbery] Planting request data has been assigned." << std::endl;
 	return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {
-	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
+	std::cout << "[Shrubbery] The request for " << this->_target << " has been destroyed." << std::endl;
 }
 
 const std::string &ShrubberyCreationForm::getTarget(void) const
@@ -50,20 +53,38 @@ const std::string &ShrubberyCreationForm::getTarget(void) const
 	return (this->_target);
 }
 
-void ShrubberyCreationForm::executeAction(void) const
+void ShrubberyCreationForm::writeTree(std::ostream &out) const
 {
-	std::ofstream file;
-	file.open((this->_target + "_shrubbery").c_str());
-	if (!file.is_open())
-		throw std::runtime_error("Could not create shrubbery file");
-	file << "       _-_" << std::endl;
-	file << "    /~~   ~~\\" << std::endl;
-	file << " /~~         ~~\\" << std::endl;
-	file << "{               }" << std::endl;
-	file << " \\  _-     -_  /" << std::endl;
-	file << "   ~  \\\\ //  ~" << std::endl;
-	file << "_- -   | | _- _" << std::endl;
-	file << "  _ -  | |   -_" << std::endl;
-	file << "      // \\\\" << std::endl;
+	out << "    oxoxoo    ooxoo" << std::endl;
+	out << "  ooxoxo oo  oxoxooo" << std::endl;
+	out << " oooo xxoxoo ooo ooox" << std::endl;
+	out << " oxo o oxoxo  xoxxoxo" << std::endl;
+	out << "  oxo xooxoooo o ooo" << std::endl;
+	out << "    ooo\\oo\\  /o/o" << std::endl;
+	out << "        \\  \\/ /" << std::endl;
+	out << "         |   /" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "         | D|" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "  ______/____\\____" << std::endl;
+}
+
+void ShrubberyCreationForm::performAction(void) const
+{
+	const std::string fileName = this->_target + "_shrubbery";
+	std::ofstream file(fileName.c_str());
+
+	if (!file)
+		throw OutputFileException();
+	this->writeTree(file);
+	if (!file.good())
+		throw OutputFileException();
 	file.close();
+	std::cout << "[Shrubbery] Trees were planted in " << fileName << "." << std::endl;
+}
+
+const char *ShrubberyCreationForm::OutputFileException::what(void) const throw()
+{
+	return ("The shrubbery file could not be written");
 }
