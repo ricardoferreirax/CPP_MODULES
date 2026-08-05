@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:20:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 16:03:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/04 16:03:55 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
 # include "AForm.hpp"
 # include <string>
 
-class RobotomyRequestForm : public AForm
+class PresidentialPardonForm : public AForm
 {
 	private:
 		std::string	_target;
@@ -25,11 +25,11 @@ class RobotomyRequestForm : public AForm
 		virtual void performAction(void) const;
 
 	public:
-		RobotomyRequestForm(void);
-		RobotomyRequestForm(const std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &src);
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
-		virtual ~RobotomyRequestForm(void);
+		PresidentialPardonForm(void);
+		PresidentialPardonForm(const std::string target);
+		PresidentialPardonForm(const PresidentialPardonForm &src);
+		PresidentialPardonForm &operator=(const PresidentialPardonForm &src);
+		virtual ~PresidentialPardonForm(void);
 
 		const std::string &getTarget(void) const;
 };

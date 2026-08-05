@@ -5,6 +5,8 @@ SRCS     := srcs/main.cpp \
 		   srcs/Bureaucrat.cpp \
 		   srcs/AForm.cpp \
 		   srcs/ShrubberyCreationForm.cpp \
+		   srcs/RobotomyRequestForm.cpp \
+		   srcs/PresidentialPardonForm.cpp
 			
 OBJS     := $(SRCS:%.cpp=$(OBJ_DIR)%.o)
 

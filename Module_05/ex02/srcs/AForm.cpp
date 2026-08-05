@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:56:02 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 15:00:03 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/05 11:00:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 AForm::AForm(void) : _name("Untitled form"), _signGrade(150), _executeGrade(150)
 {
-	std::cout << "[AForm] A blank form has been prepared." << std::endl;
+	std::cout << "[AForm] A blank form has been prepared!" << std::endl;
 	this->_signed = false;
 }
 
-AForm::AForm(const std::string &name, int signGrade, int executeGrade)
+AForm::AForm(const std::string name, int signGrade, int executeGrade)
 	: _name(name), _signGrade(signGrade), _executeGrade(executeGrade)
 {
 	if (signGrade < 1 || executeGrade < 1)
@@ -27,12 +27,12 @@ AForm::AForm(const std::string &name, int signGrade, int executeGrade)
 	if (signGrade > 150 || executeGrade > 150)
 		throw GradeTooLowException();
 	this->_signed = false;
-	std::cout << "[AForm] \"" << this->_name << "\" has been prepared and is waiting for a signature." << std::endl;
+	std::cout << "[AForm] \"" << this->_name << "\" has been prepared and is waiting for a signature!" << std::endl;
 }
 
 AForm::AForm(const AForm &other) : _name(other._name), _signGrade(other._signGrade), _executeGrade(other._executeGrade)
 {
-	std::cout << "[AForm] A copy of \"" << other._name << "\" was created." << std::endl;
+	std::cout << "[AForm] A copy of \"" << other._name << "\" has been created!" << std::endl;
 	this->_signed = other._signed;
 }
 
@@ -46,7 +46,7 @@ AForm &AForm::operator=(const AForm &other)
 
 AForm::~AForm(void)
 {
-	std::cout << "[AForm] \"" << this->_name << "\" was archived." << std::endl;
+	std::cout << "[AForm] \"" << this->_name << "\" has been destroyed!" << std::endl;
 }
 
 const std::string &AForm::getName(void) const
@@ -87,17 +87,17 @@ void AForm::execute(const Bureaucrat &executor) const
 
 const char *AForm::GradeTooHighException::what(void) const throw()
 {
-	return ("A form cannot require a grade higher than 1");
+	return ("A form cannot require a grade higher than 1 !");
 }
 
 const char *AForm::GradeTooLowException::what(void) const throw()
 {
-	return ("The bureaucrat does not have the required grade");
+	return ("The bureaucrat does not have the required grade!");
 }
 
 const char *AForm::NotSignedException::what(void) const throw()
 {
-	return ("The form has not been signed yet");
+	return ("The form has not been signed yet!");
 }
 
 std::ostream &operator<<(std::ostream &out, const AForm &form)
