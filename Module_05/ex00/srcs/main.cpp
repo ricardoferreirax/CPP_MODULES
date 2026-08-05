@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:45:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/07/28 15:47:27 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/05 11:28:42 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,81 +14,91 @@
 
 int	main(void)
 {
-	try
-	{
-		Bureaucrat a("Ricky", 2);
-		std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		Bureaucrat b(a);
-		std::cout << b.getName() << ", bureaucrat grade " << b.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		Bureaucrat c("Default", 150);
-		std::cout << "Before assignment: " << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
-		c = a;
-		std::cout << "After assignment: " << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		a.incrementGrade();
-		std::cout << a.getName() << ", bureaucrat grade " << a.getGrade() << std::endl;
-		std::cout << std::endl;
-		
-		c.decrementGrade();
-		std::cout << c.getName() << ", bureaucrat grade " << c.getGrade() << std::endl;
-		std::cout << std::endl;
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << "\nException: " << e.what() << std::endl;
-	}
 	std::cout << std::endl;
-
-	std::cout << "---------------------------------------------------------------------" << std::endl;
-
 	try
 	{
-		Bureaucrat high("TooHigh", 0);
-		std::cout << high << std::endl;
+		Bureaucrat ricky("Ricky", 10);
+
+		std::cout << ricky << std::endl;
+		std::cout << std::endl;
+		
+		ricky.incrementGrade();
+		std::cout << "After increment: " << ricky << std::endl;
+		ricky.decrementGrade();
+		std::cout << "After decrement: " << ricky << std::endl;
+		std::cout << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
-
+	std::cout << "---------------------------------------------------" << std::endl;
+	std::cout << std::endl;
+	
 	try
 	{
-		Bureaucrat low("TooLow", 151);
-		std::cout << low << std::endl;
+		Bureaucrat highest("Highest", 1);
+
+		std::cout << highest << std::endl;
+		std::cout << std::endl;
+		
+		highest.incrementGrade();
+		std::cout << std::endl;
+
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
-
+	
 	try
 	{
-		Bureaucrat top("Top", 1);
-		std::cout << top << std::endl;
-		top.incrementGrade();
-		std::cout << top << std::endl;
+		Bureaucrat lowest("Lowest", 150);
+
+		std::cout << lowest << std::endl;
+		std::cout << std::endl;
+
+		lowest.decrementGrade();
+		std::cout << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
+	std::cout << "---------------------------------------------------" << std::endl;
+	std::cout << std::endl;
+	
+	try
+	{
+		Bureaucrat invalid("Invalid", 151);
+
+		std::cout << invalid << std::endl;
+		std::cout << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << "---------------------------------------------------" << std::endl;
+	std::cout << std::endl;
 
 	try
 	{
-		Bureaucrat bottom("Bottom", 150);
-		std::cout << bottom << std::endl;
-		bottom.decrementGrade();
-		std::cout << bottom << std::endl;
+		Bureaucrat original("Original", 42);
+		Bureaucrat copy(original);
+		Bureaucrat assigned("Assigned", 100);
+
+		assigned = original;
+
+		std::cout << original << std::endl;
+		std::cout << copy << std::endl;
+		std::cout << assigned << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
