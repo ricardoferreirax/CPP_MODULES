@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 16:22:04 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/07/28 17:43:06 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/05 11:40:00 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/05 15:45:58 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ class Form
 {
 	private:
 		const std::string _name;
-		bool _isSigned;
-		const int _gradeSign;
-		const int _gradeExecute;
+		bool _signed;
+		const int _signGrade;
+		const int _executeGrade;
 
 	public:
 		Form(void);
-		Form(const std::string name, int gradeSign, int gradeExecute);
-		Form(const Form &src);
-		Form &operator=(const Form &src);
+		Form(const std::string name, int signGrade, int executeGrade);
+		Form(const Form &other);
+		Form &operator=(const Form &other);
 		~Form(void);
 
 		const std::string &getName(void) const;
-		bool getIsSigned(void) const;
-		int	getGradeSign(void) const;
-		int	getGradeExecute(void) const;
+		bool isSigned(void) const;
+		int	getSignGrade(void) const;
+		int	getExecuteGrade(void) const;
 
 		void beSigned(const Bureaucrat &bureaucrat);
 
