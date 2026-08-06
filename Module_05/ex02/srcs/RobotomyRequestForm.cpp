@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:20:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 16:03:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/06 10:54:22 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,7 @@ void RobotomyRequestForm::performAction(void) const
 {
 	std::cout << "* Loud drilling and metallic noises *" << std::endl;
 	if (std::rand() % 2 == 0)
-	{
 		std::cout << "[Robotomy] " << this->_target << " has been robotomized successfully!" << std::endl;
-	}
 	else
-	{
 		std::cout << "[Robotomy] " << this->_target << " failed!" << std::endl;
-	}
 }
