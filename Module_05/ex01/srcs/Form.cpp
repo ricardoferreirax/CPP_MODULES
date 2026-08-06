@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 11:40:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/05 15:53:25 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/06 10:51:56 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ std::ostream &operator<<(std::ostream &out, const Form &form)
 		out << "Present";
 	else
 		out << "Missing";
-	out << " | Sign grade: "
-		<< form.getSignGrade()
-		<< " | Execute grade: "
-		<< form.getExecuteGrade();
+	out << " | Sign grade: " << form.getSignGrade() << " | Execute grade: " << form.getExecuteGrade();
 	return (out);
 }
