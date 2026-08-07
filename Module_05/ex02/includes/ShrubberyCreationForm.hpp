@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/04 15:01:02 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 15:03:11 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/07 17:41:32 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/07 17:44:21 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 # include "AForm.hpp"
+# include <iostream>
 # include <string>
 
 class ShrubberyCreationForm : public AForm
@@ -21,10 +22,10 @@ class ShrubberyCreationForm : public AForm
 	private:
 		std::string	_target;
 
-		void writeTree(std::ostream &out) const;
+		void drawTree(std::ostream &out) const;
 
 	protected:
-		virtual void performAction(void) const;
+		virtual void executeForm(void) const;
 
 	public:
 		ShrubberyCreationForm(void);
@@ -38,7 +39,7 @@ class ShrubberyCreationForm : public AForm
 		class OutputFileException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 };
 

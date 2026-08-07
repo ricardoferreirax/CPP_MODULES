@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/04 11:54:37 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 11:55:37 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/07 17:38:36 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/07 17:39:16 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class AForm
 		const int _executeGrade;
 
 	protected:
-		virtual void performAction(void) const = 0;
+		virtual void executeForm(void) const = 0;
 
 	public:
 		AForm(void);
@@ -54,13 +54,13 @@ class AForm
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 
 		class NotSignedException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 };
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/04 15:20:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 16:03:29 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/07 17:43:50 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/07 17:44:05 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ class RobotomyRequestForm : public AForm
 		std::string	_target;
 
 	protected:
-		virtual void performAction(void) const;
+		virtual void executeForm(void) const;
 
 	public:
 		RobotomyRequestForm(void);
 		RobotomyRequestForm(const std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &src);
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
+		RobotomyRequestForm(const RobotomyRequestForm &other);
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 		virtual ~RobotomyRequestForm(void);
 
 		const std::string &getTarget(void) const;
