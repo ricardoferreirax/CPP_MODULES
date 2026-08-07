@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:03:01 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 20:30:39 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/07 20:39:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,13 @@ static int	ft_is_digit(int c)
 	return (0);
 }
 
-// static int	ft_count_char(const std::string &s, char c)
-// {
-// 	int	count;
-
-// 	count = 0;
-// 	for (size_t i = 0; i < s.size(); i++)
-// 	{
-// 		if (s[i] == c)
-// 			count++;
-// 	}
-// 	return (count);
-// }
+static void	displayInvalidLiteral(void)
+{
+	std::cout << "[char]: Invalid literal." << std::endl;
+	std::cout << "[int]: Invalid literal." << std::endl;
+	std::cout << "[float]: Invalid literal." << std::endl;
+	std::cout << "[double]: Invalid literal." << std::endl;
+}
 
 bool ScalarConverter::checkSingleCharacter(const std::string &literal)
 {
@@ -102,12 +97,24 @@ bool ScalarConverter::isSpecialLiteral(const std::string &str)
 
 void ScalarConverter::convert(const std::string &literal)
 {
+	double	value;
+	char	*end;
+
 	if (checkSingleCharacter(literal))
 	{
-		std::cout << literal << " is a character literal." << std::endl;
+		value = static_cast<double>(literal[0]);
+		std::cout << "Converted value: " << value << std::endl;
 		return ;
 	}
 	if (isSpecialLiteral(literal))
 		return ;
-	std::cout << literal << " is neither a char nor a pseudo-literal." << std::endl;
+	value = std::strtod(literal.c_str(), &end);
+	if (*end == 'f' && *(end + 1) == '\0')
+		end++;
+	if (*end != '\0')
+	{
+		displayInvalidLiteral();
+		return ;
+	}
+	std::cout << "Converted value: " << value << std::endl;
 }
