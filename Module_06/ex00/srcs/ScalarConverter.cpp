@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:03:01 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 20:04:49 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/07 20:30:39 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,32 @@ bool ScalarConverter::checkSingleCharacter(const std::string &literal)
 	return (true);
 }
 
-bool ScalarConverter::checkPseudoLiteral(const std::string &literal)
+bool ScalarConverter::isSpecialLiteral(const std::string &str)
 {
-	if (literal == "nan" || literal == "nanf" || literal == "inf" || literal == "inff"
-		|| literal == "+inf" || literal == "+inff" || literal == "-inf" || literal == "-inff")
+	if (str == "nan" || str == "nanf")
+	{
+		std::cout << "[char]: NaN has no char value." << std::endl;
+		std::cout << "[int]: NaN has no int value." << std::endl;
+		std::cout << "[float]: Not a Number." << std::endl;
+		std::cout << "[double]: Not a Number." << std::endl;
 		return (true);
+	}
+	if (str == "-inf" || str == "-inff")
+	{
+		std::cout << "[char]: No char value." << std::endl;
+		std::cout << "[int]: No int value." << std::endl;
+		std::cout << "[float]: Negative infinity." << std::endl;
+		std::cout << "[double]: Negative infinity." << std::endl;
+		return (true);
+	}
+	if (str == "+inf" || str == "+inff" || str == "inf" || str == "inff")
+	{
+		std::cout << "[char]: No char value." << std::endl;
+		std::cout << "[int]: No int value." << std::endl;
+		std::cout << "[float]: Positive infinity." << std::endl;
+		std::cout << "[double]: Positive infinity." << std::endl;
+		return (true);
+	}
 	return (false);
 }
 
@@ -86,10 +107,7 @@ void ScalarConverter::convert(const std::string &literal)
 		std::cout << literal << " is a character literal." << std::endl;
 		return ;
 	}
-	if (checkPseudoLiteral(literal))
-	{
-		std::cout << literal << " is a pseudo-literal." << std::endl;
+	if (isSpecialLiteral(literal))
 		return ;
-	}
 	std::cout << literal << " is neither a char nor a pseudo-literal." << std::endl;
 }
