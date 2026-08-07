@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:01:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 19:04:11 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/07 19:43:21 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class ScalarConverter
 		~ScalarConverter(void);
 
 		static bool	checkSingleCharacter(const std::string &literal);
-		static bool	isPseudoLiteral(const std::string &literal);
+		static bool	checkPseudoLiteral(const std::string &literal);
 
 		static void	displayChar(double value);
 		static void	displayInt(double value);
