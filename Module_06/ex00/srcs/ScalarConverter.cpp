@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:03:01 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 19:57:37 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/07 20:04:49 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,25 @@ bool ScalarConverter::checkSingleCharacter(const std::string &literal)
 	return (true);
 }
 
+bool ScalarConverter::checkPseudoLiteral(const std::string &literal)
+{
+	if (literal == "nan" || literal == "nanf" || literal == "inf" || literal == "inff"
+		|| literal == "+inf" || literal == "+inff" || literal == "-inf" || literal == "-inff")
+		return (true);
+	return (false);
+}
+
 void ScalarConverter::convert(const std::string &literal)
 {
 	if (checkSingleCharacter(literal))
+	{
 		std::cout << literal << " is a character literal." << std::endl;
-	else
-		std::cout << literal << " is not a character literal." << std::endl;
+		return ;
+	}
+	if (checkPseudoLiteral(literal))
+	{
+		std::cout << literal << " is a pseudo-literal." << std::endl;
+		return ;
+	}
+	std::cout << literal << " is neither a char nor a pseudo-literal." << std::endl;
 }
