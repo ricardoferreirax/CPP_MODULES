@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/05 11:40:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/05 11:32:27 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/07 17:55:28 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/07 17:55:53 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Bureaucrat
 {
 	private:
 		const std::string _name;
-		int _grade;
+		int	_grade;
 
 	public:
 		Bureaucrat(void);
@@ -37,21 +37,22 @@ class Bureaucrat
 
 		void incrementGrade(void);
 		void decrementGrade(void);
+
 		void signForm(Form &form) const;
 
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 };
 
-std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
 
 #endif

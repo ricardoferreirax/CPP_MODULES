@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/05 11:40:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/05 15:45:58 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/07 17:57:30 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/07 17:58:06 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ class Form
 		const std::string &getName(void) const;
 		bool isSigned(void) const;
 		int	getSignGrade(void) const;
-		int	getExecuteGrade(void) const;
+		int getExecuteGrade(void) const;
 
 		void beSigned(const Bureaucrat &bureaucrat);
 
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 };
 
