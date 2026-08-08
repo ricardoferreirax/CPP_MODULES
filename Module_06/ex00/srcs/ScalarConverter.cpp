@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:03:01 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 16:18:25 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/08 16:32:44 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,20 @@ void ScalarConverter::displayInt(double value)
 
 void ScalarConverter::displayFloat(double value)
 {
+	float	number;
+
 	std::cout << "[float]: ";
 	if (value < -std::numeric_limits<float>::max() || value > std::numeric_limits<float>::max())
 	{
 		std::cout << "No float value." << std::endl;
 		return ;
 	}
-	std::cout << static_cast<float>(value) << "f" << std::endl;
+	number = static_cast<float>(value);
+	if (number >= std::numeric_limits<int>::min() && number <= std::numeric_limits<int>::max()
+		&& number == static_cast<int>(number))
+		std::cout << number << ".0f" << std::endl;
+	else
+		std::cout << number << "f" << std::endl;
 }
 
 void ScalarConverter::displayDouble(double value)
@@ -141,7 +148,11 @@ void ScalarConverter::displayDouble(double value)
 		std::cout << "No double value." << std::endl;
 		return ;
 	}
-	std::cout << value << std::endl;
+	if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()
+		&& value == static_cast<int>(value))
+		std::cout << value << ".0" << std::endl;
+	else
+		std::cout << value << std::endl;
 }
 
 void ScalarConverter::convert(const std::string &literal)
