@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 19:43:21 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 19:56:14 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/08 20:32:36 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,27 @@ void Data::setAge(int age)
 	this->_age = age;
 }
 
+
 // struct Data
 // {
 // 	std::string name;
 // 	int age;
 // };
+
+// int	main(void)
+// {
+// 	Data data;
+// 	Data *ptr;
+// 	uintptr_t raw;
+
+// 	data.name = "Ricky";
+// 	data.age = 24;
+
+// 	ptr = &data;
+
+// 	std::cout << "Original pointer : " << ptr << std::endl;
+// 	raw = Serializer::serialize(ptr);
+// 	std::cout << "Serialized value : " << raw << std::endl;
+
+// 	return (0);
+// }
