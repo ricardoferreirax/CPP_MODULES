@@ -6,19 +6,19 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:01:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 15:56:12 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/08 17:50:06 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-#include <iostream>
 # include <string>
-#include <limits>
-#include <stdlib.h>
-#include <iomanip>
-#include <cmath>
+
+#define CHAR 0
+#define INT	1
+#define FLOAT 2
+#define DOUBLE 3
 
 class ScalarConverter
 {
@@ -30,14 +30,10 @@ class ScalarConverter
 
 		static bool	checkSingleCharacter(const std::string &literal);
 		static bool	isSpecialLiteral(const std::string &str);
-
-		static void	displayChar(double value);
-		static void	displayInt(double value);
-		static void	displayFloat(double value);
-		static void	displayDouble(double value);
-
+		
 	public:
 		static void	convert(const std::string &literal);
 };
 
 #endif
+
