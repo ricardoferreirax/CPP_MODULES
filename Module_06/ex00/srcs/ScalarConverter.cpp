@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:03:01 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 20:39:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/08 16:09:34 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,33 @@ bool ScalarConverter::isSpecialLiteral(const std::string &str)
 	return (false);
 }
 
+void ScalarConverter::displayChar(double value)
+{
+	std::cout << "[char]: ";
+	if (value < 0 || value > 255)
+	{
+		std::cout << "No char value." << std::endl;
+		return ;
+	}
+	if (!ft_is_printable(static_cast<int>(value)))
+	{
+		std::cout << "Non displayable." << std::endl;
+		return ;
+	}
+	std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
+}
+
+void ScalarConverter::displayInt(double value)
+{
+	std::cout << "[int]: ";
+	if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
+	{
+		std::cout << "No int value." << std::endl;
+		return ;
+	}
+	std::cout << static_cast<int>(value) << std::endl;
+}
+
 void ScalarConverter::convert(const std::string &literal)
 {
 	double	value;
@@ -103,7 +130,8 @@ void ScalarConverter::convert(const std::string &literal)
 	if (checkSingleCharacter(literal))
 	{
 		value = static_cast<double>(literal[0]);
-		std::cout << "Converted value: " << value << std::endl;
+		displayChar(value);
+		displayInt(value);
 		return ;
 	}
 	if (isSpecialLiteral(literal))
@@ -116,5 +144,65 @@ void ScalarConverter::convert(const std::string &literal)
 		displayInvalidLiteral();
 		return ;
 	}
-	std::cout << "Converted value: " << value << std::endl;
+	displayChar(value);
+	displayInt(value);
 }
+
+
+// static void	displayConversions(double value)
+// {
+// 	std::cout << "[char]: ";
+// 	if (value < 0 || value > 127)
+// 		std::cout << "No char value.";
+// 	else if (value < 32 || value > 126)
+// 		std::cout << "Non displayable.";
+// 	else
+// 		std::cout << "'" << static_cast<char>(value) << "'";
+// 	std::cout << std::endl;
+
+// 	std::cout << "[int]: ";
+// 	if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
+// 		std::cout << "No int value.";
+// 	else
+// 		std::cout << static_cast<int>(value);
+// 	std::cout << std::endl;
+
+// 	std::cout << "[float]: ";
+// 	if (value < -std::numeric_limits<float>::max() || value > std::numeric_limits<float>::max())
+// 		std::cout << "No float value.";
+// 	else
+// 		std::cout << static_cast<float>(value) << "f";
+// 	std::cout << std::endl;
+
+// 	std::cout << "[double]: ";
+// 	if (value < -std::numeric_limits<double>::max() || value > std::numeric_limits<double>::max())
+// 		std::cout << "No double value.";
+// 	else
+// 		std::cout << value;
+// 	std::cout << std::endl;
+// }
+
+// void ScalarConverter::convert(const std::string &literal)
+// {
+// 	double	value;
+// 	char	*end;
+
+// 	if (checkSingleCharacter(literal))
+// 	{
+// 		value = static_cast<double>(literal[0]);
+// 		displayConversions(value);
+// 		return ;
+// 	}
+// 	if (isSpecialLiteral(literal))
+// 		return ;
+// 	value = std::strtod(literal.c_str(), &end);
+// 	if (*end == 'f' && *(end + 1) == '\0')
+// 		end++;
+// 	if (*end != '\0')
+// 	{
+// 		displayInvalidLiteral();
+// 		return ;
+// 	}
+// 	displayConversions(value);
+// }
+
