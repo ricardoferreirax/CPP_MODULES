@@ -6,24 +6,25 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:44:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 17:45:53 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:10:19 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RobotomyRequestForm.hpp"
+
 #include <cstdlib>
 #include <iostream>
 
 RobotomyRequestForm::RobotomyRequestForm(void)
-	: AForm("Robotomy request", 72, 45), _target("Default")
+	: AForm("Robotomy Request Form", 72, 45), _target("Default")
 {
-	std::cout << "[Robotomy] A request has been created!" << std::endl;
+	std::cout << "[Robotomy] A robotomy request has been created!" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target)
-	: AForm("Robotomy request", 72, 45), _target(target)
+	: AForm("Robotomy Request Form", 72, 45), _target(target)
 {
-	std::cout << "[Robotomy] A request has been created for " << this->_target << "!" << std::endl;
+	std::cout << "[Robotomy] A robotomy request has been created for " << this->_target << "!" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
@@ -39,13 +40,13 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 		AForm::operator=(other);
 		this->_target = other._target;
 	}
-	std::cout << "[Robotomy] Request has been assigned!" << std::endl;
+	std::cout << "[Robotomy] Request data has been assigned!" << std::endl;
 	return (*this);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
-	std::cout << "[Robotomy] Request for " << this->_target << " has been destroyed!" << std::endl;
+	std::cout << "[Robotomy] " << this->_target << " has been destroyed!" << std::endl;
 }
 
 const std::string &RobotomyRequestForm::getTarget(void) const
@@ -53,11 +54,11 @@ const std::string &RobotomyRequestForm::getTarget(void) const
 	return (this->_target);
 }
 
-void RobotomyRequestForm::executeForm(void) const
+void RobotomyRequestForm::processForm(void) const
 {
 	std::cout << "* Loud drilling and metallic noises *" << std::endl;
-	if (std::rand() % 2)
+	if (std::rand() % 2 == 0)
 		std::cout << "[Robotomy] " << this->_target << " has been robotomized successfully!" << std::endl;
 	else
-		std::cout << "[Robotomy] Robotomy of " << this->_target << " failed!" << std::endl;
+		std::cout << "[Robotomy] Robotomy failed on " << this->_target << "!" << std::endl;
 }

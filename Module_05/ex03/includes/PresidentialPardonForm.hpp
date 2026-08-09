@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:46:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 17:47:16 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:04:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ class PresidentialPardonForm : public AForm
 	private:
 		std::string	_target;
 
-	protected:
-		virtual void executeForm(void) const;
-
 	public:
 		PresidentialPardonForm(void);
 		PresidentialPardonForm(const std::string target);
@@ -32,6 +29,8 @@ class PresidentialPardonForm : public AForm
 		virtual ~PresidentialPardonForm(void);
 
 		const std::string &getTarget(void) const;
+
+		virtual void processForm(void) const;
 };
 
 #endif

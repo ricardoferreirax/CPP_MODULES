@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:45:28 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/04 11:46:03 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:04:29 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ class Bureaucrat
 		const std::string &getName(void) const;
 		int	getGrade(void) const;
 
-		void incrementGrade(void);
-		void decrementGrade(void);
-
-		void signForm(AForm &form) const;
-		void executeForm(const AForm &form) const;
-
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
 
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char	*what(void) const throw();
+				virtual const char *what(void) const throw();
 		};
+
+		void incrementGrade(void);
+		void decrementGrade(void);
+
+		void signForm(AForm &form) const;
+		void executeForm(const AForm &form) const;
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
