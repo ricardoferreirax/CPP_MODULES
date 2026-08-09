@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 21:04:31 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 20:10:55 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 20:33:25 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int	main(void)
 {
-	Base	*ptr;
+	Base *ptr;
 
 	std::srand(std::time(NULL));
 
@@ -37,8 +37,8 @@ int	main(void)
 		identify(ptr);
 
 		std::cout << "Reference: ";
-		identify(*ptr);
-
+		if (ptr != NULL)
+			identify(*ptr);
 		std::cout << std::endl;
 		delete ptr;
 	}

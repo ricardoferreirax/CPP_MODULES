@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 20:54:43 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 20:10:47 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 20:30:54 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,35 @@ Base::~Base(void)
 	std::cout << "[Base] Base has been destroyed!" << std::endl;
 }
 
-Base *generate(void)
+Base	*generate(void)
 {
 	int	random;
 
 	random = std::rand() % 3;
 	std::cout << "[generate] Random choice: " << random << " -> ";
-
-	if (random == 0)
+	switch (random)
 	{
-		std::cout << "Create object [A] and returns it as Base *" << std::endl << std::endl;
-		return (new A());
+		case 0:
+			std::cout << "Creates object [A] and returns it as Base *" << std::endl << std::endl;
+			return (new A());
+		case 1:
+			std::cout << "Creates object [B] and returns it as Base *" << std::endl << std::endl;
+			return (new B());
+		case 2:
+			std::cout << "Creates object [C] and returns it as Base *" << std::endl << std::endl;
+			return (new C());
+		default:
+			return (NULL);
 	}
-	if (random == 1)
-	{
-		std::cout << "Create object [B] and returns it as Base *" << std::endl << std::endl;
-		return (new B());
-	}
-	std::cout << "Create object [C] and returns it as Base *" << std::endl << std::endl;
-	return (new C());
 }
 
 void	identify(Base *p)
 {
+	if (p == NULL)
+	{
+		std::cout << "[identify pointer] Null pointer" << std::endl;
+		return ;
+	}
 	std::cout << "[identify pointer] Base * points to ";
 	if (dynamic_cast<A *>(p))
 		std::cout << "an object of type [A]" << std::endl;
@@ -63,32 +69,25 @@ void	identify(Base &p)
 	{
 		dynamic_cast<A &>(p);
 		std::cout << "[identify reference] Base & refers to an object of type [A]" << std::endl;
-		return ;
 	}
-	catch (...)
+	catch (const std::exception &e)
 	{
-		
+		try
+		{
+			dynamic_cast<B &>(p);
+			std::cout << "[identify reference] Base & refers to an object of type [B]" << std::endl;
+		}
+		catch (const std::exception &e)
+		{
+			try
+			{
+				dynamic_cast<C &>(p);
+				std::cout << "[identify reference] Base & refers to an object of type [C]" << std::endl;
+			}
+			catch (const std::exception &e)
+			{
+				std::cerr << "[identify reference] Unknown Base type" << std::endl;
+			}
+		}
 	}
-	try
-	{
-		dynamic_cast<B &>(p);
-		std::cout << "[identify reference] Base & refers to an object of type [B]" << std::endl;
-		return ;
-	}
-	catch (...)
-	{
-
-	}
-	try
-	{
-		dynamic_cast<C &>(p);
-		std::cout << "[identify reference] Base & refers to an object of type [C]" << std::endl;
-		return ;
-	}
-	catch (...)
-	{
-		
-	}
-	std::cout << "[identify reference] Unknown Base type" << std::endl;
 }
- 
