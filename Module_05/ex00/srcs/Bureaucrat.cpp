@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 11:30:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 18:30:15 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 23:02:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ Bureaucrat::Bureaucrat(const std::string name, int grade)
 		throw GradeTooHighException();
 	if (grade > 150)
 		throw GradeTooLowException();
-	std::cout << "[Bureaucrat] " << this->_name << " has been created!" << std::endl;
+	std::cout << "[Bureaucrat] " << this->_name << " has been created with grade " << this->_grade << "!" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
 	: _name(other._name), _grade(other._grade)
 {
-	std::cout << "[Bureaucrat] " << this->_name << " has been copied!" << std::endl;
+	std::cout << "[Bureaucrat] A copy of " << other._name << " has been created!" << std::endl;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
 	if (this != &other)
 		this->_grade = other._grade;
-	std::cout << "[Bureaucrat] Assignment completed!" << std::endl;
+	std::cout << "[Bureaucrat] Grade assigned to " << this->_name << "!" << std::endl;
 	return (*this);
 }
 
@@ -52,33 +52,33 @@ const std::string &Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-int Bureaucrat::getGrade(void) const
+int	Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
 }
 
-void Bureaucrat::incrementGrade(void)
+void	Bureaucrat::incrementGrade(void)
 {
-	if (this->_grade == 1)
+	if (this->_grade <= 1)
 		throw GradeTooHighException();
 	this->_grade--;
 }
 
-void Bureaucrat::decrementGrade(void)
+void	Bureaucrat::decrementGrade(void)
 {
-	if (this->_grade == 150)
+	if (this->_grade >= 150)
 		throw GradeTooLowException();
 	this->_grade++;
 }
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	return ("Grade is too high!");
+	return ("Bureaucrat grade cannot be higher than 1!");
 }
 
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	return ("Grade is too low!");
+	return ("Bureaucrat grade cannot be lower than 150!");
 }
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
@@ -86,6 +86,7 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 	out << bureaucrat.getName() << " | Grade: " << bureaucrat.getGrade();
 	return (out);
 }
+
 
 // try: Defines a block of code that will be tested for exceptions. 
 // If an exception is thrown inside this block, control passes to the matching 

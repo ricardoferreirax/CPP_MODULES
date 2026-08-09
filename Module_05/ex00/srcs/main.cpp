@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:45:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/05 11:28:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 23:03:06 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,6 @@ int	main(void)
 	}
 	std::cout << std::endl;
 	std::cout << "---------------------------------------------------" << std::endl;
-	std::cout << std::endl;
-
-	try
-	{
-		Bureaucrat original("Original", 42);
-		Bureaucrat copy(original);
-		Bureaucrat assigned("Assigned", 100);
-
-		assigned = original;
-
-		std::cout << original << std::endl;
-		std::cout << copy << std::endl;
-		std::cout << assigned << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
 	std::cout << std::endl;
 
 	return (0);
