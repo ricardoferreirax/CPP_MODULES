@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:41:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 17:44:21 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 20:57:29 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,19 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 # include "AForm.hpp"
-# include <iostream>
+# include <exception>
+# include <ostream>
 # include <string>
 
 class ShrubberyCreationForm : public AForm
 {
 	private:
 		std::string	_target;
-
 		void drawTree(std::ostream &out) const;
-
-	protected:
-		virtual void executeForm(void) const;
 
 	public:
 		ShrubberyCreationForm(void);
-		ShrubberyCreationForm(const std::string target);
+		ShrubberyCreationForm(const std::string &target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &other);
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 		virtual ~ShrubberyCreationForm(void);
@@ -41,6 +38,8 @@ class ShrubberyCreationForm : public AForm
 			public:
 				virtual const char *what(void) const throw();
 		};
+
+		virtual void processForm(void) const;
 };
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/07 17:38:36 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/07 17:39:16 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/08/09 20:43:08 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/09 20:45:56 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ class AForm
 		const int _signGrade;
 		const int _executeGrade;
 
-	protected:
-		virtual void executeForm(void) const = 0;
-
 	public:
 		AForm(void);
 		AForm(const std::string name, int signGrade, int executeGrade);
@@ -38,12 +35,9 @@ class AForm
 		virtual ~AForm(void);
 
 		const std::string &getName(void) const;
-		bool isSigned(void) const;
 		int	getSignGrade(void) const;
 		int	getExecuteGrade(void) const;
-
-		void beSigned(const Bureaucrat &bureaucrat);
-		void execute(const Bureaucrat &executor) const;
+		bool isSigned(void) const;
 
 		class GradeTooHighException : public std::exception
 		{
@@ -57,11 +51,15 @@ class AForm
 				virtual const char *what(void) const throw();
 		};
 
-		class NotSignedException : public std::exception
+		class FormNotSignedException : public std::exception
 		{
 			public:
 				virtual const char *what(void) const throw();
 		};
+		
+		void beSigned(const Bureaucrat &bureaucrat);
+		void execute(const Bureaucrat &executor) const;
+		virtual void processForm(void) const = 0;
 };
 
 std::ostream &operator<<(std::ostream &out, const AForm &form);
