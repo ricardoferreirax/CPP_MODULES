@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 21:04:31 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 20:09:31 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 20:10:55 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,4 @@ int	main(void)
 	std::cout << std::endl;
 	return (0);
 }
+ 

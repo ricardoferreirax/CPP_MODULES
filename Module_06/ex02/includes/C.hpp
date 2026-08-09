@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 20:58:42 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 20:58:58 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 20:10:36 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,4 @@ class C : public Base
 };
 
 #endif
+ 

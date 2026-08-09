@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 20:50:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 19:46:32 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 20:10:33 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,4 @@ void identify(Base *p);
 void identify(Base &p);
 
 #endif
+ 
