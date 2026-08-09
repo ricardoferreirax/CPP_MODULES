@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:41:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 20:57:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:04:56 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class ShrubberyCreationForm : public AForm
 
 	public:
 		ShrubberyCreationForm(void);
-		ShrubberyCreationForm(const std::string &target);
+		ShrubberyCreationForm(const std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &other);
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 		virtual ~ShrubberyCreationForm(void);

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:42:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 21:00:16 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:10:26 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(void)
 	std::cout << "[Shrubbery] A planting request has been created!" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
 	: AForm("Shrubbery Creation Form", 145, 137), _target(target)
 {
 	std::cout << "[Shrubbery] A planting request has been created for " << this->_target << "!" << std::endl;

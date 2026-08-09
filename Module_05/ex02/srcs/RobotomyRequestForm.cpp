@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:44:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 21:03:36 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:10:19 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ RobotomyRequestForm::RobotomyRequestForm(void)
 	std::cout << "[Robotomy] A robotomy request has been created!" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string target)
 	: AForm("Robotomy Request Form", 72, 45), _target(target)
 {
 	std::cout << "[Robotomy] A robotomy request has been created for " << this->_target << "!" << std::endl;
