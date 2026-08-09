@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 20:50:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 21:03:33 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/09 19:40:33 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ class Base
 };
 
 Base *generate(void);
+void identify(Base *p);
 
 #endif
