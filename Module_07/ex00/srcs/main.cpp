@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:16:40 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/10 17:12:04 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:15:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main( void )
 	
 	return 0;
 }
-
+ 
 
 // A template is a way to write generic code: instead of writing the same function or class 
 // several times for different types, we write it once using a placeholder type, and 

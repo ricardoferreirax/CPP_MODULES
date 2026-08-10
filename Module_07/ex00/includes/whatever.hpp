@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 13:56:26 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/10 17:10:58 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:15:11 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,4 @@ template <typename T> const T &max(const T &valueA, const T &valueB)
 }
 	
 #endif
+ 
