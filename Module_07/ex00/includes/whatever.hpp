@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 13:56:26 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/10 14:16:22 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:10:58 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,31 @@
 #include <iostream>
 #include <string>
 
-template <typename T>
-void swap(T &a, T &b)
+template <typename T> void swap(T &valueA, T &valueB)
 {
 	T tmp;
 
-	tmp = a;
-	a = b;
-	b = tmp;
+	tmp = valueA;
+	valueA = valueB;
+	valueB = tmp;
 }
 
+template <typename T> const T &min(const T &valueA, const T &valueB)
+{
+	if (valueB < valueA)
+		return (valueB);
+	if (valueA < valueB)
+		return (valueA);
+	return (valueB);
+}
+
+template <typename T> const T &max(const T &valueA, const T &valueB)
+{
+	if (valueB > valueA)
+		return (valueB);
+	if (valueA > valueB)
+		return (valueA);
+	return (valueB);
+}
+	
 #endif
