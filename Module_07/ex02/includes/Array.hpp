@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:42:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/11 18:11:17 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:16:11 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,18 @@ template <typename T> class Array
 				throw InvalidIndexException();
 			return (this->_array[index]);
 		}
+
+		const T &operator[](unsigned int index) const
+		{
+			if (index >= this->_length)
+				throw InvalidIndexException();
+			return (this->_array[index]);
+		}
 		
+		unsigned int size(void) const
+		{
+			return (this->_length);
+		}
 };
 
 #endif

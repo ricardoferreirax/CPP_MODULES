@@ -6,73 +6,70 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:47:27 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/11 18:08:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:51:28 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Array.hpp"
 
 #include <iostream>
+#include <string>
 
 int	main(void)
 {
-	Array<int> empty;
-
-	Array<int>	numbers(4);
+	Array<int> defaultArray;
+	Array<int> nbrs(4);
 
 	std::cout << std::endl;
+	std::cout << "Default size: " << defaultArray.size() << std::endl << std::endl;
 
-	numbers[0] = 10;
-	numbers[1] = 20;
-	numbers[2] = 30;
-	numbers[3] = 40;
+	nbrs[0] = 10;
+	nbrs[1] = 20;
+	nbrs[2] = 30;
+	nbrs[3] = 40;
 
 	std::cout << "Values: ";
-	for (unsigned int i = 0; i < 4; i++)
-		std::cout << numbers[i] << " ";
+	for (unsigned int i = 0; i < nbrs.size(); i++)
+		std::cout << nbrs[i] << " ";
 	std::cout << std::endl << std::endl;
 
-	Array<int>	copy(numbers);
+	Array<int> copy(nbrs);
 
 	std::cout << std::endl;
 
-	std::cout << "Original: " << std::endl;
-	for (unsigned int i = 0; i < 4; i++)
-		std::cout << numbers[i] << " ";
-	std::cout << std::endl << std::endl;
-
-	std::cout << "Copy:     ";
-	for (unsigned int i = 0; i < 4; i++)
+	std::cout << "Copy: ";
+	for (unsigned int i = 0; i < copy.size(); i++)
 		std::cout << copy[i] << " ";
-	std::cout << std::endl << std::endl;
-
-	// deep copy
-	copy[0] = 999;
-
-	std::cout << "Original[0]: " << numbers[0] << std::endl;
-	std::cout << "Copy[0]:     " << copy[0] << std::endl << std::endl;
-
-	Array<int>	assigned;
-	
-	std::cout << std::endl;
-
-	assigned = numbers;
-
-	std::cout << "Assigned: ";
-	for (unsigned int i = 0; i < 4; i++)
-		std::cout << assigned[i] << " ";
 	std::cout << std::endl << std::endl;
 
 	try
 	{
-		std::cout << numbers[4] << std::endl;
-		std::cout << numbers[100] << std::endl;
+		std::cout << nbrs[4] << std::endl;
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
+	try
+	{
+		std::cout << defaultArray[0] << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	const Array<int> constNbrs(nbrs);
 
 	std::cout << std::endl;
+
+	std::cout << "Const values: ";
+	for (unsigned int i = 0; i < constNbrs.size(); i++)
+		std::cout << constNbrs[i] << " ";
+	std::cout << std::endl << std::endl;
+
+	// constNbrs[0] = 100;
+
 	return (0);
 }
