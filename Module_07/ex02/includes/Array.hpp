@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:42:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/11 17:26:18 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:11:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,47 @@ template <typename T> class Array
 				this->_array = NULL;
 		}
 		
+		Array &operator=(const Array &other)
+		{
+			std::cout << "[Array] Assignment operator!" << std::endl;
+			if (this != &other)
+			{
+				delete[] this->_array;
+				this->_length = other._length;
+				if (this->_length > 0)
+				{
+					this->_array = new T[this->_length];
+					for (unsigned int i = 0; i < this->_length; i++)
+						this->_array[i] = other._array[i];
+				}
+				else
+					this->_array = NULL;
+			}
+			return (*this);
+		}
+
 		~Array(void)
 		{
 			delete[] this->_array;
 			std::cout << "[Array] Destructor!" << std::endl;
 		}
+
+		class InvalidIndexException : public std::exception
+		{
+			public:
+				virtual const char *what(void) const throw()
+				{
+					return ("Array index is out of bounds!");
+				}
+		};
+
+		T &operator[](unsigned int index)
+		{
+			if (index >= this->_length)
+				throw InvalidIndexException();
+			return (this->_array[index]);
+		}
+		
 };
 
 #endif
