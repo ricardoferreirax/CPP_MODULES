@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:47:27 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/11 18:51:28 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/11 19:21:49 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,59 +17,62 @@
 
 int	main(void)
 {
-	Array<int> defaultArray;
-	Array<int> nbrs(4);
+	Array<int> a;
+	Array<int> nbrs(5);
+	Array<std::string> words(2);
 
 	std::cout << std::endl;
-	std::cout << "Default size: " << defaultArray.size() << std::endl << std::endl;
 
-	nbrs[0] = 10;
-	nbrs[1] = 20;
-	nbrs[2] = 30;
-	nbrs[3] = 40;
-
-	std::cout << "Values: ";
 	for (unsigned int i = 0; i < nbrs.size(); i++)
-		std::cout << nbrs[i] << " ";
-	std::cout << std::endl << std::endl;
+		nbrs[i] = (i + 1) * 10;
 
-	Array<int> copy(nbrs);
+	try
+	{
+		for (unsigned int i = 0; i < nbrs.size(); i++)
+			std::cout << "nbrs[" << i << "] = " << nbrs[i] << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << std::endl;
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
 
+	for (unsigned int i = 0; i < words.size(); i++)
+			words[i] = "Second";
+		std::cout << std::endl;
+	
+	for (unsigned int i = 0; i < words.size(); i++)
+			std::cout << "words[" << i << "] = " << words[i] << std::endl;
+		std::cout << std::endl;
+
+	Array<std::string> copy(words);
 	std::cout << std::endl;
 
-	std::cout << "Copy: ";
 	for (unsigned int i = 0; i < copy.size(); i++)
-		std::cout << copy[i] << " ";
-	std::cout << std::endl << std::endl;
-
-	try
-	{
-		std::cout << nbrs[4] << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
-	try
-	{
-		std::cout << defaultArray[0] << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
+		std::cout << "words[" << i << "] = " << copy[i] << std::endl;
 	std::cout << std::endl;
 
-	const Array<int> constNbrs(nbrs);
+	Array<std::string> assign;
 
+	assign = words;
 	std::cout << std::endl;
 
-	std::cout << "Const values: ";
-	for (unsigned int i = 0; i < constNbrs.size(); i++)
-		std::cout << constNbrs[i] << " ";
-	std::cout << std::endl << std::endl;
+	for (unsigned int i = 0; i < assign.size(); i++)
+		std::cout << "words[" << i << "] = " << assign[i] << std::endl;
+	std::cout << std::endl;
 
-	// constNbrs[0] = 100;
+	words[0] = "First";
+
+	for (unsigned int i = 0; i < words.size(); i++)
+		std::cout << "words[" << i << "] = " << words[i] << std::endl;
+	std::cout << std::endl;
+
+	const Array<int> constant(nbrs);
+	std::cout << std::endl;
+
+	std::cout << constant[0] << std::endl << std::endl;
+
+	// constant[0] = 42;
 
 	return (0);
 }
