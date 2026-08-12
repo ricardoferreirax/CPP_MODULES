@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 11:30:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/12 17:25:41 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/12 22:24:47 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "[Bureaucrat] " << this->_name << " has been destroyed!" << std::endl;
 }
 
-// Returns the Bureaucrat's name. It returns const std::string& instead of std::string in order to avoid
-// creating an unnecessary copy of the string. The returned reference is const so the caller cannot modify 
-// the name through the getter.
+// Returns the Bureaucrat's name as a const reference in order to avoid the caller to modify the object's name.
 const std::string &Bureaucrat::getName(void) const
 {
 	return (this->_name);
@@ -66,7 +64,8 @@ int	Bureaucrat::getGrade(void) const
 	return (this->_grade);
 }
 
-// Increases the Bureaucrat's grade by decrementing it by 1. If the grade is already at the maximum (1) or lower, it throws a GradeTooHighException.
+// Promotes the Bureaucrat. Since grade 1 is the highest rank, promoting a Bureaucrat decreases the numeric value 
+// of the grade. If the Bureaucrat is already at grade 1, a GradeTooHighException is thrown.
 void	Bureaucrat::incrementGrade(void)
 {
 	if (this->_grade <= 1)
@@ -74,7 +73,8 @@ void	Bureaucrat::incrementGrade(void)
 	this->_grade--;
 }
 
-// Decreases the Bureaucrat's grade by incrementing it by 1. If the grade is already at the minimum (150) or greater, it throws a GradeTooLowException.
+// Demotes the Bureaucrat. Since grade 150 is the lowest rank, demoting a Bureaucrat increases the numeric value 
+// of the grade. If the Bureaucrat is already at grade 150, a GradeTooLowException is thrown.
 void	Bureaucrat::decrementGrade(void)
 {
 	if (this->_grade >= 150)
@@ -82,22 +82,19 @@ void	Bureaucrat::decrementGrade(void)
 	this->_grade++;
 }
 
-// Returns a string associated with a grade higher than the allowed rank (less than 1). Overrides the what() from std::exception and
-// it will still be called because std::exception uses polymorphism
+// This function overrides std::exception::what() and provides a descriptive message explaining why the exception was thrown.
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return ("Bureaucrat grade cannot be higher than 1!");
 }
 
-// Returns a string associated with a grade lower than the allowed rank (greater than 150). Overrides the what() from std::exception and 
-// it will still be called because std::exception uses polymorphism
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
 	return ("Bureaucrat grade cannot be lower than 150!");
 }
 
-// Stream insertion operator, overload for a Bureaucrat object to an output stream. It allows to use the << operator to print the Bureaucrat's 
-// name and grade in a formatted way.
+// Stream insertion operator allows a Bureaucrat object to be printed using std::cout. It returns the output stream by 
+// reference so multiple << operations can be chained together.
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
 	out << bureaucrat.getName() << " | Grade: " << bureaucrat.getGrade();
@@ -110,8 +107,7 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
  * flow is interrupted and control is transferred to the nearest compatible catch block.
  * ---------------------------------------------------------------------
  * Throw: is used to signal an exception when a problem occurs. The thrown object is an instance 
- * of a class derived from std::exception.
- * When a throw statement is executed, the following happens:
+ * of a class derived from std::exception. When a throw statement is executed, the following happens:
  * 1. An exception object is created.
  * 2. Normal execution immediately stops.
  * 3. The program starts searching for a matching catch block.
