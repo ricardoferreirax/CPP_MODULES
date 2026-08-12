@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 04:45:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 23:03:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/12 23:13:41 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,72 +18,75 @@ int	main(void)
 	try
 	{
 		Bureaucrat ricky("Ricky", 10);
-
-		std::cout << ricky << std::endl;
 		std::cout << std::endl;
-		
+
+		std::cout << ricky << std::endl << std::endl;
+
 		ricky.incrementGrade();
 		std::cout << "After increment: " << ricky << std::endl;
 		ricky.decrementGrade();
-		std::cout << "After decrement: " << ricky << std::endl;
-		std::cout << std::endl;
+		std::cout << "After decrement: " << ricky << std::endl << std::endl;
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
-	std::cout << std::endl;
-	std::cout << "---------------------------------------------------" << std::endl;
-	std::cout << std::endl;
 	
+	std::cout << "\n----------------------------------------------------------------\n" <<std::endl;
 	try
 	{
 		Bureaucrat highest("Highest", 1);
-
-		std::cout << highest << std::endl;
 		std::cout << std::endl;
-		
+
+		std::cout << highest << std::endl << std::endl;
+
 		highest.incrementGrade();
-		std::cout << std::endl;
-
+		std::cout << "Do not appear." << std::endl; // This line is never executed because incrementGrade() throws.
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << "Exception: " << e.what() << std::endl;
+		std::cerr << "\nException: " << e.what() << std::endl;
 	}
-	std::cout << std::endl;
-	
+
+	std::cout << "\n----------------------------------------------------------------\n" <<std::endl;
 	try
 	{
 		Bureaucrat lowest("Lowest", 150);
-
-		std::cout << lowest << std::endl;
 		std::cout << std::endl;
 
+		std::cout << lowest << std::endl << std::endl;
 		lowest.decrementGrade();
-		std::cout << std::endl;
+		std::cout << "Do not appear." << std::endl; // This line is never executed because decrementGrade() throws.
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << "Exception: " << e.what() << std::endl;
+		std::cerr << "\nException: " << e.what() << std::endl;
 	}
-	std::cout << std::endl;
-	std::cout << "---------------------------------------------------" << std::endl;
-	std::cout << std::endl;
-	
+
+	std::cout << "\n----------------------------------------------------------------\n" <<std::endl;
 	try
 	{
-		Bureaucrat invalid("Invalid", 151);
+		Bureaucrat invalid("Invalid", 0);
 
-		std::cout << invalid << std::endl;
-		std::cout << std::endl;
+		std::cout << invalid; // The object is never fully constructed.
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
-	std::cout << std::endl;
-	std::cout << "---------------------------------------------------" << std::endl;
+
+	std::cout << "\n----------------------------------------------------------------\n" <<std::endl;
+	{
+		Bureaucrat test("Constname", 20);
+		std::cout << std::endl;
+		
+		std::cout << test << std::endl;
+
+		// _name is private and const. It cannot be accessed or modified directly.
+		
+		// test._name = "NewName";       // Does not compile.
+		// test.getName() = "NewName";   // Does not compile.
+	}
 	std::cout << std::endl;
 
 	return (0);
