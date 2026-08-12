@@ -6,20 +6,20 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 11:30:00 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/12 16:39:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/12 17:25:41 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
 
-// Creates a Bureaucrat with a default name and grade 150. Grade 150 is the lowest grade
+// Creates a Bureaucrat with a default name and the lowest valid grade (150).
+// The initializer list is used because _name is const and must be initialized during object construction.
 Bureaucrat::Bureaucrat(void)
 	: _name("Default"), _grade(150)
 {
 	std::cout << "[Bureaucrat] Default bureaucrat created!" << std::endl;
 }
 
-//  Creates a Bureaucrat using a custom name and grade.
 Bureaucrat::Bureaucrat(const std::string name, int grade)
 	: _name(name), _grade(grade)
 {
@@ -30,14 +30,15 @@ Bureaucrat::Bureaucrat(const std::string name, int grade)
 	std::cout << "[Bureaucrat] " << this->_name << " has been created with grade " << this->_grade << "!" << std::endl;
 }
 
-// Creates a new Bureaucrat from an already existing Bureaucrat object. Both the name and grade are copied during construction.
+// Creates a new Bureaucrat as an exact copy of another one. It is called when a new object is initialized from an existing object.
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
 	: _name(other._name), _grade(other._grade)
 {
 	std::cout << "[Bureaucrat] A copy of " << other._name << " has been created!" << std::endl;
 }
 
-//  Copies the assignable state of another Bureaucrat into an object that already exists.
+// Copies the assignable state of another Bureaucrat into an existing object.
+// The name is not copied because _name is const and cannot be modified after construction.
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
 	if (this != &other)
@@ -103,20 +104,32 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 	return (out);
 }
 
-
-// try: Defines a block of code that will be tested for exceptions. 
-// If an exception is thrown inside this block, control passes to the matching 
-// catch block.
-
-// throw: Used to signal (or "throw") an exception when a problem occurs. 
-// The thrown object is typically an instance of a class derived from std::exception.
-
-// catch: Defines a block of code that handles an exception. 
-// It catches the thrown exception if its type matches or is compatible with the type 
-// specified in the catch block.
-
-// Exception: An exception is a runtime error or an unexpected event that occurs during 
-// program execution.
-// Exception Handling: A mechanism that allows a program to detect, catch, and handle 
-// exceptions so that the program can continue executing or terminate instead of crashing.
-
+/*
+ * Exception: is an object that represents an runtime error or an unexpected situation that
+ * occurs during the execution of a program. When an exception is thrown, the normal execution 
+ * flow is interrupted and control is transferred to the nearest compatible catch block.
+ * ---------------------------------------------------------------------
+ * Throw: is used to signal an exception when a problem occurs. The thrown object is an instance 
+ * of a class derived from std::exception.
+ * When a throw statement is executed, the following happens:
+ * 1. An exception object is created.
+ * 2. Normal execution immediately stops.
+ * 3. The program starts searching for a matching catch block.
+ * ---------------------------------------------------------------------
+ * try: defines a block of code that will be tested for exceptions.
+ * If no exception occurs, execution reaches the end of the try block. If an exception is thrown 
+ * inside the try block, execution stops immediately and jumps to the first catch block.
+ * ---------------------------------------------------------------------
+ * catch: defines a block that receives and handles an exception previously thrown inside
+ * the associated try block.
+ * ---------------------------------------------------------------------
+ * std::exception: is the standard base class for exceptions in C++.
+ * By inheriting from std::exception, custom exceptions automatically become
+ * compatible with generic catch blocks. This allows many different exception types to be handled 
+ * through the same interface.
+ * ---------------------------------------------------------------------
+ * what(): is a virtual member function inherited from std::exception. Every custom exception overrides 
+ * this function in order to provide a meaningful error message. It returns a C-style string that describes 
+ * the exception. Because what() is virtual, the correct overridden version is selected at runtime through polymorphism.
+ */
+ 
