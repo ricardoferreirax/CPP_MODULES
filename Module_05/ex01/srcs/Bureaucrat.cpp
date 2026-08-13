@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 22:51:54 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 22:54:51 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/13 16:05:08 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ void Bureaucrat::decrementGrade(void)
 	this->_grade++;
 }
 
+// Attempts to sign the form using the current Bureaucrat. "*this" means the current Bureaucrat object is passed by reference.
+// If the Bureaucrat has a sufficient grade, beSigned() succeeds and the form becomes signed. If is too low, beSigned() throws 
+// an exception. The catch block handles that exception and prints the reason using e.what(). This function is const because 
+// signing a Form does not modify the Bureaucrat.
 void Bureaucrat::signForm(Form &form) const
 {
 	try
