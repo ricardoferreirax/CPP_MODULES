@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 22:48:32 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/13 18:26:41 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/13 18:29:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,5 @@ std::ostream &operator<<(std::ostream &out, const Form &form)
  // Bureaucrat::signForm() -> asks a Form to be signed by the current Bureaucrat. Belongs to the Bureaucrat class 
  // because it represents an action performed by a Bureaucrat: trying to sign a Form.
  //
- // Form::beSigned() -> decides whether that Bureaucrat actually has permission to sign it.
+ // Form::beSigned() -> decides whether that Bureaucrat actually has permission to sign it. This function contains 
+ // the rules that must be satisfied before the Form can become signed. It receives the Bureaucrat that is trying to sign the Form.
