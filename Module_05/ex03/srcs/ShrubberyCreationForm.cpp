@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/07 17:42:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 22:10:26 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/05/29 17:42:08 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/17 15:55:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void ShrubberyCreationForm::drawTree(std::ostream &out) const
 	out << " oooo xxoxoo ooo ooox" << std::endl;
 	out << " oxo o oxoxo  xoxxoxo" << std::endl;
 	out << "  oxo xooxoooo o ooo" << std::endl;
-	out << "    ooo\\oo\\  /o/o" << std::endl;
-	out << "        \\  \\/ /" << std::endl;
-	out << "         |   /" << std::endl;
-	out << "         |  |" << std::endl;
-	out << "         | D|" << std::endl;
+	out << "    ooooooooo  oooo" << std::endl;
+	out << "        oo  ooo o" << std::endl;
+	out << "         |  /" << std::endl;
 	out << "         |  |" << std::endl;
 	out << "         |  |" << std::endl;
-	out << "  ******/***\\__\\****" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "  ********************" << std::endl;
 }
 
 void ShrubberyCreationForm::processForm(void) const
