@@ -6,13 +6,14 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:40:58 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 22:09:58 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/17 11:12:39 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
 #include "../includes/AForm.hpp"
 
+// Creates a Bureaucrat with the default name and grade 150. Grade 150 is the lowest valid rank.
 Bureaucrat::Bureaucrat(void)
 	: _name("Default"), _grade(150)
 {
@@ -83,6 +84,11 @@ void Bureaucrat::decrementGrade(void)
 	this->_grade++;
 }
 
+// Tries to sign the given AForm using the current Bureaucrat.
+//form.beSigned(*this) passes the current Bureaucrat to the form. "*this" means the current Bureaucrat object.
+// AForm::beSigned() contains the actual validation rule. It compares the Bureaucrat's grade with the required signing grade.
+// If the grade is sufficient, the form becomes signed and this function prints a success message.
+// signForm() is const because signing a form changes the AForm, not the Bureaucrat.
 void Bureaucrat::signForm(AForm &form) const
 {
 	try
@@ -96,6 +102,16 @@ void Bureaucrat::signForm(AForm &form) const
 	}
 }
 
+// Tries to execute the given AForm using the current Bureaucrat. This function does not execute the concrete action directly.
+//Instead, it calls: form.execute(*this); AForm::execute() is responsible for checking:
+// 1. Whether the form is signed and 2. Whether the Bureaucrat has the required execution grade.
+// If both conditions are valid, AForm::execute() calls processForm(). processForm() is virtual, so the implementation that runs 
+// depends on the real type of the form:  ShrubberyCreationForm  -> creates the shrubbery file.
+//     									  RobotomyRequestForm    -> performs the robotomy attempt.
+//     									  PresidentialPardonForm -> prints the presidential pardon.
+// This is runtime polymorphism: executeForm() works with an AForm reference, but the concrete behavior is selected according to the actual 
+// derived object. If execute() throws an exception, the catch block handles it and prints the reason using e.what()
+// This function is const because executing a form does not modify the Bureaucrat itself.
 void Bureaucrat::executeForm(const AForm &form) const
 {
 	try
@@ -109,6 +125,7 @@ void Bureaucrat::executeForm(const AForm &form) const
 	}
 }
 
+// Allows a Bureaucrat to be printed directly with std::cout.
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
 	out << bureaucrat.getName() << " | Grade: " << bureaucrat.getGrade();
