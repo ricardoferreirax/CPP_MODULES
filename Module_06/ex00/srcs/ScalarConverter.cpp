@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/17 17:17:35 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:53:05 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ bool ScalarConverter::checkSingleCharacter(const std::string &literal)
 	return (true);
 }
 
-bool ScalarConverter::isSpecialLiteral(const std::string &str)
+static bool	displaySpecialLiteral(const std::string &literal)
 {
-	if (str == "nan" || str == "nanf")
+	if (literal == "nan" || literal == "nanf" || literal == "NAN" || literal == "NaN" || literal == "NANF")
 	{
 		std::cout << "[char]: Impossible." << std::endl;
 		std::cout << "[int]: Impossible." << std::endl;
@@ -80,7 +80,7 @@ bool ScalarConverter::isSpecialLiteral(const std::string &str)
 		std::cout << "[double]: nan" << std::endl;
 		return (true);
 	}
-	if (str == "-inf" || str == "-inff")
+	else if (literal == "-inf" || literal == "-inff" || literal == "-INF" || literal == "-INFF")
 	{
 		std::cout << "[char]: Impossible." << std::endl;
 		std::cout << "[int]: Impossible." << std::endl;
@@ -88,7 +88,8 @@ bool ScalarConverter::isSpecialLiteral(const std::string &str)
 		std::cout << "[double]: -inf" << std::endl;
 		return (true);
 	}
-	if (str == "+inf" || str == "+inff" || str == "inf" || str == "inff")
+	else if (literal == "+inf" || literal == "+inff" || literal == "+INF" || literal == "+INFF"
+		|| literal == "inf" || literal == "inff" || literal == "INF" || literal == "INFF")
 	{
 		std::cout << "[char]: Impossible." << std::endl;
 		std::cout << "[int]: Impossible." << std::endl;
@@ -141,9 +142,7 @@ static void	displayValue(double value, int type)
 		if (value < -std::numeric_limits<double>::max() || value > std::numeric_limits<double>::max())
 			std::cout << "Impossible.";
 		else
-		{
 			std::cout << std::fixed << std::setprecision(1) << value;
-		}
 		std::cout << std::endl;
 	}
 }
@@ -153,7 +152,7 @@ void ScalarConverter::convert(const std::string &literal)
 	double	value;
 	char	*end;
 
-	if (isSpecialLiteral(literal))
+	if (displaySpecialLiteral(literal))
 		return ;
 	if (checkSingleCharacter(literal))
 	{
@@ -166,11 +165,6 @@ void ScalarConverter::convert(const std::string &literal)
 	}
 	value = std::strtod(literal.c_str(), &end);
 	if (end == literal.c_str())
-	{
-		displayInvalidLiteral();
-		return ;
-	}
-	if (value != value)
 	{
 		displayInvalidLiteral();
 		return ;
