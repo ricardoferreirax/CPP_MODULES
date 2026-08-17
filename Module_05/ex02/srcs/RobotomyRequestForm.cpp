@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:44:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 22:10:19 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/17 11:35:48 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <iostream>
 
+// Builds the AForm base class using the fixed requirements of a RobotomyRequestForm: sign grade = 72 and execute grade = 45
 RobotomyRequestForm::RobotomyRequestForm(void)
 	: AForm("Robotomy Request Form", 72, 45), _target("Default")
 {
@@ -54,6 +55,11 @@ const std::string &RobotomyRequestForm::getTarget(void) const
 	return (this->_target);
 }
 
+// Performs the concrete action of a RobotomyRequestForm. This function implements the virtual processForm() operation 
+// declared by AForm. AForm::execute() first checks that the form is signed and that the executor has grade 45 or better.
+// std::rand() % 2 produces either 0 or 1, giving two possible outcomes: 0 -> robotomy succeeds or 1 -> robotomy fails.
+// The function is an example of runtime polymorphism because AForm::execute() calls processForm() through the AForm interface, 
+// while the implementation executed here belongs specifically to RobotomyRequestForm.
 void RobotomyRequestForm::processForm(void) const
 {
 	std::cout << "* Loud drilling and metallic noises *" << std::endl;
