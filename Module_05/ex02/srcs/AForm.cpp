@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 20:50:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/17 12:32:16 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/05/28 20:50:14 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/17 15:36:51 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/AForm.hpp"
 #include "../includes/Bureaucrat.hpp"
 
+// Creates a default abstract form with: name "Untitled", unsigned state and sign grade and execute grade to 150
 AForm::AForm(void)
 	: _name("Untitled"), _signed(false), _signGrade(150), _executeGrade(150)
 {
@@ -29,6 +30,7 @@ AForm::AForm(const std::string name, int signGrade, int executeGrade)
 	std::cout << "[AForm] " << this->_name << " has been created and is waiting for a signature!" << std::endl;
 }
 
+// Creates a new AForm using another AForm as its initial state. The name, signature state, signing grade and execution grade are copied.
 AForm::AForm(const AForm &other)
 	: _name(other._name), _signed(other._signed), _signGrade(other._signGrade), _executeGrade(other._executeGrade)
 {
@@ -48,6 +50,8 @@ AForm::~AForm(void)
 	std::cout << "[AForm] " << this->_name << " has been destroyed!" << std::endl;
 }
 
+// Returns the form name. The string is returned by const reference to avoid an unnecessary copy and to prevent modification 
+// through the returned reference. The final const means that this function does not modify the AForm.
 const std::string &AForm::getName(void) const
 {
 	return (this->_name);
@@ -83,6 +87,9 @@ const char *AForm::FormNotSignedException::what(void) const throw()
 	return ("The form has not been signed yet!");
 }
 
+//  Attempts to sign the form using the given Bureaucrat. The Bureaucrat's grade is compared with the required signing grade.
+// Since grade 1 is the highest rank, a numerically greater grade represents a lower-ranked Bureaucrat.
+// The Bureaucrat is received by const reference because this function only needs to read its grade and must not modify it.
 void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->_signGrade)
@@ -90,6 +97,14 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 	this->_signed = true;
 }
 
+
+// Executes the form using the given Bureaucrat. This function contains the common execution rules shared by every derived
+// form. First, it checks whether the form is signed. If not, execution is stopped by throwing FormNotSignedException.
+// Then, it checks whether the Bureaucrat has the required execution grade. If the grade is too low, GradeTooLowException is thrown.
+// Only if both checks succeed does the function call: this->processForm(); processForm() is a pure virtual function implemented
+// differently by each derived form. Because processForm() is virtual, C++ uses runtime polymorphism to call the implementation 
+// that belongs to the real derived object. This means AForm::execute() can contain the common validation logic once, while each 
+// derived class provides only its specific action.
 void AForm::execute(const Bureaucrat &executor) const
 {
 	if (!this->_signed)

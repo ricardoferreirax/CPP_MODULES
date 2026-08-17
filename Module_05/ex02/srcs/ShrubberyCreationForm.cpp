@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/07 17:42:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/17 11:30:37 by rmedeiro         ###   ########.fr       */
+/*   Created: 2026/05/29 17:42:08 by rmedeiro          #+#    #+#             */
+/*   Updated: 2026/08/17 15:45:38 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void ShrubberyCreationForm::drawTree(std::ostream &out) const
 	out << " oooo xxoxoo ooo ooox" << std::endl;
 	out << " oxo o oxoxo  xoxxoxo" << std::endl;
 	out << "  oxo xooxoooo o ooo" << std::endl;
-	out << "    ooo\\oo\\  /o/o" << std::endl;
-	out << "        \\  \\/ /" << std::endl;
-	out << "         |   /" << std::endl;
-	out << "         |  |" << std::endl;
-	out << "         | D|" << std::endl;
+	out << "    ooooooooo  oooo" << std::endl;
+	out << "        oo  ooo o" << std::endl;
+	out << "         |  /" << std::endl;
 	out << "         |  |" << std::endl;
 	out << "         |  |" << std::endl;
-	out << "  ******/***\\__\\****" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "         |  |" << std::endl;
+	out << "  ********************" << std::endl;
 }
 
 // Performs the concrete action of a ShrubberyCreationForm. The output filename is created from the target: <target>_shrubbery.
