@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:02:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 18:02:48 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/17 17:01:40 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cerr << "Usage: ./ScalarConverter <literal>" << std::endl;
+		std::cerr << "Usage: ./convert <literal>" << std::endl;
 		return (1);
 	}
 	ScalarConverter::convert(av[1]);

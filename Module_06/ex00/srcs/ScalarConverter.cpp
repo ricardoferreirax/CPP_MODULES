@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 17:53:18 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/17 17:17:35 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <limits>
+#include <iomanip>
 
 ScalarConverter::ScalarConverter(void)
 {
@@ -100,13 +101,13 @@ bool ScalarConverter::isSpecialLiteral(const std::string &str)
 
 static void	displayValue(double value, int type)
 {
-	float number;
+	float	number;
 
 	if (type == CHAR)
 	{
 		std::cout << "[char]: ";
 		if (value < 0 || value > 255)
-			std::cout << "No char value.";
+			std::cout << "Impossible.";
 		else if (!ft_is_printable(static_cast<int>(value)))
 			std::cout << "Non displayable.";
 		else
@@ -117,7 +118,7 @@ static void	displayValue(double value, int type)
 	{
 		std::cout << "[int]: ";
 		if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
-			std::cout << "No int value.";
+			std::cout << "Impossible.";
 		else
 			std::cout << static_cast<int>(value);
 		std::cout << std::endl;
@@ -126,15 +127,11 @@ static void	displayValue(double value, int type)
 	{
 		std::cout << "[float]: ";
 		if (value < -std::numeric_limits<float>::max() || value > std::numeric_limits<float>::max())
-			std::cout << "No float value.";
+			std::cout << "Impossible.";
 		else
 		{
 			number = static_cast<float>(value);
-			if (number >= std::numeric_limits<int>::min() && number <= std::numeric_limits<int>::max()
-				&& number == static_cast<int>(number))
-				std::cout << static_cast<int>(number) << ".0f";
-			else
-				std::cout << number << "f";
+			std::cout << std::fixed << std::setprecision(1) << number << "f";
 		}
 		std::cout << std::endl;
 	}
@@ -142,12 +139,11 @@ static void	displayValue(double value, int type)
 	{
 		std::cout << "[double]: ";
 		if (value < -std::numeric_limits<double>::max() || value > std::numeric_limits<double>::max())
-			std::cout << "No double value.";
-		else if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()
-			&& value == static_cast<int>(value))
-			std::cout << static_cast<int>(value) << ".0";
+			std::cout << "Impossible.";
 		else
-			std::cout << value;
+		{
+			std::cout << std::fixed << std::setprecision(1) << value;
+		}
 		std::cout << std::endl;
 	}
 }
