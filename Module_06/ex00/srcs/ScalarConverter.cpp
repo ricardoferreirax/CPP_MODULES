@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/17 18:53:05 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/18 18:10:57 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,12 @@ static void	displayValue(double value, int type)
 		else
 		{
 			number = static_cast<float>(value);
-			std::cout << std::fixed << std::setprecision(1) << number << "f";
+		
+			if (number >= std::numeric_limits<int>::min() && number <= std::numeric_limits<int>::max()
+				&& number == static_cast<int>(number))
+				std::cout << static_cast<int>(number) << ".0f";
+			else
+				std::cout << std::setprecision(7) << number << "f";
 		}
 		std::cout << std::endl;
 	}
@@ -141,8 +146,11 @@ static void	displayValue(double value, int type)
 		std::cout << "[double]: ";
 		if (value < -std::numeric_limits<double>::max() || value > std::numeric_limits<double>::max())
 			std::cout << "Impossible.";
+		else if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()
+			&& value == static_cast<int>(value))
+			std::cout << static_cast<int>(value) << ".0";
 		else
-			std::cout << std::fixed << std::setprecision(1) << value;
+			std::cout << std::setprecision(15) << value;
 		std::cout << std::endl;
 	}
 }
