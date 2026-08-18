@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/18 18:10:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/18 18:25:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,28 @@ bool ScalarConverter::checkSingleCharacter(const std::string &literal)
 
 static bool	displaySpecialLiteral(const std::string &literal)
 {
-	if (literal == "nan" || literal == "nanf" || literal == "NAN" || literal == "NaN" || literal == "NANF")
+	if (literal == "nan" || literal == "nanf")
 	{
-		std::cout << "[char]: Impossible." << std::endl;
-		std::cout << "[int]: Impossible." << std::endl;
-		std::cout << "[float]: nanf" << std::endl;
-		std::cout << "[double]: nan" << std::endl;
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
 		return (true);
 	}
-	else if (literal == "-inf" || literal == "-inff" || literal == "-INF" || literal == "-INFF")
+	else if (literal == "-inf" || literal == "-inff")
 	{
-		std::cout << "[char]: Impossible." << std::endl;
-		std::cout << "[int]: Impossible." << std::endl;
-		std::cout << "[float]: -inff" << std::endl;
-		std::cout << "[double]: -inf" << std::endl;
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: -inff" << std::endl;
+		std::cout << "double: -inf" << std::endl;
 		return (true);
 	}
-	else if (literal == "+inf" || literal == "+inff" || literal == "+INF" || literal == "+INFF"
-		|| literal == "inf" || literal == "inff" || literal == "INF" || literal == "INFF")
+	else if (literal == "+inf" || literal == "+inff")
 	{
-		std::cout << "[char]: Impossible." << std::endl;
-		std::cout << "[int]: Impossible." << std::endl;
-		std::cout << "[float]: +inff" << std::endl;
-		std::cout << "[double]: +inf" << std::endl;
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: +inff" << std::endl;
+		std::cout << "double: +inf" << std::endl;
 		return (true);
 	}
 	return (false);
@@ -112,8 +111,7 @@ static void	displayValue(double value, int type)
 		else if (!ft_is_printable(static_cast<int>(value)))
 			std::cout << "Non displayable.";
 		else
-			std::cout << "'" << static_cast<char>(value) << "'";
-		std::cout << std::endl;
+			std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
 	}
 	else if (type == INT)
 	{
@@ -121,8 +119,7 @@ static void	displayValue(double value, int type)
 		if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
 			std::cout << "Impossible.";
 		else
-			std::cout << static_cast<int>(value);
-		std::cout << std::endl;
+			std::cout << static_cast<int>(value) << std::endl;
 	}
 	else if (type == FLOAT)
 	{
@@ -137,7 +134,7 @@ static void	displayValue(double value, int type)
 				&& number == static_cast<int>(number))
 				std::cout << static_cast<int>(number) << ".0f";
 			else
-				std::cout << std::setprecision(7) << number << "f";
+				std::cout << std::fixed << std::setprecision(1) << number << "f";
 		}
 		std::cout << std::endl;
 	}
@@ -150,7 +147,7 @@ static void	displayValue(double value, int type)
 			&& value == static_cast<int>(value))
 			std::cout << static_cast<int>(value) << ".0";
 		else
-			std::cout << std::setprecision(15) << value;
+			std::cout << std::setprecision(1) << value;
 		std::cout << std::endl;
 	}
 }
@@ -173,6 +170,11 @@ void ScalarConverter::convert(const std::string &literal)
 	}
 	value = std::strtod(literal.c_str(), &end);
 	if (end == literal.c_str())
+	{
+		displayInvalidLiteral();
+		return ;
+	}
+	if (value != value)
 	{
 		displayInvalidLiteral();
 		return ;
