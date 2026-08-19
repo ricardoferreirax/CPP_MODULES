@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/19 23:19:12 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/19 23:25:44 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ static void	printInvalid(void)
 	std::cout << "[int]: invalid literal" << std::endl;
 	std::cout << "[float]: invalid literal" << std::endl;
 	std::cout << "[double]: invalid literal" << std::endl;
+}
+
+static bool	hasOuterSpaces(const std::string &literal)
+{
+	if (literal.empty()) // if the string is empty, it cannot have outer spaces
+		return (false);
+	if (literal[0] == ' ' || literal[literal.length() - 1] == ' ') // if the first or last character is a space, it has outer spaces
+		return (true);
+	return (false);
 }
 
 // Detects and displays the special floating-point pseudo-literals.
@@ -234,6 +243,11 @@ void	ScalarConverter::convert(const std::string &literal)
 	char	*end;
 	int		type;
 
+	if (hasOuterSpaces(literal))
+	{
+		printInvalid();
+		return ;
+	}
 	if (printPseudoLiteral(literal)) // if the input is a recognized as a pseudo-literal, print it and return
 		return ;
 	if (checkSingleCharacter(literal)) // if the input is a single printable non-digit character
