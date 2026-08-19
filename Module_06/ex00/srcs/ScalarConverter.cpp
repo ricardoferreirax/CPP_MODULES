@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/19 22:40:54 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/19 23:19:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,13 @@ static bool	hasValidSyntax(const std::string &literal, int type, char *end)
 	return (*end == '\0'); // for INT and DOUBLE, the entire string must be consumed by std::strtod(), so *end should point to the null terminator.
 }
 
-// Prints the character conversion. The numeric value is cast to char using static_cast<char>().
-// Three situations: impossible -> outside the valid char range | Non displayable -> valid ASCII but not printable | printable -> displayed between single quotes
+// Displays the char conversion. The input arrives as a double because all normal numeric literals are first converted to a 
+// common numeric representation before the output conversions are displayed. First, the function checks whether the value 
+// fits inside the range of the char type.
+// impossible -> The value cannot be represented by char.
+// Non displayable -> The value can be represented by char but does not correspond to a printable ASCII character.
+// Printable character -> The value can be represented by char and corresponds to a printable ASCII character.
+// static_cast<char>() performs the explicit scalar conversion from double to char.
 static void	printChar(double value)
 {
 	std::cout << "[char]: ";
@@ -157,8 +162,11 @@ static void	printChar(double value)
 	std::cout << std::endl;
 }
 
-// Prints the integer conversion. Before casting, the function verifies that the value fits inside the range of the int.
-// If the value overflows, the conversion is impossible.
+// Displays the int conversion. The function checks whether the double value fits inside the valid int range.
+// std::numeric_limits<int>::min() gives the smallest representable int.
+// std::numeric_limits<int>::max() gives the largest representable int.
+// This check is important because converting a value outside the int range would overflow.
+// If the value is valid, static_cast<int>() explicitly converts it to int. Any fractional part is discarded by the conversion.
 static void	printInt(double value)
 {
 	std::cout << "[int]: ";
@@ -169,6 +177,11 @@ static void	printInt(double value)
 	std::cout << std::endl;
 }
 
+// Displays the float conversion. The original numeric value is stored as double, so the function first checks whether that 
+// value fits inside the finite range of a float. std::numeric_limits<float>::max() represents the largest finite float.
+// If the value is outside the float range, the conversion would overflow and is therefore reported as impossible.
+// If it fits, static_cast<float>() performs the float conversion.  Example: 42.0 -> "42.0f" instead of: "42f".
+// Fractional values are printed using the selected floating-point formatting. 
 static void	printFloat(double value)
 {
 	float	converted;
@@ -179,15 +192,18 @@ static void	printFloat(double value)
 		std::cout << "impossible" << std::endl;
 		return ;
 	}
-	converted = static_cast<float>(value);
+	converted = static_cast<float>(value); // conversion from double to float
 	if (converted >= std::numeric_limits<int>::min() && converted <= std::numeric_limits<int>::max()
-		&& converted == static_cast<int>(converted))
-		std::cout << static_cast<int>(converted) << ".0f";
-	else
-		std::cout << std::fixed << std::setprecision(1) << converted << "f";
+		&& converted == static_cast<int>(converted)) // if the float value is within the int range and has no fractional part
+		std::cout << static_cast<int>(converted) << ".0f"; //  print it as an integer with ".0f" appended
+	else // if the float value has a fractional part 
+		std::cout << std::fixed << std::setprecision(1) << converted << "f"; // print it with one decimal place and append "f"
 	std::cout << std::endl;
 }
 
+// Displays the double conversion. The value is already stored as double, so no additional cast is required for the double representation.
+// The function still checks the double range so that overflow can be reported as impossible.
+// Fractional values are printed using the selected floating-point formatting.
 static void	printDouble(double value)
 {
 	std::cout << "[double]: ";
@@ -197,10 +213,10 @@ static void	printDouble(double value)
 		return ;
 	}
 	if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()
-		&& value == static_cast<int>(value))
-		std::cout << static_cast<int>(value) << ".0";
-	else
-		std::cout << std::fixed << std::setprecision(1) << value;
+		&& value == static_cast<int>(value)) // if the double value is within the int range and has no fractional part
+		std::cout << static_cast<int>(value) << ".0"; // print it as an integer with ".0" appended
+	else // if the double value has a fractional part
+		std::cout << std::fixed << std::setprecision(1) << value; // print it with one decimal place
 	std::cout << std::endl;
 }
 
@@ -218,21 +234,21 @@ void	ScalarConverter::convert(const std::string &literal)
 	char	*end;
 	int		type;
 
-	if (printPseudoLiteral(literal))
+	if (printPseudoLiteral(literal)) // if the input is a recognized as a pseudo-literal, print it and return
 		return ;
-	if (checkSingleCharacter(literal))
+	if (checkSingleCharacter(literal)) // if the input is a single printable non-digit character
 	{
-		printAllConversions(static_cast<double>(literal[0]));
+		printAllConversions(static_cast<double>(literal[0])); // convert its ASCII value to double and print all scalar representations
 		return ;
 	}
-	type = findLiteralType(literal);
-	value = std::strtod(literal.c_str(), &end);
-	if (end == literal.c_str() || value != value)
+	type = findLiteralType(literal); // determine the numeric type based on the syntax of the literal
+	value = std::strtod(literal.c_str(), &end); // convert the string to a double using std::strtod(), which also provides a pointer to the first unprocessed character
+	if (end == literal.c_str() || value != value) // if std::strtod() did not consume any characters (end points to the start of the string)
 	{
 		printInvalid();
 		return ;
 	}
-	if (!hasValidSyntax(literal, type, end))
+	if (!hasValidSyntax(literal, type, end)) // if the syntax of the literal is not valid (e.g., missing 'f' for float, extra characters after the number)
 	{
 		printInvalid();
 		return ;
