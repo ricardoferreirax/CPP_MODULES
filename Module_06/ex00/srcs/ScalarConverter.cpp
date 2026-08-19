@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/18 18:25:12 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/19 12:53:18 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,15 @@ static bool	displaySpecialLiteral(const std::string &literal)
 	return (false);
 }
 
+static int	detectType(const std::string &literal)
+{
+	if (literal.find('.') == std::string::npos && literal.find('f') == std::string::npos)
+		return (INT);
+	if (literal.length() > 1 && literal[literal.length() - 1] == 'f')
+		return (FLOAT);
+	return (DOUBLE);
+}
+
 static void	displayValue(double value, int type)
 {
 	float	number;
@@ -107,9 +116,9 @@ static void	displayValue(double value, int type)
 	{
 		std::cout << "[char]: ";
 		if (value < 0 || value > 255)
-			std::cout << "Impossible.";
+			std::cout << "Impossible." << std::endl;
 		else if (!ft_is_printable(static_cast<int>(value)))
-			std::cout << "Non displayable.";
+			std::cout << "Non displayable." << std::endl;
 		else
 			std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
 	}
@@ -117,7 +126,7 @@ static void	displayValue(double value, int type)
 	{
 		std::cout << "[int]: ";
 		if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
-			std::cout << "Impossible.";
+			std::cout << "Impossible." << std::endl;
 		else
 			std::cout << static_cast<int>(value) << std::endl;
 	}
@@ -156,6 +165,7 @@ void ScalarConverter::convert(const std::string &literal)
 {
 	double	value;
 	char	*end;
+	int		type;
 
 	if (displaySpecialLiteral(literal))
 		return ;
@@ -168,6 +178,7 @@ void ScalarConverter::convert(const std::string &literal)
 		displayValue(value, DOUBLE);
 		return ;
 	}
+	type = detectType(literal);
 	value = std::strtod(literal.c_str(), &end);
 	if (end == literal.c_str())
 	{
@@ -179,9 +190,14 @@ void ScalarConverter::convert(const std::string &literal)
 		displayInvalidLiteral();
 		return ;
 	}
-	if (*end == 'f' && *(end + 1) == '\0')
+	if (type == FLOAT)
 	{
 		if (literal.find('.') == std::string::npos)
+		{
+			displayInvalidLiteral();
+			return ;
+		}
+		if (*end != 'f' || *(end + 1) != '\0')
 		{
 			displayInvalidLiteral();
 			return ;
