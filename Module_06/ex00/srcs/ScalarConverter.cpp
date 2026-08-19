@@ -6,11 +6,12 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/19 12:53:18 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/19 13:12:16 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ScalarConverter.hpp"
+
 #include <cstdlib>
 #include <iostream>
 #include <limits>
@@ -108,57 +109,87 @@ static int	detectType(const std::string &literal)
 	return (DOUBLE);
 }
 
-static void	displayValue(double value, int type)
+static bool	isValidFloatLiteral(const std::string &literal, char *end)
+{
+	if (literal.find('.') == std::string::npos)
+		return (false);
+	if (*end != 'f')
+		return (false);
+	if (*(end + 1) != '\0')
+		return (false);
+	return (true);
+}
+
+static bool	isValidNumericLiteral(const std::string &literal, int type, char *end)
+{
+	if (type == FLOAT)
+		return (isValidFloatLiteral(literal, end));
+	if (*end != '\0')
+		return (false);
+	return (true);
+}
+
+static void	displayChar(double value)
+{
+	std::cout << "[char]: ";
+	if (value < 0 || value > 255)
+		std::cout << "Impossible.";
+	else if (!ft_is_printable(static_cast<int>(value)))
+		std::cout << "Non displayable.";
+	else
+		std::cout << "'" << static_cast<char>(value) << "'";
+	std::cout << std::endl;
+}
+
+static void	displayInt(double value)
+{
+	std::cout << "[int]: ";
+	if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
+		std::cout << "Impossible.";
+	else
+		std::cout << static_cast<int>(value);
+	std::cout << std::endl;
+}
+
+static void	displayFloat(double value)
 {
 	float	number;
 
-	if (type == CHAR)
+	std::cout << "[float]: ";
+	if (value < -std::numeric_limits<float>::max() || value > std::numeric_limits<float>::max())
+		std::cout << "Impossible.";
+	else
 	{
-		std::cout << "[char]: ";
-		if (value < 0 || value > 255)
-			std::cout << "Impossible." << std::endl;
-		else if (!ft_is_printable(static_cast<int>(value)))
-			std::cout << "Non displayable." << std::endl;
+		number = static_cast<float>(value);
+
+		if (number >= std::numeric_limits<int>::min() && number <= std::numeric_limits<int>::max()
+			&& number == static_cast<int>(number))
+			std::cout << static_cast<int>(number) << ".0f";
 		else
-			std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
+			std::cout << std::fixed << std::setprecision(1) << number << "f";
 	}
-	else if (type == INT)
-	{
-		std::cout << "[int]: ";
-		if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
-			std::cout << "Impossible." << std::endl;
-		else
-			std::cout << static_cast<int>(value) << std::endl;
-	}
-	else if (type == FLOAT)
-	{
-		std::cout << "[float]: ";
-		if (value < -std::numeric_limits<float>::max() || value > std::numeric_limits<float>::max())
-			std::cout << "Impossible.";
-		else
-		{
-			number = static_cast<float>(value);
-		
-			if (number >= std::numeric_limits<int>::min() && number <= std::numeric_limits<int>::max()
-				&& number == static_cast<int>(number))
-				std::cout << static_cast<int>(number) << ".0f";
-			else
-				std::cout << std::fixed << std::setprecision(1) << number << "f";
-		}
-		std::cout << std::endl;
-	}
-	else if (type == DOUBLE)
-	{
-		std::cout << "[double]: ";
-		if (value < -std::numeric_limits<double>::max() || value > std::numeric_limits<double>::max())
-			std::cout << "Impossible.";
-		else if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()
-			&& value == static_cast<int>(value))
-			std::cout << static_cast<int>(value) << ".0";
-		else
-			std::cout << std::setprecision(1) << value;
-		std::cout << std::endl;
-	}
+	std::cout << std::endl;
+}
+
+static void	displayDouble(double value)
+{
+	std::cout << "[double]: ";
+	if (value < -std::numeric_limits<double>::max() || value > std::numeric_limits<double>::max())
+		std::cout << "Impossible.";
+	else if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()
+		&& value == static_cast<int>(value))
+		std::cout << static_cast<int>(value) << ".0";
+	else
+		std::cout << std::fixed << std::setprecision(1) << value;
+	std::cout << std::endl;
+}
+
+static void	displayConversions(double value)
+{
+	displayChar(value);
+	displayInt(value);
+	displayFloat(value);
+	displayDouble(value);
 }
 
 void ScalarConverter::convert(const std::string &literal)
@@ -172,10 +203,7 @@ void ScalarConverter::convert(const std::string &literal)
 	if (checkSingleCharacter(literal))
 	{
 		value = static_cast<double>(literal[0]);
-		displayValue(value, CHAR);
-		displayValue(value, INT);
-		displayValue(value, FLOAT);
-		displayValue(value, DOUBLE);
+		displayConversions(value);
 		return ;
 	}
 	type = detectType(literal);
@@ -190,27 +218,10 @@ void ScalarConverter::convert(const std::string &literal)
 		displayInvalidLiteral();
 		return ;
 	}
-	if (type == FLOAT)
-	{
-		if (literal.find('.') == std::string::npos)
-		{
-			displayInvalidLiteral();
-			return ;
-		}
-		if (*end != 'f' || *(end + 1) != '\0')
-		{
-			displayInvalidLiteral();
-			return ;
-		}
-		end++;
-	}
-	if (*end != '\0')
+	if (!isValidNumericLiteral(literal, type, end))
 	{
 		displayInvalidLiteral();
 		return ;
 	}
-	displayValue(value, CHAR);
-	displayValue(value, INT);
-	displayValue(value, FLOAT);
-	displayValue(value, DOUBLE);
+	displayConversions(value);
 }
