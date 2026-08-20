@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 18:10:45 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/20 16:53:11 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:14:39 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 1)
 	{
-		std::cerr << "Use: ./serialize" << std::endl;
+		std::cerr << "Use: ./Serialize" << std::endl;
 		return (1);
 	}
 	car.brand = "Porsche";
