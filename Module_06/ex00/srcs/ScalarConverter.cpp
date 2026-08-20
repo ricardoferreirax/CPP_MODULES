@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/19 23:25:44 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:51:26 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,3 +269,35 @@ void	ScalarConverter::convert(const std::string &literal)
 	}
 	printAllConversions(value);
 }
+
+
+// The goal of the ScalarConverter class is to receive a string containing the representation of a C++ scalar literal, detect what 
+// kind of literal it represents, convert it into the corresponding numeric value, and then display its equivalent value as char, int, 
+// float and double. The class itself does not need to store any data. Its only responsibility is to perform conversions.
+// First, the input arrives as a std::string. Even if we write: ./convert 42, the program initially receives  "42" as text. The program must determine what
+// that text represents. The supported scalar types are: char, int, float, double and there are special floating-point pseudo-literals: nanf / nan, +inff / +inf 
+// and -inff / -inf. These values are treated separately because they do not behave like normal numeric values. If input is one of these pseudo-literals, the 
+// float and double representations are printed directly and the normal conversion process stops. If the input is not a pseudo-literal, the program checks whether 
+// it represents a single character. 
+// A one-character input such as: 'a' is treated as a char, but a digit such as: 7 must not be treated as the character '7'. It represents the integer 
+// value 7. For that reason, the character check verifies that the input contains exactly one printable character and that this character is not a decimal digit.
+//
+// For numeric literals, the program identifies the expected type from the syntax of the string. The type detection only classifies the textual representation. 
+// The actual numeric parsing is performed using std::strtod(). std::strtod() converts a string into a double and also provides an "end" pointer. This pointer is 
+// extremely useful for validation because it points to the first character that was not consumed by the conversion. For example: "42.0f" <- end (points to 'f').
+// strtod() converts the "42.0" part and stops when it reaches 'f'. This allows the program to check that a float literal ends with exactly one 'f' and has
+// no unexpected characters after it. For an int or double literal, the complete string should be consumed, so "end" must point to the null terminator '\0'.
+// This validation prevents malformed literals from being accepted as valid values. Examples: "42.0" <- end (points to '\0') | "42abc" <- end (points to 'a'). 
+// Once the input has been successfully parsed, the same numeric value is used to display the four required scalar representations.
+//
+// The char conversion has an additional distinction between "impossible" and "Non displayable". "impossible" means that the numeric value cannot be represented 
+// as the char type being used. "Non displayable" means that the conversion itself is possible, but the resulting character is not printable. Printable ASCII 
+// characters are normally in the range 32 to 126.
+//
+// Float and double outputs also need special formatting. Whole numeric values should normally be displayed with a decimal part: 42.0f or 42.0.
+// Therefore, the program checks whether the converted floating-point value is mathematically equal to its integer representation. If it is, ".0f" or ".0"
+// is added to the output. Fractional values are printed using floating-point formatting. Care must be taken with std::fixed and std::setprecision(), because with 
+// fixed notation the precision represents the number of digits after the decimal point.
+//
+//  input string -> pseudo-literal check -> character detection -> numeric type detection -> std::strtod() -> syntax validation -> scalar casts -> char / int / float / double
+//
