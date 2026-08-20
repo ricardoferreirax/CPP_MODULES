@@ -6,21 +6,19 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 20:54:43 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 20:30:54 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/20 23:07:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Base.hpp"
-#include "../includes/A.hpp"
-#include "../includes/B.hpp"
-#include "../includes/C.hpp"
 
-#include <iostream>
 #include <cstdlib>
+#include <exception>
+#include <iostream>
 
 Base::~Base(void)
 {
-	std::cout << "[Base] Base has been destroyed!" << std::endl;
+
 }
 
 Base	*generate(void)

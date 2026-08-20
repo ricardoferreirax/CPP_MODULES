@@ -6,14 +6,11 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 21:04:31 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/09 20:33:25 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/20 23:10:21 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Base.hpp"
-#include "../includes/A.hpp"
-#include "../includes/B.hpp"
-#include "../includes/C.hpp"
 
 #include <cstdlib>
 #include <ctime>
