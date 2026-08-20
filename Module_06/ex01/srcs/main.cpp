@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 18:10:45 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/20 16:47:23 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/20 16:53:11 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,53 @@
 
 int	main(int argc, char **argv)
 {
+	Data car;
 	Data *original;
 	Data *restored;
-	Data car;
 	uintptr_t raw;
+
 	(void)argv;
-	
 	if (argc != 1)
 	{
-		std::cerr << "Error: use ./serialize" << std::endl;
+		std::cerr << "Use: ./serialize" << std::endl;
 		return (1);
 	}
 	car.brand = "Porsche";
-	car.year = 2026;
-	car.price = 67000;
+	car.year = 2024;
+	car.price = 135000;
 
 	original = &car;
 
-	std::cout << std::endl;
-	std::cout << "Brand: " << original->brand << std::endl;
-	std::cout << "Year:  " << original->year << std::endl;
-	std::cout << "Price: " << original->price << std::endl;
+	std::cout << "\n--------------------------------------------------------\n" << std::endl;
 
-	std::cout << "\n--------------------------------------------------\n" << std::endl;
+	std::cout << "Brand: " << car.brand << std::endl;
+	std::cout << "Year: " << car.year << std::endl;
+	std::cout << "Price: " << car.price << " EUR" << std::endl;
 
-	std::cout << "Original pointer: " << original << std::endl;
+	std::cout << "\n--------------------------------------------------------\n" << std::endl;
 
+	std::cout << "Original address: " << original << std::endl;
+	
 	raw = Serializer::serialize(original);
-	std::cout << "Serialized value: " << raw << std::endl;
-
+	std::cout << "Serialized address: " << raw << std::endl;
+	
 	restored = Serializer::deserialize(raw);
-	std::cout << "Restored pointer: " << restored << std::endl;
+	std::cout << "Restored address: " << restored << std::endl;
 
-	std::cout << "\n--------------------------------------------------\n" << std::endl;
+	std::cout << "\n--------------------------------------------------------\n" << std::endl;
 
 	std::cout << "Brand: " << restored->brand << std::endl;
-	std::cout << "Year:  " << restored->year << std::endl;
-	std::cout << "Price: " << restored->price << std::endl;
+	std::cout << "Year: " << restored->year << std::endl;
+	std::cout << "Price: " << restored->price << " EUR" << std::endl;
 
-	std::cout << "\n--------------------------------------------------\n" << std::endl;
+	std::cout << "\n--------------------------------------------------------\n" << std::endl;
 
+	std::cout << std::boolalpha;
+	std::cout << "Same address: " << (original == restored) << std::endl;
 	if (original == restored)
-		std::cout << "Success: pointers are equal -> " << (original == restored) << std::endl;
+		std::cout << "The original pointer was successfully recovered." << std::endl;
 	else
-		std::cout << "Error: pointers are different -> " << (original == restored) << std::endl;
+		std::cout << "The recovered pointer does not match the original." << std::endl;
 	std::cout << std::endl;
-
 	return (0);
 }
