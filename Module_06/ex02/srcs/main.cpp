@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 21:04:31 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/20 23:10:21 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/08/20 23:12:44 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ int	main(void)
 
 	for (int i = 0; i < 5; i++)
 	{
-		std::cout << std::endl;
-		std::cout << "----------------------------- Test " << i + 1 << " -----------------------------" << std::endl;
+		std::cout << "\n----------------------------- Test " << i + 1 << " -----------------------------\n" << std::endl;
 
 		ptr = generate();
-		std::cout << std::endl;
 
 		std::cout << "Pointer: ";
 		identify(ptr);
@@ -36,7 +34,7 @@ int	main(void)
 		std::cout << "Reference: ";
 		if (ptr != NULL)
 			identify(*ptr);
-		std::cout << std::endl;
+		
 		delete ptr;
 	}
 
