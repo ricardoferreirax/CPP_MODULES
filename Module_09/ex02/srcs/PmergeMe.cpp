@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 15:15:13 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 21:55:57 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void PmergeMe::print_nbrs(size_t group_size) const
 		if (group_size > 0 && i % group_size == 0) // check if new group starts
 			std::cout << " [";
 		else
-			std::cout << " "; // add a space between nbrs
+			std::cout << " ";        // add a space between nbrs
 		std::cout << this->_nbrs[i]; // print current nbr
 		if (group_size > 0)
 		{
@@ -93,24 +93,49 @@ void PmergeMe::print_nbrs(size_t group_size) const
 
 // pending: b1  b2  b3  b4
 // winner:  a1  a2  a3  a4
-void PmergeMe::show_insertion_groups(size_t group_size) const
+void PmergeMe::print_chains(size_t group_size) const
 {
 	size_t block_size;
 
 	block_size = group_size * 2;
-	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++) // iterate each block
+	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 	{
-		std::cout << "pending: [";
-		for (size_t j = 0; j < block_size; j++) // iterate each nbr in block
+		std::cout << "loser: [";
+		for (size_t j = 0; j < block_size; j++)
 		{
 			if (j == group_size)
 				std::cout << "] | winner: [";
 			else if (j > 0)
 				std::cout << " ";
-			std::cout << this->_nbrs[i * block_size + j]; // print current nbr
+			std::cout << this->_nbrs[i * block_size + j];
 		}
 		std::cout << "]" << std::endl;
 	}
+	std::cout << "Main chain: ";
+	for (size_t i = 0; i < this->_main_chain.size(); i++)
+	{
+		std::cout << "[";
+		for (size_t j = 0; j < group_size; j++)
+		{
+			if (j > 0)
+				std::cout << " ";
+			std::cout << this->_nbrs[this->_main_chain[i] + j];
+		}
+		std::cout << "] ";
+	}
+	std::cout << "\nPending groups: ";
+	for (size_t i = 0; i < this->_pending_groups.size(); i++)
+	{
+		std::cout << "[";
+		for (size_t j = 0; j < group_size; j++)
+		{
+			if (j > 0)
+				std::cout << " ";
+			std::cout << this->_nbrs[this->_pending_groups[i] + j];
+		}
+		std::cout << "] ";
+	}
+	std::cout << std::endl;
 }
 
 void PmergeMe::swap_groups(size_t a, size_t b, size_t group_size)
@@ -150,19 +175,18 @@ void PmergeMe::compare_groups(size_t group_size)
 // pending   :     b2  b3  b4
 void PmergeMe::build_chains(size_t group_size)
 {
-	size_t	block_size;
 	size_t	pos;
 
-	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
-		return ;
-	block_size = group_size * 2;
-	this->_main_chain.clear(); // clear groups from previous level
+	this->_main_chain.clear();
 	this->_pending_groups.clear();
-	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+	for (size_t i = 0; i < this->_nbrs.size() / (group_size * 2); i++)
 	{
-		pos = i * block_size;
-		this->_pending_groups.push_back(pos); // smaller group
-		this->_main_chain.push_back(pos + group_size); // larger group
+		pos = i * group_size * 2;
+		if (i == 0)
+			this->_main_chain.push_back(pos); // 1st loser goes directly to main chain
+		else
+			this->_pending_groups.push_back(pos); // other losers wait for insertion
+		this->_main_chain.push_back(pos + group_size); // add winner to main chain
 	}
 }
 
@@ -177,6 +201,6 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 	print_nbrs(block_size);
 	merge_insertion_sort(block_size);
 	std::cout << "\nInsertion level: " << group_size << std::endl;
-	show_insertion_groups(group_size);
 	build_chains(group_size);
+	print_chains(group_size);
 }
