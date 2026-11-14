@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 14:34:04 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 15:15:13 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,19 @@ PmergeMe::PmergeMe()
 
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
-	*this = other;
+	this->_nbrs = other._nbrs;
+	this->_main_chain = other._main_chain;
+	this->_pending_groups = other._pending_groups;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 {
 	if (this != &other)
+	{
 		this->_nbrs = other._nbrs;
+		this->_main_chain = other._main_chain;
+		this->_pending_groups = other._pending_groups;
+	}
 	return (*this);
 }
 
@@ -72,7 +78,7 @@ void PmergeMe::print_nbrs(size_t group_size) const
 		if (group_size > 0 && i % group_size == 0) // check if new group starts
 			std::cout << " [";
 		else
-			std::cout << " ";        // add a space between nbrs
+			std::cout << " "; // add a space between nbrs
 		std::cout << this->_nbrs[i]; // print current nbr
 		if (group_size > 0)
 		{
@@ -85,6 +91,8 @@ void PmergeMe::print_nbrs(size_t group_size) const
 	std::cout << std::endl;
 }
 
+// pending: b1  b2  b3  b4
+// winner:  a1  a2  a3  a4
 void PmergeMe::show_insertion_groups(size_t group_size) const
 {
 	size_t block_size;
@@ -135,12 +143,34 @@ void PmergeMe::compare_groups(size_t group_size)
 	}
 }
 
+// winner : a1  a2  a3  a4
+// pending: b1  b2  b3  b4
+//
+// main chain: b1  a1  a2  a3  a4
+// pending   :     b2  b3  b4
+void PmergeMe::build_chains(size_t group_size)
+{
+	size_t	block_size;
+	size_t	pos;
+
+	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
+		return ;
+	block_size = group_size * 2;
+	this->_main_chain.clear(); // clear groups from previous level
+	this->_pending_groups.clear();
+	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+	{
+		pos = i * block_size;
+		this->_pending_groups.push_back(pos); // smaller group
+		this->_main_chain.push_back(pos + group_size); // larger group
+	}
+}
+
 void PmergeMe::merge_insertion_sort(size_t group_size)
 {
 	size_t	block_size;
 
-	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
-		// insufficient elements to sort
+	if (group_size == 0 || group_size > this->_nbrs.size() / 2) // insufficient elements to sort
 		return ;
 	block_size = group_size * 2;
 	compare_groups(group_size);
@@ -148,4 +178,5 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 	merge_insertion_sort(block_size);
 	std::cout << "\nInsertion level: " << group_size << std::endl;
 	show_insertion_groups(group_size);
+	build_chains(group_size);
 }

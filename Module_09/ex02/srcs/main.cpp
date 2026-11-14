@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:53:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 13:44:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 15:05:55 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	main(int ac, char **av)
 {
+	PmergeMe	pmerge;
+
 	try
 	{
-		PmergeMe	pmerge;
-		
 		std::cout << std::endl;
 		pmerge.validate_input(ac, av);
 		pmerge.print_nbrs(0);
