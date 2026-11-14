@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 13:56:47 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 14:34:04 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,26 @@ void PmergeMe::print_nbrs(size_t group_size) const
 	std::cout << std::endl;
 }
 
+void PmergeMe::show_insertion_groups(size_t group_size) const
+{
+	size_t block_size;
+
+	block_size = group_size * 2;
+	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++) // iterate each block
+	{
+		std::cout << "pending: [";
+		for (size_t j = 0; j < block_size; j++) // iterate each nbr in block
+		{
+			if (j == group_size)
+				std::cout << "] | winner: [";
+			else if (j > 0)
+				std::cout << " ";
+			std::cout << this->_nbrs[i * block_size + j]; // print current nbr
+		}
+		std::cout << "]" << std::endl;
+	}
+}
+
 void PmergeMe::swap_groups(size_t a, size_t b, size_t group_size)
 {
 	int	temp;
@@ -118,11 +138,14 @@ void PmergeMe::compare_groups(size_t group_size)
 void PmergeMe::merge_insertion_sort(size_t group_size)
 {
 	size_t	block_size;
-	
-	if (group_size == 0 || group_size > this->_nbrs.size() / 2) // insufficient elements to sort
-		return;
+
+	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
+		// insufficient elements to sort
+		return ;
 	block_size = group_size * 2;
 	compare_groups(group_size);
 	print_nbrs(block_size);
 	merge_insertion_sort(block_size);
+	std::cout << "\nInsertion level: " << group_size << std::endl;
+	show_insertion_groups(group_size);
 }
