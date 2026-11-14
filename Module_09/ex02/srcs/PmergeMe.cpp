@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 12:29:23 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 13:56:47 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,23 @@ void PmergeMe::validate_input(int ac, char **av)
 	}
 }
 
-void PmergeMe::print_nbrs() const
+void PmergeMe::print_nbrs(size_t group_size) const
 {
 	std::cout << "Vector:";
-	for (size_t i = 0; i < this->_nbrs.size(); ++i)
-		std::cout << " " << this->_nbrs[i];
-	std::cout << std::endl;
-}
-
-void PmergeMe::print_groups(size_t group_size) const
-{
-	if (group_size == 0)
-		return ;
 	for (size_t i = 0; i < this->_nbrs.size(); i++)
 	{
-		if (i % group_size == 0) // check if new group starts
-			std::cout << "[";
-		std::cout << this->_nbrs[i]; // print current nbr
-		if ((i + 1) % group_size == 0) // check if group is complete
-			std::cout << "] ";
-		else if (i == this->_nbrs.size() - 1) // check if this is last nbr
-			std::cout << "] ";
+		if (group_size > 0 && i % group_size == 0) // check if new group starts
+			std::cout << " [";
 		else
-			std::cout << " "; // Add a space between numbers
+			std::cout << " ";        // add a space between nbrs
+		std::cout << this->_nbrs[i]; // print current nbr
+		if (group_size > 0)
+		{
+			if ((i + 1) % group_size == 0) // check if group is complete
+				std::cout << "]";
+			else if (i == this->_nbrs.size() - 1) // check if is last nbr
+				std::cout << "]";
+		}
 	}
 	std::cout << std::endl;
 }
@@ -108,11 +102,8 @@ void PmergeMe::compare_groups(size_t group_size)
 	size_t	pos;
 	size_t	a_max;
 	size_t	b_max;
+	size_t	block_size;
 
-	size_t block_size; // size of two groups to compare
-	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
-		// insufficient elements to compare
-		return ;
 	block_size = group_size * 2;
 	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 	{
@@ -124,17 +115,14 @@ void PmergeMe::compare_groups(size_t group_size)
 	}
 }
 
-void PmergeMe::sort_nbrs()
+void PmergeMe::merge_insertion_sort(size_t group_size)
 {
-	size_t	group_size;
-
-	group_size = 1;
+	size_t	block_size;
+	
+	if (group_size == 0 || group_size > this->_nbrs.size() / 2) // insufficient elements to sort
+		return;
+	block_size = group_size * 2;
 	compare_groups(group_size);
-	print_groups(group_size * 2);
-	group_size = 2;
-	compare_groups(group_size);
-	print_groups(group_size * 2);
-	group_size = 4;
-	compare_groups(group_size);
-	print_groups(group_size * 2);
+	print_nbrs(block_size);
+	merge_insertion_sort(block_size);
 }
