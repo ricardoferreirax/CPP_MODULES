@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 12:14:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 12:29:23 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,25 @@ void PmergeMe::print_nbrs() const
 	std::cout << std::endl;
 }
 
+void PmergeMe::print_groups(size_t group_size) const
+{
+	if (group_size == 0)
+		return ;
+	for (size_t i = 0; i < this->_nbrs.size(); i++)
+	{
+		if (i % group_size == 0) // check if new group starts
+			std::cout << "[";
+		std::cout << this->_nbrs[i]; // print current nbr
+		if ((i + 1) % group_size == 0) // check if group is complete
+			std::cout << "] ";
+		else if (i == this->_nbrs.size() - 1) // check if this is last nbr
+			std::cout << "] ";
+		else
+			std::cout << " "; // Add a space between numbers
+	}
+	std::cout << std::endl;
+}
+
 void PmergeMe::swap_groups(size_t a, size_t b, size_t group_size)
 {
 	int	temp;
@@ -91,7 +110,8 @@ void PmergeMe::compare_groups(size_t group_size)
 	size_t	b_max;
 
 	size_t block_size; // size of two groups to compare
-	if (group_size == 0 || group_size > this->_nbrs.size() / 2) // insufficient elements to compare
+	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
+		// insufficient elements to compare
 		return ;
 	block_size = group_size * 2;
 	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
@@ -106,10 +126,15 @@ void PmergeMe::compare_groups(size_t group_size)
 
 void PmergeMe::sort_nbrs()
 {
-	compare_groups(1); // compare pairs
-	print_nbrs();
-	compare_groups(2); // compare quartets
-	print_nbrs();
-	compare_groups(4); // compare octets
-	print_nbrs();
+	size_t	group_size;
+
+	group_size = 1;
+	compare_groups(group_size);
+	print_groups(group_size * 2);
+	group_size = 2;
+	compare_groups(group_size);
+	print_groups(group_size * 2);
+	group_size = 4;
+	compare_groups(group_size);
+	print_groups(group_size * 2);
 }

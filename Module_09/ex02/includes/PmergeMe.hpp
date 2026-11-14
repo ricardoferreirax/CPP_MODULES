@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:48:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 12:11:21 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/14 12:33:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class	PmergeMe
 
 		void	validate_input(int ac, char **av);
 		void	print_nbrs() const;
+		void 	print_groups(size_t group_size) const;
 		void	sort_nbrs();
 };
 
