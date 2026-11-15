@@ -6,11 +6,12 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/15 21:26:42 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 21:47:48 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PmergeMe.hpp"
+#include <iomanip>
 
 PmergeMe::PmergeMe()
 {
@@ -90,8 +91,9 @@ void PmergeMe::print_nbrs(size_t group_size) const
 			std::cout << " [";
 		else
 			std::cout << " ";
-		std::cout << i;
-		if (group_size > 0 && ((i + 1) % group_size == 0 || i == this->_nbrs.size() - 1))
+		std::cout << std::setw(2) << i;
+		if (group_size > 0 && ((i + 1) % group_size == 0
+				|| i == this->_nbrs.size() - 1))
 			std::cout << "]";
 	}
 	std::cout << std::endl;
@@ -102,7 +104,7 @@ void PmergeMe::print_nbrs(size_t group_size) const
 			std::cout << " [";
 		else
 			std::cout << " ";
-		std::cout << this->_nbrs[i];
+		std::cout << std::setw(2) << this->_nbrs[i];
 		if (group_size > 0 && ((i + 1) % group_size == 0
 				|| i == this->_nbrs.size() - 1))
 			std::cout << "]";
@@ -123,11 +125,11 @@ void PmergeMe::print_chains(size_t group_size, bool show_pairs) const
 		for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 		{
 			pos = i * block_size;
-			std::cout << "Loser (" << pos << "): [";
+			std::cout << "Loser (" << pos << ")[";
 			for (size_t j = 0; j < block_size; j++)
 			{
 				if (j == group_size)
-					std::cout << "] | Winner (" << pos + group_size << "): [";
+					std::cout << "] | Winner (" << pos + group_size << ")[";
 				else if (j > 0)
 					std::cout << " ";
 				std::cout << this->_nbrs[pos + j];
@@ -167,19 +169,29 @@ void PmergeMe::print_chains(size_t group_size, bool show_pairs) const
 
 void PmergeMe::insert_pending_groups(size_t group_size)
 {
-	size_t	pend_pos;
-	size_t	left;
-	size_t	right;
-	size_t	mid;
-	int		pend_max;
-	int		mid_max;
+	size_t pend_pos;
+	size_t winner_pos;
+	size_t left;
+	size_t right;
+	size_t mid;
+	int    pend_max;
+	int    mid_max;
 
 	for (size_t i = 0; i < this->_pend_groups.size(); i++)
 	{
 		pend_pos = this->_pend_groups[i]; // starting index in _nbrs
-		pend_max = this->_nbrs[pend_pos + group_size - 1]; // last element of pending group
+		pend_max = this->_nbrs[pend_pos + group_size - 1]; // last element of pending group (max)
+		winner_pos = pend_pos + group_size;
 		left = 0;
 		right = this->_main_chain.size();
+		for (size_t j = 0; j < this->_main_chain.size(); j++)
+		{
+			if (this->_main_chain[j] == winner_pos) // find pos of winner group in main chain
+			{
+				right = j;
+				break ;
+			}
+		}
 		while (left < right)
 		{
 			mid = left + (right - left) / 2; // find mid pos of main chain
@@ -187,7 +199,7 @@ void PmergeMe::insert_pending_groups(size_t group_size)
 			if (pend_max < mid_max)
 				right = mid; // search left half
 			else
-				left = mid + 1; // otherwise->search right half
+				left = mid + 1; // search right half
 		}
 		this->_main_chain.insert(this->_main_chain.begin() + left, pend_pos);
 	}
@@ -195,13 +207,13 @@ void PmergeMe::insert_pending_groups(size_t group_size)
 
 void PmergeMe::merge_insertion_sort(size_t group_size)
 {
-	std::vector<int> sorted;
-	size_t 			 block_size;
-	size_t 			 pos;
-	size_t 			 a_max;
-	size_t 			 b_max;
-	size_t 			 full_groups;
+	size_t	block_size;
+	size_t	pos;
+	size_t	a_max;
+	size_t	b_max;
+	size_t	full_groups;
 
+	std::vector<int> sorted;
 	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
 		return ;
 	block_size = group_size * 2;
@@ -232,6 +244,16 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 		this->_pend_groups.push_back((full_groups - 1) * group_size);
 	std::cout << "\nBefore insertion:" << std::endl;
 	print_chains(group_size, true);
+	for (size_t i = 1; i < this->_main_chain.size(); i++)
+	{
+		a_max = this->_main_chain[i - 1] + group_size - 1;
+		b_max = this->_main_chain[i] + group_size - 1;
+		if (this->_nbrs[a_max] > this->_nbrs[b_max])
+		{
+			std::cerr << "ain chain not sorted at level " << group_size << std::endl;
+			break ;
+		}
+	}
 	insert_pending_groups(group_size);
 	std::cout << "After insertion:" << std::endl;
 	print_chains(group_size, false);
