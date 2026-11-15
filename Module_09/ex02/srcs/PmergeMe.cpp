@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/15 21:12:09 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 21:26:42 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void PmergeMe::print_chains(size_t group_size, bool show_pairs) const
 		for (size_t i = 0; i < this->_pend_groups.size(); i++)
 		{
 			pos = this->_pend_groups[i];
-			std::cout << "(" << pos << "): [";
+			std::cout << "(" << pos << ")[";
 			for (size_t j = 0; j < group_size; j++)
 			{
 				if (j > 0)
@@ -195,21 +195,18 @@ void PmergeMe::insert_pending_groups(size_t group_size)
 
 void PmergeMe::merge_insertion_sort(size_t group_size)
 {
-	size_t block_size;
-	size_t pos;
-	size_t a_max;
-	size_t b_max;
-	size_t full_groups;
-	size_t paired_groups;
-	size_t tail_start;
 	std::vector<int> sorted;
+	size_t 			 block_size;
+	size_t 			 pos;
+	size_t 			 a_max;
+	size_t 			 b_max;
+	size_t 			 full_groups;
 
 	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
 		return ;
 	block_size = group_size * 2;
 	full_groups = this->_nbrs.size() / group_size;
-	paired_groups = this->_nbrs.size() / block_size;
-	for (size_t i = 0; i < paired_groups; i++)
+	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 	{
 		pos = i * block_size;
 		a_max = pos + group_size - 1;
@@ -222,7 +219,7 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 	std::cout << "\nInsertion level: " << group_size << std::endl;
 	this->_main_chain.clear();
 	this->_pend_groups.clear();
-	for (size_t i = 0; i < paired_groups; i++)
+	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 	{
 		pos = i * block_size;
 		if (i == 0)
@@ -232,10 +229,7 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 		this->_main_chain.push_back(pos + group_size);
 	}
 	if (full_groups % 2 != 0)
-	{
-		pos = paired_groups * block_size;
-		this->_pend_groups.push_back(pos);
-	}
+		this->_pend_groups.push_back((full_groups - 1) * group_size);
 	std::cout << "\nBefore insertion:" << std::endl;
 	print_chains(group_size, true);
 	insert_pending_groups(group_size);
@@ -247,8 +241,7 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 		for (size_t j = 0; j < group_size; j++)
 			sorted.push_back(this->_nbrs[pos + j]);
 	}
-	tail_start = full_groups * group_size;
-	for (size_t i = tail_start; i < this->_nbrs.size(); i++)
+	for (size_t i = full_groups * group_size; i < this->_nbrs.size(); i++)
 		sorted.push_back(this->_nbrs[i]);
 	this->_nbrs = sorted;
 	std::cout << "\nVector reordered:" << std::endl;
