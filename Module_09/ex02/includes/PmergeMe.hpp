@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:48:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/15 19:51:50 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 20:44:17 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class	PmergeMe
 		void	swap_groups(size_t first, size_t second, size_t group_size);
 		void 	print_chains(size_t group_size, bool show_pairs) const;
 		void 	insert_pending_groups(size_t group_size);
+		void 	reorder_groups(size_t group_size);
 		
 	public:
 		PmergeMe();

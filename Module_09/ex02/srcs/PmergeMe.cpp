@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/15 19:59:39 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 20:52:35 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,22 +123,22 @@ void PmergeMe::print_chains(size_t group_size, bool show_pairs) const
 		for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 		{
 			pos = i * block_size;
-			std::cout << "Loser start at _nbrs[" << pos << "]: [";
+			std::cout << "Loser (" << pos << "): [";
 			for (size_t j = 0; j < block_size; j++)
 			{
 				if (j == group_size)
-					std::cout << "] | Winner start at _nbrs[" << pos + group_size << "]: [";
+					std::cout << "] | Winner (" << pos + group_size << "): [";
 				else if (j > 0)
 					std::cout << " ";
 				std::cout << this->_nbrs[pos + j];
 			}
 			std::cout << "]" << std::endl;
 		}
-		std::cout << "Pending groups: ";
+		std::cout << "\nPending groups: ";
 		for (size_t i = 0; i < this->_pend_groups.size(); i++)
 		{
 			pos = this->_pend_groups[i];
-			std::cout << "(" << pos << ")[";
+			std::cout << "(" << pos << "): [";
 			for (size_t j = 0; j < group_size; j++)
 			{
 				if (j > 0)
@@ -174,7 +174,7 @@ void PmergeMe::insert_pending_groups(size_t group_size)
 	int		pend_max;
 	int		mid_max;
 
-	for (size_t i = 0; i < this->_pend_groups.size(); i++) // iterate pending groups that need to be inserted
+	for (size_t i = 0; i < this->_pend_groups.size(); i++)
 	{
 		pend_pos = this->_pend_groups[i]; // starting index in _nbrs
 		pend_max = this->_nbrs[pend_pos + group_size - 1]; // last element of pending group
@@ -189,20 +189,21 @@ void PmergeMe::insert_pending_groups(size_t group_size)
 			else
 				left = mid + 1; // otherwise->search right half
 		}
-		this->_main_chain.insert(this->_main_chain.begin() + left, pend_pos); // insert pend into chain at correct pos
+		this->_main_chain.insert(this->_main_chain.begin() + left, pend_pos);
 	}
 }
 
 void PmergeMe::merge_insertion_sort(size_t group_size)
 {
-	size_t	block_size;
-	size_t	pos;
-	size_t	a_max;
-	size_t	b_max;
+	size_t block_size;
+	size_t pos;
+	size_t a_max;
+	size_t b_max;
+	std::vector<int> sorted;
 
 	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
 		return ;
-	block_size = group_size * 2; // size of two groups to be compared (1vs1, 2vs2, 4vs4)
+	block_size = group_size * 2; // size of two groups to be compared
 	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
 	{
 		pos = i * block_size;
@@ -230,4 +231,13 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 	insert_pending_groups(group_size);
 	std::cout << "After insertion:" << std::endl;
 	print_chains(group_size, false);
+	for (size_t i = 0; i < this->_main_chain.size(); i++)
+	{
+		pos = this->_main_chain[i];
+		for (size_t j = 0; j < group_size; j++)
+			sorted.push_back(this->_nbrs[pos + j]);
+	}
+	this->_nbrs = sorted;
+	std::cout << "\nVector reordered:" << std::endl;
+	print_nbrs(block_size);
 }
