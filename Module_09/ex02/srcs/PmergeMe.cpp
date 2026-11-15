@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/15 20:52:35 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 21:12:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,12 +199,17 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 	size_t pos;
 	size_t a_max;
 	size_t b_max;
+	size_t full_groups;
+	size_t paired_groups;
+	size_t tail_start;
 	std::vector<int> sorted;
 
 	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
 		return ;
-	block_size = group_size * 2; // size of two groups to be compared
-	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+	block_size = group_size * 2;
+	full_groups = this->_nbrs.size() / group_size;
+	paired_groups = this->_nbrs.size() / block_size;
+	for (size_t i = 0; i < paired_groups; i++)
 	{
 		pos = i * block_size;
 		a_max = pos + group_size - 1;
@@ -217,7 +222,7 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 	std::cout << "\nInsertion level: " << group_size << std::endl;
 	this->_main_chain.clear();
 	this->_pend_groups.clear();
-	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+	for (size_t i = 0; i < paired_groups; i++)
 	{
 		pos = i * block_size;
 		if (i == 0)
@@ -225,6 +230,11 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 		else
 			this->_pend_groups.push_back(pos);
 		this->_main_chain.push_back(pos + group_size);
+	}
+	if (full_groups % 2 != 0)
+	{
+		pos = paired_groups * block_size;
+		this->_pend_groups.push_back(pos);
 	}
 	std::cout << "\nBefore insertion:" << std::endl;
 	print_chains(group_size, true);
@@ -237,6 +247,9 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 		for (size_t j = 0; j < group_size; j++)
 			sorted.push_back(this->_nbrs[pos + j]);
 	}
+	tail_start = full_groups * group_size;
+	for (size_t i = tail_start; i < this->_nbrs.size(); i++)
+		sorted.push_back(this->_nbrs[i]);
 	this->_nbrs = sorted;
 	std::cout << "\nVector reordered:" << std::endl;
 	print_nbrs(block_size);
