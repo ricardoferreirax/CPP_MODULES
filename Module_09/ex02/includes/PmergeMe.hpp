@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:48:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 22:44:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 19:51:50 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ class	PmergeMe
 {
 	private:
 		std::vector<int> _nbrs;
-		std::vector<size_t> _main_chain; // starting indexes of main groups
-		std::vector<size_t> _pend_groups; // starting indexes of pending groups
+		std::vector<size_t> _main_chain; // store main chain groups indexes
+		std::vector<size_t> _pend_groups; // store pend groups indexes to be inserted in main chain
 		
 		void	swap_groups(size_t first, size_t second, size_t group_size);
-		void 	print_chains(size_t group_size) const;
-		void insert_pending_groups(size_t group_size);
+		void 	print_chains(size_t group_size, bool show_pairs) const;
+		void 	insert_pending_groups(size_t group_size);
 		
 	public:
 		PmergeMe();

@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:53:13 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/14 22:46:13 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/15 19:52:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int ac, char **av)
 {
 	try
 	{
-		std::cout << std::endl;
 		PmergeMe pmerge(ac, av);
 		pmerge.print_nbrs(0);
 		pmerge.merge_insertion_sort(1);
