@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:48:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 20:45:16 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 21:18:26 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ class PmergeMe
 		std::vector<t_group> _losers; // store losers groups idxs
 
 		t_group create_group(size_t pos, size_t group_size) const;
+		size_t 	find_insert_pos(const t_group &loser, size_t limit) const;
 		void 	swap_groups(size_t first, size_t second, size_t group_size);
 		void 	print_group(const t_group &group) const;
 		void 	print_chains(bool show_pairs) const;
-		void 	insert_losers();
+		void 	insert_pend_losers();
 		void 	reorder_groups();
 
 	public:
