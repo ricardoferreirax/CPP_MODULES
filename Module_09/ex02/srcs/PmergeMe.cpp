@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 20:27:21 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 21:03:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ PmergeMe::~PmergeMe()
 	std::cout << "PmergeMe destructor called." << std::endl;
 }
 
-void PmergeMe::swap_groups(size_t a, size_t b, size_t group_size)
+void PmergeMe::swap_groups(size_t a, size_t b, size_t group_len)
 {
 	int	temp;
 
-	for (size_t i = 0; i < group_size; ++i)
+	for (size_t i = 0; i < group_len; ++i)
 	{
 		temp = this->_nbrs[a + i];
 		this->_nbrs[a + i] = this->_nbrs[b + i];
@@ -84,29 +84,39 @@ void PmergeMe::swap_groups(size_t a, size_t b, size_t group_size)
 	}
 }
 
-void PmergeMe::print_nbrs(size_t group_size) const
+t_group PmergeMe::create_group(size_t pos, size_t group_len) const
+{
+	t_group group;
+
+	group.id = pos;
+	for (size_t i = 0; i < group_len; i++)
+		group.nbrs.push_back(this->_nbrs[pos + i]);
+	return (group);
+}
+
+void PmergeMe::print_nbrs(size_t group_len) const
 {
 	std::cout << "\nIndex: ";
 	for (size_t i = 0; i < this->_nbrs.size(); i++)
 	{
-		if (group_size > 0 && i % group_size == 0)
+		if (group_len > 0 && i % group_len == 0)
 			std::cout << " [";
 		else
 			std::cout << " ";
 		std::cout << std::setw(2) << i;
-		if (group_size > 0 && ((i + 1) % group_size == 0 || i == this->_nbrs.size() - 1))
+		if (group_len > 0 && ((i + 1) % group_len == 0 || i == this->_nbrs.size() - 1))
 			std::cout << "]";
 	}
 	std::cout << std::endl;
 	std::cout << "Vector:";
 	for (size_t i = 0; i < this->_nbrs.size(); i++)
 	{
-		if (group_size > 0 && i % group_size == 0)
+		if (group_len > 0 && i % group_len == 0)
 			std::cout << " [";
 		else
 			std::cout << " ";
 		std::cout << std::setw(2) << this->_nbrs[i];
-		if (group_size > 0 && ((i + 1) % group_size == 0 || i == this->_nbrs.size() - 1))
+		if (group_len > 0 && ((i + 1) % group_len == 0 || i == this->_nbrs.size() - 1))
 			std::cout << "]";
 	}
 	std::cout << std::endl;
@@ -194,67 +204,53 @@ void PmergeMe::insert_losers(size_t group_size)
 	}
 }
 
-void PmergeMe::merge_insertion_sort(size_t group_size)
+void PmergeMe::ford_johnson_sort(size_t group_len)
 {
-	size_t	block_size;
-	size_t	pos;
-	size_t	a_max;
-	size_t	b_max;
-	size_t	full_groups;
-
 	std::vector<int> sorted;
-	if (group_size == 0 || group_size > this->_nbrs.size() / 2)
+	t_pair 			 pair;
+	size_t 			 pair_len; // len of two groups combined
+	size_t 			 pos;
+	size_t 			 total_groups;
+
+	if (group_len == 0 || group_len > this->_nbrs.size() / 2)
 		return ;
-	block_size = group_size * 2;
-	full_groups = this->_nbrs.size() / group_size;
-	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+	pair_len = group_len * 2;
+	total_groups = this->_nbrs.size() / group_len;
+	for (size_t i = 0; i < this->_nbrs.size() / pair_len; i++)
 	{
-		pos = i * block_size;
-		a_max = pos + group_size - 1;
-		b_max = pos + block_size - 1;
-		if (this->_nbrs[a_max] > this->_nbrs[b_max])
-			swap_groups(pos, pos + group_size, group_size);
+		pos = i * pair_len;
+		if (this->_nbrs[pos + group_len - 1] > this->_nbrs[pos + pair_len - 1])
+			swap_groups(pos, pos + group_len, group_len);
 	}
-	print_nbrs(block_size);
-	merge_insertion_sort(block_size);
-	std::cout << "\nInsertion level: " << group_size << std::endl;
+	ford_johnson_sort(pair_len);
+	this->_pairs.clear();
 	this->_main_chain.clear();
-	this->_pend_groups.clear();
-	for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+	this->_losers.clear();
+	for (size_t i = 0; i < this->_nbrs.size() / pair_len; i++)
 	{
-		pos = i * block_size;
+		pos = i * pair_len;
+		pair.pair_id = i;
+		pair.loser = make_group(pos, group_len);
+		pair.winner = make_group(pos + group_len, group_len);
+		this->_pairs.push_back(pair);
 		if (i == 0)
-			this->_main_chain.push_back(pos);
+			this->_main_chain.push_back(pair.loser);
 		else
-			this->_pend_groups.push_back(pos);
-		this->_main_chain.push_back(pos + group_size);
+			this->_losers.push_back(pair.loser);
+		this->_main_chain.push_back(pair.winner);
 	}
-	if (full_groups % 2 != 0)
-		this->_pend_groups.push_back((full_groups - 1) * group_size);
-	std::cout << "\nBefore insertion:" << std::endl;
-	print_chains(group_size, true);
-	for (size_t i = 1; i < this->_main_chain.size(); i++)
+	if (total_groups % 2 != 0)
 	{
-		a_max = this->_main_chain[i - 1] + group_size - 1;
-		b_max = this->_main_chain[i] + group_size - 1;
-		if (this->_nbrs[a_max] > this->_nbrs[b_max])
-		{
-			std::cerr << "ain chain not sorted at level " << group_size << std::endl;
-			break ;
-		}
+		pos = (total_groups - 1) * group_len;
+		this->_losers.push_back(make_group(pos, group_len));
 	}
-	insert_losers(group_size);
-	std::cout << "After insertion:" << std::endl;
-	print_chains(group_size, false);
+	insert_losers();
 	for (size_t i = 0; i < this->_main_chain.size(); i++)
 	{
-		pos = this->_main_chain[i];
-		for (size_t j = 0; j < group_size; j++)
-			sorted.push_back(this->_nbrs[pos + j]);
+		for (size_t j = 0; j < this->_main_chain[i].nbrs.size(); j++)
+			sorted.push_back(this->_main_chain[i].nbrs[j]);
 	}
-	for (size_t i = full_groups * group_size; i < this->_nbrs.size(); i++)
+	for (size_t i = total_groups * group_len; i < this->_nbrs.size(); i++)
 		sorted.push_back(this->_nbrs[i]);
 	this->_nbrs = sorted;
-	std::cout << "\nVector reordered:" << std::endl;
-	print_nbrs(block_size);
 }

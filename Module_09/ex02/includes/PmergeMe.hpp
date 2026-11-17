@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:48:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 20:29:10 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 20:45:16 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ class PmergeMe
 		std::vector<t_group> _main_chain; // store main chain groups idxs
 		std::vector<t_group> _losers; // store losers groups idxs
 
+		t_group create_group(size_t pos, size_t group_size) const;
 		void 	swap_groups(size_t first, size_t second, size_t group_size);
 		void 	print_group(const t_group &group) const;
-		void 	print_nbrs(size_t group_size) const;
 		void 	print_chains(bool show_pairs) const;
 		void 	insert_losers();
 		void 	reorder_groups();
@@ -57,7 +57,7 @@ class PmergeMe
 
 		void	validate_input(int ac, char **av);
 		void	print_nbrs(size_t group_size) const;
-		void	merge_insertion_sort(size_t group_size);
+		void	ford_johnson_sort(size_t group_size);
 };
 
 #endif
