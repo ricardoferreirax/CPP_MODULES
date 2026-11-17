@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/15 21:47:48 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 18:32:01 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ PmergeMe::PmergeMe()
 
 PmergeMe::PmergeMe(int ac, char **av)
 {
-	int	nb;
-	int	digit;
-
 	std::string input;
+	int			nb;
+	int			digit;
+
 	if (ac < 2)
 		throw std::invalid_argument("No numbers provided.");
 	for (int i = 1; i < ac; i++)
@@ -50,8 +50,9 @@ PmergeMe::PmergeMe(int ac, char **av)
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
 	this->_nbrs = other._nbrs;
+	this->_pairs = other._pairs;
 	this->_main_chain = other._main_chain;
-	this->_pend_groups = other._pend_groups;
+	this->_losers = other._losers;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other)
@@ -59,8 +60,9 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 	if (this != &other)
 	{
 		this->_nbrs = other._nbrs;
+		this->_pairs = other._pairs;
 		this->_main_chain = other._main_chain;
-		this->_pend_groups = other._pend_groups;
+		this->_losers = other._losers;
 	}
 	return (*this);
 }
@@ -167,7 +169,7 @@ void PmergeMe::print_chains(size_t group_size, bool show_pairs) const
 	std::cout << std::endl;
 }
 
-void PmergeMe::insert_pending_groups(size_t group_size)
+void PmergeMe::insert_losers(size_t group_size)
 {
 	size_t pend_pos;
 	size_t winner_pos;
@@ -254,7 +256,7 @@ void PmergeMe::merge_insertion_sort(size_t group_size)
 			break ;
 		}
 	}
-	insert_pending_groups(group_size);
+	insert_losers(group_size);
 	std::cout << "After insertion:" << std::endl;
 	print_chains(group_size, false);
 	for (size_t i = 0; i < this->_main_chain.size(); i++)
