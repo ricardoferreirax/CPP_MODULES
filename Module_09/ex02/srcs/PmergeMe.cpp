@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 18:32:01 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 20:27:21 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void PmergeMe::print_nbrs(size_t group_size) const
 		else
 			std::cout << " ";
 		std::cout << std::setw(2) << i;
-		if (group_size > 0 && ((i + 1) % group_size == 0
-				|| i == this->_nbrs.size() - 1))
+		if (group_size > 0 && ((i + 1) % group_size == 0 || i == this->_nbrs.size() - 1))
 			std::cout << "]";
 	}
 	std::cout << std::endl;
@@ -107,64 +106,52 @@ void PmergeMe::print_nbrs(size_t group_size) const
 		else
 			std::cout << " ";
 		std::cout << std::setw(2) << this->_nbrs[i];
-		if (group_size > 0 && ((i + 1) % group_size == 0
-				|| i == this->_nbrs.size() - 1))
+		if (group_size > 0 && ((i + 1) % group_size == 0 || i == this->_nbrs.size() - 1))
 			std::cout << "]";
 	}
 	std::cout << std::endl;
 }
 
+void PmergeMe::print_group(const t_group &group) const
+{
+	std::cout << "(" << group.id << ")[";
+	for (size_t i = 0; i < group.nbrs.size(); i++)
+	{
+		if (i > 0)
+			std::cout << " ";
+		std::cout << group.nbrs[i];
+	}
+	std::cout << "]";
+}
+
 // pending: b1  b2  b3  b4
 // winner:  a1  a2  a3  a4
-void PmergeMe::print_chains(size_t group_size, bool show_pairs) const
+void PmergeMe::print_chains(bool show_pairs) const
 {
-	size_t block_size;
-	size_t pos;
-
-	block_size = group_size * 2;
 	if (show_pairs)
 	{
-		for (size_t i = 0; i < this->_nbrs.size() / block_size; i++)
+		for (size_t i = 0; i < this->_pairs.size(); i++)
 		{
-			pos = i * block_size;
-			std::cout << "Loser (" << pos << ")[";
-			for (size_t j = 0; j < block_size; j++)
-			{
-				if (j == group_size)
-					std::cout << "] | Winner (" << pos + group_size << ")[";
-				else if (j > 0)
-					std::cout << " ";
-				std::cout << this->_nbrs[pos + j];
-			}
-			std::cout << "]" << std::endl;
+			std::cout << "Pair " << this->_pairs[i].pair_id << ": ";
+			std::cout << "Loser ";
+			print_group(this->_pairs[i].loser);
+			std::cout << " | Winner ";
+			print_group(this->_pairs[i].winner);
+			std::cout << std::endl;
 		}
-		std::cout << "\nPending groups: ";
-		for (size_t i = 0; i < this->_pend_groups.size(); i++)
+		std::cout << "\nPend groups: ";
+		for (size_t i = 0; i < this->_losers.size(); i++)
 		{
-			pos = this->_pend_groups[i];
-			std::cout << "(" << pos << ")[";
-			for (size_t j = 0; j < group_size; j++)
-			{
-				if (j > 0)
-					std::cout << " ";
-				std::cout << this->_nbrs[pos + j];
-			}
-			std::cout << "] ";
+			print_group(this->_losers[i]);
+			std::cout << " ";
 		}
 		std::cout << std::endl;
 	}
 	std::cout << "Main chain: ";
 	for (size_t i = 0; i < this->_main_chain.size(); i++)
 	{
-		pos = this->_main_chain[i];
-		std::cout << "(" << pos << ")[";
-		for (size_t j = 0; j < group_size; j++)
-		{
-			if (j > 0)
-				std::cout << " ";
-			std::cout << this->_nbrs[pos + j];
-		}
-		std::cout << "] ";
+		print_group(this->_main_chain[i]);
+		std::cout << " ";
 	}
 	std::cout << std::endl;
 }
