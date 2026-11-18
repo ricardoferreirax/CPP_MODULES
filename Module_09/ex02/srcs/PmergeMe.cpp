@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/18 23:17:45 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/18 23:22:47 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ void PmergeMe::ford_johnson_sort(size_t group_len)
 	if (group_len == 0 || group_len > this->_nbrs.size() / 2)
 		return ; // base case: there arent enough nbrs to form two groups of group_len
 	pair_len = group_len * 2;
-	complete_groups = this->_nbrs.size() / pair_len;
+	complete_groups = this->_nbrs.size() / group_len;
 	for (size_t i = 0; i < this->_nbrs.size() / pair_len; i++)
 	{
 		pos = i * pair_len; // starting pos of curr pair
