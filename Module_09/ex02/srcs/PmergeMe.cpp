@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/18 22:28:32 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/18 23:02:26 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ std::vector<size_t> PmergeMe::jacobsthal_order() const
 	size_t next; // J(n)
 	size_t end; // last nbr to process in curr block
 
-	prev = 1; // J(1)
+	prev = 1; // J(2)
 	curr = 3; // J(3)
 	while (prev <= this->_losers.size()) // while there are pend losers
 	{
@@ -260,23 +260,31 @@ void PmergeMe::insert_pend_losers()
 	}
 }
 
+// At each level:
+// 1) compare two adjacent groups using their max values.
+// 2) swap groups if left group is greater.
+// 3) recursively process larger groups.
+// 4) build winner/loser pairs when recursion returns.
+// 5) insert pend losers using jacobsthal order.
+// 6) rebuild _nbrs with new group order.
 void PmergeMe::ford_johnson_sort(size_t group_len)
 {
-	t_pair	pair;
-	size_t	pair_len;
-	size_t	pos;
-	size_t	total_groups;
+	std::vector<int> sorted; // sorted nbrs to rebuilt after inserting losers
+	t_pair			 pair;
+	t_group			 straggler; // group w/o an associated winner
+	size_t			 pair_len; // nbr of int in two groups
+	size_t			 pos; // starting pos in _nbrs
+	size_t			 complete_groups;
 
-	std::vector<int> sorted;
 	if (group_len == 0 || group_len > this->_nbrs.size() / 2)
-		return ;
+		return ; // base case: there arent enough nbrs to form two groups of group_len
 	pair_len = group_len * 2;
-	total_groups = this->_nbrs.size() / group_len;
+	complete_groups = this->_nbrs.size() / pair_len;
 	for (size_t i = 0; i < this->_nbrs.size() / pair_len; i++)
 	{
-		pos = i * pair_len;
-		if (this->_nbrs[pos + group_len - 1] > this->_nbrs[pos + pair_len - 1])
-			swap_groups(pos, pos + group_len, group_len);
+		pos = i * pair_len; // starting pos of curr pair
+		if (this->_nbrs[pos + group_len - 1] > this->_nbrs[pos + pair_len - 1]) // compare max of two groups
+			swap_groups(pos, pos + group_len, group_len); // swap groups if left group is greater
 	}
 	print_nbrs(pair_len);
 	ford_johnson_sort(pair_len);
@@ -285,34 +293,35 @@ void PmergeMe::ford_johnson_sort(size_t group_len)
 	this->_pairs.clear();
 	this->_main_chain.clear();
 	this->_losers.clear();
-	for (size_t i = 0; i < this->_nbrs.size() / pair_len; i++)
+	for (size_t i = 0; i < this->_nbrs.size() / pair_len; i++) // create loser/winner pair for every two complete groups
 	{
 		pos = i * pair_len;
 		pair.pair_id = i;
-		pair.loser = create_group(pos, group_len);
-		pair.winner = create_group(pos + group_len, group_len);
-		this->_pairs.push_back(pair);
+		pair.loser = create_group(pos, group_len); // left group is loser (b1, b2, b3,...)
+		pair.winner = create_group(pos + group_len, group_len); // right group is winner (a1, a2, a3,...)
+		this->_pairs.push_back(pair); // store pair for find winner associated with loser
 		if (i == 0)
-			this->_main_chain.push_back(pair.loser); // b2, b3, b4,... -> b1, b2, b3, b4,...
+			this->_main_chain.push_back(pair.loser); // first loser (b1) is inserted in main chain
 		else
-			this->_losers.push_back(pair.loser);
-		this->_main_chain.push_back(pair.winner);
+			this->_losers.push_back(pair.loser); // remaining losers (b2, b3,...) are stored in losers vector
+		this->_main_chain.push_back(pair.winner); // add every winner to main chain 
 	}
-	if (total_groups % 2 != 0)
+	if (complete_groups % 2 != 0) // nbr of complete groups is odd, last group cannot form a pair (straggler)
 	{
-		pos = (total_groups - 1) * group_len;
-		this->_losers.push_back(create_group(pos, group_len));
+		pos = (complete_groups - 1) * group_len; // find start of last complete group
+		straggler = create_group(pos, group_len);
+		this->_losers.push_back(straggler); // add straggler to losers vector
 	}
 	print_chains(true);
-	insert_pend_losers();
+	insert_pend_losers(); // insert pend losers in main chain using jacobsthal order
 	print_chains(false);
-	for (size_t i = 0; i < this->_main_chain.size(); i++)
+	for (size_t i = 0; i < this->_main_chain.size(); i++) // rebuild _nbrs with new group order
 	{
 		for (size_t j = 0; j < this->_main_chain[i].nbrs.size(); j++)
-			sorted.push_back(this->_main_chain[i].nbrs[j]);
+			sorted.push_back(this->_main_chain[i].nbrs[j]); // copy every nbr from curr group
 	}
-	for (size_t i = total_groups * group_len; i < this->_nbrs.size(); i++)
-		sorted.push_back(this->_nbrs[i]);
+	for (size_t i = complete_groups * group_len; i < this->_nbrs.size(); i++)
+		sorted.push_back(this->_nbrs[i]); // copy remaining nbrs that couldnt form a complete group
 	this->_nbrs = sorted;
 	std::cout << "\nrebuilt vector (group " << group_len << "):" << std::endl;
 	print_nbrs(group_len);
