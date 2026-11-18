@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 22:18:34 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/18 22:28:32 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,13 +193,21 @@ size_t PmergeMe::find_insert_pos(const t_group &loser, size_t limit) const
 }
 
 // J(n) = J(n-1) + 2*J(n-2), J(0) = 0, J(1) = 1  -> 0, 1, 1, 3, 5, 11, 21, 43, 85...
-// create a vector of losers idxs in the order they should be inserted into main chain
+// jacobsthal determines boundaries of blocks of losers that we need to insert into main chain. 
+// We insert each block backwards to reduce nbr of comparisons.
+// we order winners: a1 < a2 < a3 and each loser is less than its associated winner: b1 < a1, b2 < a2, b3 < a3. 
+// We have to insert b2 and b3. We have two options:
+// 1) insert b2 first, we need to find before a2: b1 a1 | a2 a3 (in worst case we have 2 comparisons).
+//    After inserting b2, we have to insert b3: b1 a1 b2 a2 | a3 (in worst case we have 3 comparisons).
+// 2) insert b3 first, we need to find before a3: b1 a1 a2 | a3 (in worst case we have 2 comparisons).
+//    After inserting b3, we have to insert b2: b1 a1 | a2 b3 a3 (in worst case we have 2 comparisons).
+// For this, ford johnson uses b3 -> b2 insertion order.
 std::vector<size_t> PmergeMe::jacobsthal_order() const
 {
 	std::vector<size_t> order; // losers idxs in jacobsthal insertion order
 	size_t prev; // J(n-2)
 	size_t curr; // J(n-1)
-	size_t next;
+	size_t next; // J(n)
 	size_t end; // last nbr to process in curr block
 
 	prev = 1; // J(1)
@@ -207,13 +215,13 @@ std::vector<size_t> PmergeMe::jacobsthal_order() const
 	while (prev <= this->_losers.size()) // while there are pend losers
 	{
 		end = curr; // set end of curr block
-		if (end > this->_losers.size() + 1)
+		if (end > this->_losers.size() + 1) // last block may contain more losers than we have, we limit it to the last loser
 			end = this->_losers.size() + 1;
-		for (size_t i = end; i > prev; i--)
+		for (size_t i = end; i > prev; i--) // insert losers in reverse order to reduce nbr of comparisons
 			order.push_back(i - 2);
-		if (curr >= this->_losers.size() + 1)
+		if (curr >= this->_losers.size() + 1) // we have processed all losers
 			break ;
-		next = curr + 2 * prev;
+		next = curr + 2 * prev; // J(n) = J(n-1) + 2*J(n-2)
 		prev = curr;
 		curr = next;
 	}
@@ -227,27 +235,27 @@ void PmergeMe::insert_pend_losers()
 	size_t 				insert_pos;
 	size_t 				loser_idx;
 
-	order = jacobsthal_order();
-	for (size_t i = 0; i < order.size(); i++)
+	order = jacobsthal_order(); // get losers idxs -> [1, 0, 3, 2] means insert b3, b2, b5, b4.
+	for (size_t i = 0; i < order.size(); i++) // process each loser in jacobsthal order
 	{
-		loser_idx = order[i];
-		limit = this->_main_chain.size();
+		loser_idx = order[i]; // get next loser idx to insert
+		limit = this->_main_chain.size(); // allow search in entire main chain
 		for (size_t j = 0; j < this->_pairs.size(); j++)
 		{
-			if (this->_losers[loser_idx].id == this->_pairs[j].loser.id)
+			if (this->_losers[loser_idx].id == this->_pairs[j].loser.id) // find pair that has the curr loser
 			{
 				for (size_t k = 0; k < this->_main_chain.size(); k++)
 				{
-					if (this->_main_chain[k].id == this->_pairs[j].winner.id)
+					if (this->_main_chain[k].id == this->_pairs[j].winner.id) // once we find the pair, we locate winner in main chain
 					{
-						limit = k;
+						limit = k; // loser cannot be greater than its winner, we limit search to before winner
 						break ;
 					}
 				}
-				break ;
+				break ; // we found the pair->stop search
 			}
 		}
-		insert_pos = find_insert_pos(this->_losers[loser_idx], limit);
+		insert_pos = find_insert_pos(this->_losers[loser_idx], limit); // find where to insert loser in main chain
 		this->_main_chain.insert(this->_main_chain.begin() + insert_pos, this->_losers[loser_idx]);
 	}
 }
