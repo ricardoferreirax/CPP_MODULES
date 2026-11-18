@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/18 23:02:26 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/18 23:17:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,10 @@ void PmergeMe::print_chains(bool show_pairs) const
 	std::cout << std::endl;
 }
 
+// Every loser belongs to a pair: b1 <= a1, b2 <= a2, b3 <= a3
+// Since loser cannot be greater than its associated winner, we need to search before winner.
+// Limit represents winner's curr idx -> binary search uses range [0, limit[.
+// The function returns pos where loser should be inserted to keep main chain ordered.
 size_t PmergeMe::find_insert_pos(const t_group &loser, size_t limit) const
 {
 	size_t left;
@@ -178,22 +182,22 @@ size_t PmergeMe::find_insert_pos(const t_group &loser, size_t limit) const
 	int    loser_max;
 
 	left = 0;
-	right = limit;
-	loser_max = loser.nbrs[loser.nbrs.size() - 1];
-	while (left < right)
+	right = limit; // set limit to winner idx or if no winner set to chain size
+	loser_max = loser.nbrs[loser.nbrs.size() - 1]; // get max nbr of loser group
+	while (left < right) // continue till we find pos to insert loser group
 	{
-		mid = left + (right - left) / 2;
-		mid_max = this->_main_chain[mid].nbrs[this->_main_chain[mid].nbrs.size() - 1];
+		mid = left + (right - left) / 2; // get mid idx of main chain
+		mid_max = this->_main_chain[mid].nbrs[this->_main_chain[mid].nbrs.size() - 1]; // get max nbr of mid group
 		if (loser_max < mid_max)
-			right = mid;
+			right = mid; // belongs before mid->continue search in left half
 		else
-			left = mid + 1;
+			left = mid + 1; // belongs after mid->continue search in right half
 	}
-	return (left);
+	return (left); // left is where loser should be inserted to keep main chain ordered
 }
 
 // J(n) = J(n-1) + 2*J(n-2), J(0) = 0, J(1) = 1  -> 0, 1, 1, 3, 5, 11, 21, 43, 85...
-// jacobsthal determines boundaries of blocks of losers that we need to insert into main chain. 
+// jacobsthal determines limits of blocks of losers that we need to insert into main chain. 
 // We insert each block backwards to reduce nbr of comparisons.
 // we order winners: a1 < a2 < a3 and each loser is less than its associated winner: b1 < a1, b2 < a2, b3 < a3. 
 // We have to insert b2 and b3. We have two options:
@@ -222,8 +226,8 @@ std::vector<size_t> PmergeMe::jacobsthal_order() const
 		if (curr >= this->_losers.size() + 1) // we have processed all losers
 			break ;
 		next = curr + 2 * prev; // J(n) = J(n-1) + 2*J(n-2)
-		prev = curr;
-		curr = next;
+		prev = curr; // update prev to J(n-1)
+		curr = next; // update curr to J(n)
 	}
 	return (order);
 }
@@ -260,13 +264,6 @@ void PmergeMe::insert_pend_losers()
 	}
 }
 
-// At each level:
-// 1) compare two adjacent groups using their max values.
-// 2) swap groups if left group is greater.
-// 3) recursively process larger groups.
-// 4) build winner/loser pairs when recursion returns.
-// 5) insert pend losers using jacobsthal order.
-// 6) rebuild _nbrs with new group order.
 void PmergeMe::ford_johnson_sort(size_t group_len)
 {
 	std::vector<int> sorted; // sorted nbrs to rebuilt after inserting losers
