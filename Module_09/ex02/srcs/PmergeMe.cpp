@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:50:12 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 21:45:03 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 22:18:34 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,17 +192,49 @@ size_t PmergeMe::find_insert_pos(const t_group &loser, size_t limit) const
 	return (left);
 }
 
+// J(n) = J(n-1) + 2*J(n-2), J(0) = 0, J(1) = 1  -> 0, 1, 1, 3, 5, 11, 21, 43, 85...
+// create a vector of losers idxs in the order they should be inserted into main chain
+std::vector<size_t> PmergeMe::jacobsthal_order() const
+{
+	std::vector<size_t> order; // losers idxs in jacobsthal insertion order
+	size_t prev; // J(n-2)
+	size_t curr; // J(n-1)
+	size_t next;
+	size_t end; // last nbr to process in curr block
+
+	prev = 1; // J(1)
+	curr = 3; // J(3)
+	while (prev <= this->_losers.size()) // while there are pend losers
+	{
+		end = curr; // set end of curr block
+		if (end > this->_losers.size() + 1)
+			end = this->_losers.size() + 1;
+		for (size_t i = end; i > prev; i--)
+			order.push_back(i - 2);
+		if (curr >= this->_losers.size() + 1)
+			break ;
+		next = curr + 2 * prev;
+		prev = curr;
+		curr = next;
+	}
+	return (order);
+}
+
 void PmergeMe::insert_pend_losers()
 {
-	size_t	limit;
-	size_t	insert_pos;
+	std::vector<size_t> order;
+	size_t 				limit;
+	size_t 				insert_pos;
+	size_t 				loser_idx;
 
-	for (size_t i = 0; i < this->_losers.size(); i++)
+	order = jacobsthal_order();
+	for (size_t i = 0; i < order.size(); i++)
 	{
+		loser_idx = order[i];
 		limit = this->_main_chain.size();
 		for (size_t j = 0; j < this->_pairs.size(); j++)
 		{
-			if (this->_losers[i].id == this->_pairs[j].loser.id)
+			if (this->_losers[loser_idx].id == this->_pairs[j].loser.id)
 			{
 				for (size_t k = 0; k < this->_main_chain.size(); k++)
 				{
@@ -215,8 +247,8 @@ void PmergeMe::insert_pend_losers()
 				break ;
 			}
 		}
-		insert_pos = find_insert_pos(this->_losers[i], limit);
-		this->_main_chain.insert(this->_main_chain.begin() + insert_pos, this->_losers[i]);
+		insert_pos = find_insert_pos(this->_losers[loser_idx], limit);
+		this->_main_chain.insert(this->_main_chain.begin() + insert_pos, this->_losers[loser_idx]);
 	}
 }
 
@@ -253,7 +285,7 @@ void PmergeMe::ford_johnson_sort(size_t group_len)
 		pair.winner = create_group(pos + group_len, group_len);
 		this->_pairs.push_back(pair);
 		if (i == 0)
-			this->_main_chain.push_back(pair.loser);
+			this->_main_chain.push_back(pair.loser); // b2, b3, b4,... -> b1, b2, b3, b4,...
 		else
 			this->_losers.push_back(pair.loser);
 		this->_main_chain.push_back(pair.winner);

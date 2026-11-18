@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:48:14 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/17 21:18:26 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/17 22:02:39 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ class PmergeMe
 		void 	print_group(const t_group &group) const;
 		void 	print_chains(bool show_pairs) const;
 		void 	insert_pend_losers();
-		void 	reorder_groups();
+
+		std::vector<size_t> jacobsthal_order() const;
 
 	public:
 		PmergeMe();
