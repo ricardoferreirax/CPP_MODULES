@@ -6,10 +6,11 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 10:15:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/20 21:10:56 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/22 23:04:50 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/easyfind.hpp"
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -28,9 +29,14 @@ int	main(void)
 	for (it = nbrs.begin(); it != nbrs.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << std::endl;
+	it = std::find(nbrs.begin(), nbrs.end(), 20);
+	std::cout << "F: " << *it << " at index " << (it - nbrs.begin()) << std::endl;
 	it = std::find(nbrs.begin(), nbrs.end(), 30);
-	std::cout << "Found: " << *it << " at index " << (it - nbrs.begin()) << std::endl;
+	std::cout << "F: " << *it << " at index " << (it - nbrs.begin()) << std::endl;
 	it = std::find(nbrs.begin(), nbrs.end(), 100);
-	std::cout << "Not Found: " << *it << std::endl;
+	std::cout << "NF: " << *it << std::endl << std::endl;
+	easyfind(nbrs, 20);
+	easyfind(nbrs, 30);
+	easyfind(nbrs, 100);
 	return (0);
 }
