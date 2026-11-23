@@ -6,12 +6,11 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:02:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/17 17:01:40 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 14:13:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ScalarConverter.hpp"
-
 #include <iostream>
 
 int	main(int ac, char **av)
@@ -22,6 +21,5 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ScalarConverter::convert(av[1]);
-	
 	return (0);
 }

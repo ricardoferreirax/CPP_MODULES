@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/20 22:51:26 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 14:15:09 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,19 @@ ScalarConverter::~ScalarConverter(void)
 	
 }
 
-// Checks whether a numeric value represents a printable ASCII character. Printable ASCII characters are in the range 32 to 126.
-// Values below 32 are control characters and are not normally printable. Value 127 is also not a printable ASCII character.
-// Returns: true -> printable character | false -> non-printable character
 static bool	isPrintable(int value)
 {
 	return (value >= 32 && value <= 126);
 }
 
-// Checks whether a character is a decimal digit.
 static bool	isDigit(char value)
 {
 	return (value >= '0' && value <= '9');
+}
+
+static bool	isValidNumericChar(char c)
+{
+	return (isDigit(c) || c == '.' || c == '+' || c == '-' || c == 'f' || c == 'e' || c == 'E');
 }
 
 // Prints the result used when the input does not represent a valid literal. That means that the original input itself could not be
@@ -120,36 +121,46 @@ bool	ScalarConverter::checkSingleCharacter(const std::string &literal)
 	return (true);
 }
 
-// Determines the numeric type from the textual form of the literal. The function only classifies the syntax.
-// Rules: no '.' and no 'f' -> INT | last character is 'f' -> FLOAT | otherwise -> DOUBLE
+// detects numeric type based on the literal's format.
+// int->no decimal point and no 'f' | float->ends with 'f' | double->has decimal point and does not end with 'f'
 static int	findLiteralType(const std::string &literal)
 {
-	if (literal.find('.') == std::string::npos && literal.find('f') == std::string::npos) // if there's no decimal point and no 'f', it's an integer literal
+	if (literal.find('.') == std::string::npos && literal.find('f') == std::string::npos)
 		return (INT);
-	if (literal.length() > 1 && literal[literal.length() - 1] == 'f') // if the last character is 'f', it's a float literal
+	if (literal.length() > 1 && literal[literal.length() - 1] == 'f')
 		return (FLOAT);
-	return (DOUBLE); // if it has a decimal point and doesn't end with 'f', it's a double literal
+	return (DOUBLE);
 }
 
-
-// Performs the final syntax validation after std::strtod() has parsed the numeric part of the input.
-// std::strtod() receives a pointer named "end". After parsing, "end" points to the first character that was not consumed.
-// Example: input: "42.0f" -> std::strtod() parses "42.0" -> end points to 'f'.
-// For a FLOAT: the literal must contain '.', end must point to 'f', and the character after 'f' must be '\0'.;
-// For INT and DOUBLE: std::strtod() must consume the complete string, so end must point directly to the null terminator '\0'.
+// Performs final validation after std::strtod() has parsed numeric part of input.
+// After parsing, "end" points to the first character that was not consumed. input: "42.0f" -> std::strtod() parses "42.0" -> end points to 'f'.
 static bool	hasValidSyntax(const std::string &literal, int type, char *end)
 {
+	size_t	i;
+
+	i = 0;
+	while (i < literal.length())
+	{
+		if (!isValidNumericChar(literal[i])) // literal has only numeric chars
+			return (false);
+		i++;
+	}
+	for (size_t i = 1; i < literal.length(); i++)
+	{
+		if (literal[i] == '+' || literal[i] == '-') // check '+' or '-' appears only begining
+			return (false);
+	}
 	if (type == FLOAT)
 	{
-		if (literal.find('.') == std::string::npos) // if there's no decimal point, it's not a valid float literal
-			return (false);
-		if (*end != 'f') // if the character after the parsed number is not 'f', it's not a valid float literal
-			return (false);
-		if (*(end + 1) != '\0') // if there's any character after 'f', it's not a valid float literal
-			return (false);
-		return (true); //
+		if (literal.find('.') == std::string::npos)
+			return (false); // no '.' -> not a valid float
+		if (*end != 'f')
+			return (false); // after parsed nbr there's no 'f'-> not a valid float
+		if (*(end + 1) != '\0')
+			return (false); // after 'f' there's another char-> not a valid float
+		return (true);
 	}
-	return (*end == '\0'); // for INT and DOUBLE, the entire string must be consumed by std::strtod(), so *end should point to the null terminator.
+	return (*end == '\0'); // std::strtod() must consume string for int/double->end must point to '\0'
 }
 
 // Displays the char conversion. The input arrives as a double because all normal numeric literals are first converted to a 
