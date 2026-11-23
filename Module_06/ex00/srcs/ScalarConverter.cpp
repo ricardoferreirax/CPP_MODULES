@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/23 20:53:30 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 21:59:02 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ static void	printInvalid(void)
 	std::cout << "double: impossible" << std::endl;
 }
 
+// check and print special floating-point literals
+// nan->Not a Number | +inf->Positive infinity | -inf->Negative infinity
+// these values cant be converted to char or int.
 static bool	printPseudoLiteral(const std::string &literal)
 {
 	std::string floatValue;
@@ -89,7 +92,9 @@ static bool	printPseudoLiteral(const std::string &literal)
 	return (true);
 }
 
-bool ScalarConverter::checkSingleCharacter(const std::string &literal)
+// string must has one char | that char must be printable | it must not be a digit.
+// digits are excluded because "7" should be treated as int 7, not as ascii char '7'.
+bool ScalarConverter::checkSingleChar(const std::string &literal)
 {
 	if (literal.length() != 1)
 		return (false);
@@ -100,43 +105,66 @@ bool ScalarConverter::checkSingleCharacter(const std::string &literal)
 	return (true);
 }
 
+// identify numeric type from literal format.
+// INT: no decimal point, float suffix or exponent.
+// FLOAT: literal ends with 'f'.
+// DOUBLE: decimal values and scientific notation without 'f' suffix.
+//
+// "42.5f"   -> FLOAT
+// "1e3f"    -> FLOAT
+// "42.5"    -> DOUBLE
+// "1e3"     -> DOUBLE
 static int	findLiteralType(const std::string &literal)
 {
 	if (literal.find('.') == std::string::npos && literal.find('f') == std::string::npos
 		&& literal.find('e') == std::string::npos && literal.find('E') == std::string::npos)
 		return (INT);
 	if (literal.length() > 1 && literal[literal.length() - 1] == 'f')
-		return (FLOAT);
+		return (FLOAT); // ends with 'f'->FLOAT
 	return (DOUBLE);
 }
 
+// literal->original input string | type-> type detected by findLiteralType() | end-> pointer returned by strtod().
+// strtod() converts numeric part of string->updates 'end' to point to first char that wasnt consumed during conversion.
+//
+// literal = "42.5"->strtod() converts 42.5->end points to '\0', the end of the string.
+// literal = "42.5f"->strtod() converts 42.5->end points to 'f'.
 static bool	hasValidSyntax(const std::string &literal, int type, char *end)
 {
-	for (size_t i = 0; i < literal.length(); i++)
+	for (size_t i = 0; i < literal.length(); i++) // iterate through each char in original input string
 	{
 		if (!isValidNumericChar(literal[i]))
-			return (false);
-		if ((literal[i] == '+' || literal[i] == '-') && i > 0 && literal[i - 1] != 'e' && literal[i - 1] != 'E')
+			return (false); // reject chars that are not digits, '.', '+', '-', 'f', 'e', or 'E'.
+		if ((literal[i] == '+' || literal[i] == '-') && i > 0 
+			&& literal[i - 1] != 'e' && literal[i - 1] != 'E') // '+' or '-' can only appear at start of string or after 'e' or 'E'.
 			return (false);
 	}
 	if (type == FLOAT)
-		return (*end == 'f' && *(end + 1) == '\0');
-	return (*end == '\0');
+		return (*end == 'f' && *(end + 1) == '\0'); // floats must end with 'f' and nothing else after it.
+	return (*end == '\0'); // for int/double->strtod() must consume entire string->end point to '\0'.
 }
 
+// convert a numeric value into a formatted string.
+// controls how float and double values are displayed w/out changing their stored values.
+// value-> Number to format. | precision > Number of decimal places to display.
+//
+// value = 42.500000 ->precision = 6 ->after removing zeros ->"42.5"
+// 
+// If result ends with '.' ->append '0'.
+// "42.000000" -> "42." -> "42.0"
 static std::string formatNumber(double value, int precision)
 {
 	std::ostringstream stream;
-	std::string res;
+	std::string res; // formatted nbr as string
 
-	if (value != 0.0 && value < 0.000001 && value > -0.000001)
+	if (value != 0.0 && value < 0.000001 && value > -0.000001) // value is very small but not exactly zero
 		precision = 10;
-	stream << std::fixed << std::setprecision(precision) << value;
-	res = stream.str();
+	stream << std::fixed << std::setprecision(precision) << value; // convert value to string with fixed-point notation
+	res = stream.str(); // extract formatted string from stream
 	while (res.find('.') != std::string::npos && res[res.length() - 1] == '0')
-		res.erase(res.length() - 1);
+		res.erase(res.length() - 1); // rmv zeros after decimal point
 	if (res[res.length() - 1] == '.')
-		res += '0';
+		res += '0'; // all decimal digits were removed->append '0' to ensure at least one decimal place is displayed
 	return (res);
 }
 
@@ -263,7 +291,7 @@ void ScalarConverter::convert(const std::string &literal)
 
 	if (printPseudoLiteral(literal))
 		return ;
-	if (checkSingleCharacter(literal))
+	if (checkSingleChar(literal))
 	{
 		convertChar(literal[0]);
 		return ;
