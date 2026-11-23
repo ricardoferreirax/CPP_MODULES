@@ -6,29 +6,26 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 18:10:41 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/20 22:13:57 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:55:41 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Serializer.hpp"
 #include <iostream>
 
-// The Serializer class must not be instantiated. Its constructor is private because the class only provides static methods.
-// We never need to create a Serializer object to call serialize() or deserialize().
+// serializer class mustnt be instantiated->its constructor is private cause class 
+// only provides static methods->we never need to create a serializer object to call serialize() or deserialize().
 Serializer::Serializer(void)
 {
 	std::cout << "[Serializer] Default Serializer created!" << std::endl;
 }
 
-// It is private because Serializer objects should never be created or copied. Since the class has no attributes, 
-// there is no actual data to copy.
+// serializer objects should never be created or copied->since class has no attributes->there is no data to copy.
 Serializer::Serializer(const Serializer &other)
 {
 	(void)other;
 }
 
-// Serializer has no attributes, so there is nothing to assign. It is private because the user should not create or assign 
-// Serializer objects.
 Serializer &Serializer::operator=(const Serializer &other)
 {
 	(void)other;
@@ -39,7 +36,6 @@ Serializer::~Serializer(void)
 {
 	std::cout << "[Serializer] Serializer has been destroyed!" << std::endl;
 }
-
 
 // serialize() receives a pointer to a Data object. Data *ptr means that ptr contains the memory address of a Data object.
 // For example, if a Data object is stored at address 0x7ffd12345678, ptr contains that address.

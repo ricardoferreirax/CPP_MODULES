@@ -6,17 +6,17 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 18:09:06 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/08 18:15:06 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:45:46 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#define SERIALIZER_HPP
 
-# include <stdint.h>
-# include "Data.hpp"
+#include "Data.hpp"
+#include <stdint.h>
 
-class Serializer
+class	Serializer
 {
 	private:
 		Serializer(void);
@@ -26,7 +26,7 @@ class Serializer
 
 	public:
 		static uintptr_t serialize(Data *ptr);
-		static Data	*deserialize(uintptr_t raw);
+		static Data *deserialize(uintptr_t raw);
 };
 
 #endif
