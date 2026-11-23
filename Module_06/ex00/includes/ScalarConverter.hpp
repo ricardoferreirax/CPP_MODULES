@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 19:01:08 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/23 20:57:29 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:42:12 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 
 #include <string>
 
-#define CHAR 0
-#define INT 1
-#define FLOAT 2
-#define DOUBLE 3
+enum	e_literal_type
+{
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE
+};
 
 class	ScalarConverter
 {

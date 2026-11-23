@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 17:30:15 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/23 21:59:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/23 22:40:05 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,17 +208,22 @@ static void	printOverflow(void)
 	std::cout << "double: overflow" << std::endl;
 }
 
+// check if a double can safely become an int.
+// casting a floating-point value outside int range can cause undefined behavior.
+// we must check limits before static_cast<int>().
 static bool	canConvertToInt(double value)
 {
-	if (value != value)
+	if (value != value) // NaN cant be converted safely to int
 		return (false);
 	if (value < std::numeric_limits<int>::min())
 		return (false);
 	if (value >= static_cast<double>(std::numeric_limits<int>::max()) + 1.0)
-		return (false);
+		return (false); // reject values at or above int_max + 1.0
 	return (true);
 }
 
+// check if a double can safely become a char.
+// on systems with signed 8-bit char: min = -128 and max = 127
 static bool	canConvertToChar(double value)
 {
 	if (value != value)
@@ -230,6 +235,10 @@ static bool	canConvertToChar(double value)
 	return (true);
 }
 
+// convert a char to all four scalar types->the original value is already a char.
+// value = 'A'->ASCII value of 'A' = 65.
+// char-> 'A' | int-> 65 | float-> 65.0f | double-> 65.0
+// static_cast converts original char value to requested numeric type.
 static void	convertChar(char value)
 {
 	printChar(value, true);
@@ -238,6 +247,9 @@ static void	convertChar(char value)
 	printDouble(static_cast<double>(value));
 }
 
+// convert an int to all four scalar types.
+// value = 42 | char-> '*' | int-> 42 | float-> 42.0f | double-> 42.0
+// before casting int to char->check if int fits inside char range->if not, print "impossible" for char.
 static void	convertInt(int value)
 {
 	if (!canConvertToChar(value))
@@ -249,6 +261,10 @@ static void	convertInt(int value)
 	printDouble(static_cast<double>(value));
 }
 
+// convert a float to all four scalar types.
+// value = 42.5f | char-> '*' | int-> 42 | float-> 42.5f | double-> 42.5
+// floating-point to int conversion->truncate fractional part->42.5f becomes 42
+// before casting float to char or int->check if float fits inside char or int range
 static void	convertFloat(float value)
 {
 	if (!canConvertToChar(value))
@@ -263,6 +279,9 @@ static void	convertFloat(float value)
 	printDouble(static_cast<double>(value));
 }
 
+// convert a double to all four scalar types.
+// value = 42.5 | char-> '*' | int-> 42 | float-> 42.5f | double-> 42.5
+// before casting double to char or int->check if double fits inside char or int range
 static void	convertDouble(double value)
 {
 	if (!canConvertToChar(value))
@@ -280,6 +299,20 @@ static void	convertDouble(double value)
 	printDouble(value);
 }
 
+
+// 1) check nan, nanf, +inf, -inf->if recognized, print all four representations
+// 2) check if string has one printable char that is not a digit.
+//    literal = "a" ->convertChar('a') prints: char: 'a' | int: 97 | float: 97.0f | double: 97.0
+// 3) determine if literal represents an int, float or double.
+// 4) parse nbrs->strtod() converts numeric part of input string into a double.
+//    literal.c_str(): returns a pointer to a string.
+//    &end: allows strtod() to update pointer with position where parsing stopped.
+// 5) check if strtod() consumed entire string->if not, print "impossible" for all types.
+// 6) check if double value is infinity->if so, print "overflow" for all types.
+//    when a numeric value exceeds double range->strtod() returns +/-infinity.
+// 7) convert double to int, float and char->print all four representations.
+//    strtol() converts string to long int->check if long int fits inside int range->if not, print "overflow" for int.
+// 8) convert parsed double to float->check if float fits inside float range->if not, print "overflow" for float.
 void ScalarConverter::convert(const std::string &literal)
 {
 	char   *end;
@@ -310,19 +343,19 @@ void ScalarConverter::convert(const std::string &literal)
 	}
 	if (type == INT)
 	{
-		intNbr = std::strtol(literal.c_str(), &intEnd, 10);
+		intNbr = std::strtol(literal.c_str(), &intEnd, 10); // convert string to long int
 		if (*intEnd == '\0' && intNbr >= std::numeric_limits<int>::min() && intNbr <= std::numeric_limits<int>::max())
 			convertInt(static_cast<int>(intNbr));
 		else
-			convertDouble(value);
+			convertDouble(value); // if strtol() fails or long int is out of int range->treat as double
 	}
 	else if (type == FLOAT)
 	{
-		floatNbr = static_cast<float>(value);
+		floatNbr = static_cast<float>(value); // convert and rounds value to float precision
 		if (floatNbr == std::numeric_limits<float>::infinity() || floatNbr == -std::numeric_limits<float>::infinity())
-			convertDouble(value);
+			convertDouble(value); // if float conversion overflows->treat as double
 		else
-			convertFloat(floatNbr);
+			convertFloat(floatNbr); // if float conversion is successful->print all four representations
 	}
 	else
 		convertDouble(value);
