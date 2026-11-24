@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 18:14:29 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/23 22:46:13 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/24 10:08:45 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 struct	Data
 {
 	std::string brand;
-	int		    year;
-	double	    price;
+	int			year;
+	double		price;
 };
 
 #endif
