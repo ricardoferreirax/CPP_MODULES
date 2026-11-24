@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:16:40 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/10 17:15:17 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/24 18:26:11 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,14 @@ int main( void )
 	
 	return 0;
 }
- 
 
-// A template is a way to write generic code: instead of writing the same function or class 
-// several times for different types, we write it once using a placeholder type, and 
-// the compiler generates the concrete version that is needed when we use it.
-// void swap(T &a, T &b) - T is not a real type yet. It is a placeholder that means the 
-// actual type will be decided when this function is used.
-// So, when we call swap(a, b) with a and b being integers, the compiler sees that both arguments 
-// are integers and it creates a version of the swap function where T is replaced with int.
+
+// template is a way to write generic code->instead of writing same function or class several times 
+// for different types->we write it once using a placeholder type, and compiler generates concrete 
+// version that is needed when we use it.
+// void swap(T &a, T &b): T isnt a real type yet->it is a placeholder that means actual type will be 
+// decided when this function is used ->so when we call swap(a, b) with a and b being int, compiler 
+// sees that both arguments are ints and it creates a version of swap function where T is replaced with int.
 
 // when compiling the file containing: min(a, b); the compiler needs to see the full template definition, 
 // not only its declaration. If the header only contained: T min(const T &a, const T &b); the compiler 
