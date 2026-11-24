@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:42:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/08/11 18:16:11 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/24 18:32:25 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <exception>
 # include <iostream>
 
-template <typename T> class Array
+template <typename T> 
+class	Array
 {
 	private:
 		T *_array;
@@ -41,7 +42,7 @@ template <typename T> class Array
 		}
 
 		Array(const Array &other)
-		{			
+		{
 			std::cout << "[Array] Copy constructor!" << std::endl;
 			this->_length = other._length;
 			if (this->_length > 0)
@@ -53,7 +54,7 @@ template <typename T> class Array
 			else
 				this->_array = NULL;
 		}
-		
+
 		Array &operator=(const Array &other)
 		{
 			std::cout << "[Array] Assignment operator!" << std::endl;
@@ -101,7 +102,7 @@ template <typename T> class Array
 				throw InvalidIndexException();
 			return (this->_array[index]);
 		}
-		
+
 		unsigned int size(void) const
 		{
 			return (this->_length);
