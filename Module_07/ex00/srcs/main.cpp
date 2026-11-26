@@ -6,56 +6,122 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:16:40 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/24 18:26:11 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/26 14:53:41 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/whatever.hpp"
 #include <iostream>
+#include <string>
 
-int main( void ) 
+int	main(void)
 {
-	int a = 2;
-	int b = 3;
-	
-	::swap( a, b );
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+	int		a;
+	int		b;
+	float	e;
+	float	f;
+	double	g;
+	double	h;
+
+	a = 2;
+	b = 3;
 	std::string c = "chaine1";
 	std::string d = "chaine2";
+	e = 2.5f;
+	f = 3.7f;
+	g = 42.145;
+	h = 21.653;
+	a = 2;
+	b = 3;
+	::swap(a, b);
+	std::cout << "a = " << a << ", b = " << b << std::endl;
+	std::cout << "min(a, b) = " << ::min(a, b) << std::endl;
+	std::cout << "max(a, b) = " << ::max(a, b) << std::endl;
+	c = "chaine1";
+	d = "chaine2";
 	::swap(c, d);
 	std::cout << "c = " << c << ", d = " << d << std::endl;
-	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-	
-	return 0;
+	std::cout << "min(c, d) = " << ::min(c, d) << std::endl;
+	std::cout << "max(c, d) = " << ::max(c, d) << std::endl;
+	e = 2.5f;
+	f = 3.7f;
+	::swap(e, f);
+	std::cout << "e = " << e << ", f = " << f << std::endl;
+	std::cout << "min(e, f) = " << ::min(e, f) << std::endl;
+	std::cout << "max(e, f) = " << ::max(e, f) << std::endl;
+	g = 42.145;
+	h = 21.653;
+	::swap(g, h);
+	std::cout << "g = " << g << ", h = " << h << std::endl;
+	std::cout << "min(g, h) = " << ::min(g, h) << std::endl;
+	std::cout << "max(g, h) = " << ::max(g, h) << std::endl;
+	return (0);
 }
 
-
-// template is a way to write generic code->instead of writing same function or class several times 
-// for different types->we write it once using a placeholder type, and compiler generates concrete 
-// version that is needed when we use it.
-// void swap(T &a, T &b): T isnt a real type yet->it is a placeholder that means actual type will be 
-// decided when this function is used ->so when we call swap(a, b) with a and b being int, compiler 
-// sees that both arguments are ints and it creates a version of swap function where T is replaced with int.
-
-// when compiling the file containing: min(a, b); the compiler needs to see the full template definition, 
-// not only its declaration. If the header only contained: T min(const T &a, const T &b); the compiler 
-// would know that a template exists, but it would not know its implementation when it needs to generate 
-// min<int>, min<double>, and so on.
-// Templates are usually defined in header files because the compiler needs to see the full template definition 
-// at the point where it instantiates the template for a specific type.
-// Then every .cpp file that includes the header can see the complete template and instantiate whatever version it needs.
-
-// Templates are usually defined in header files because the compiler must see the complete template definition when it 
-// instantiates the template for a specific type. Unlike ordinary functions, template code is generated only when a concrete 
-// type is used, so the implementation must be available at compile time.
-
-// template <typename T> - typename tells the compiler that T represents a type. So:
+// a function template is a generic "model" that compiler creates specific functions for different data types.
+// template is a generic model that allows create specialized functions for concrete data types.
+// instead of writing a separate function for int, float, double ->we write a single generic implementation.
+// this improves code reusability and avoids code duplication.
+//
+// template <typename T> ->declares a template with a type param T.
+//
+// typename ->tells compiler that T represents a data type.
+// T ->placeholder for a concrete data type that will be determined when template is used.
+// a placeholder temporarily is something that hasnt yet been specified ->T represents an unspecified data type.
+// unlike a regular function param, which receives a value, a template type param represents a type.
+//
+// TEMPLATE ARGUMENT DEDUCTION: is process in which compiler determines template type param T by examining
+// types of args passed to function.
 //
 // template <typename T>
-// void swap(T &a, T &b)
+// void swap(T &valueA, T &valueB);
 //
-// means: Define a function template with a type parameter called T.<Later, T could become: int, double, 
-// char, std::string or even a user-defined class.
+// when we define template -> T doesnt represent a specific type yet.
+// when we call function ->compiler compares types of args types of args with types of function params.
+// we dont specify if T is an int, float, double, std::string or another data type.
+// when function is called ->compiler determines T based on types of args passed to function.
+//
+// int a = 2, b = 3;
+// ::swap(a, b); -> T represents int.
+// float c = 2.5f, d = 3.7f;
+// ::swap(c, d); -> T represents float.
+
+// compiler examines both arguments: a is an int -> T must be int. | b is an int -> T must also be int.
+// both args allow compiler to deduce same type -> T = int
+//
+/// ::min(2, 3); -> T = int -> valid. | ::min(2, 3.5); -> int and double -> compilation error.
+// compiler cannot deduce two different types for same T.
+// compiler then instantiates a function for each required type, using same generic implementation.
+// this happens at compile time, not at runtime ->T is not a variable that changes its type during execution.
+
+// TEMPLATE INSTANTIATION: is the process in which compiler uses a template to generate a specific function for a given type.
+// after deducing T ->compiler substitutes T with concrete type and checks if function operations are valid for that type.
+//
+// The same template can be instantiated for different types:
+//
+// ::swap(a, b); -> swap<int> | ::swap(c, d); -> swap<std::string> | ::swap(e, f); -> swap<float> | ::swap(g, h); -> swap<double>
+//
+// each instantiated function works with a specific data type, but all versions are based on same generic implementation.
+// compiler doesnt create a new version every time we call the function with same type.
+// template argument deduction -> determines type T.
+// template instantiation -> creates specific function.
+
+// WHY TEMPLATES ARE DEFINED IN HEADER FILES:
+// compiler needs access to complete template definition when instantiating it for a specific type.
+// defining templates in header files makes their implementation visible to every source file that includes them.
+//
+// PASS BY VALUE VS PASS BY REFERENCE:
+// T value ->receives a copy of original arg. ->does not modify original variable.
+// T &value ->receives a reference to original arg. ->avoids copying and allows direct modification of original variable.
+//
+// swap(T &valueA, T &valueB) uses references because it needs to modify the original variables, not copies of them.
+//
+// CONST REFERENCES:
+// const T &value ->accesses original arg w/out copying it and prevents modification through that reference.
+// min() and max() use const references because they only need to compare args, not modify them.
+// returning const T & avoids copying selected object and prevents modification through returned reference.
+// The reference remains valid only while the original object is alive.
+//
+// SCOPE RESOLUTION OPERATOR (::):
+// ::swap(), ::min() and ::max() explicitly call our functions defined in the global scope.
+// this avoids ambiguity with std::swap, std::min and std::max.
