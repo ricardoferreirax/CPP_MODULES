@@ -6,7 +6,7 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:42:55 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/27 11:20:02 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/27 11:24:50 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ template <typename T> class Array
 		~Array(void)
 		{
 			delete[] this->_array;
-			std::cout << "[Array] Destructor!" << std::endl;
+			std::cout << "[Destructor] Memory deleted!" << std::endl;
 		}
 	
 		class InvalidIndexException : public std::exception
