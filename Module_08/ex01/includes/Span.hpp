@@ -6,13 +6,14 @@
 /*   By: rmedeiro <rmedeiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 13:19:04 by rmedeiro          #+#    #+#             */
-/*   Updated: 2026/11/27 13:19:48 by rmedeiro         ###   ########.fr       */
+/*   Updated: 2026/11/28 19:09:48 by rmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
+#include <iostream>
 #include <vector>
 
 class Span
@@ -20,13 +21,16 @@ class Span
 	private:
 		unsigned int _n;
 		std::vector<int> _nbrs;
-	
+
 	public:
 		Span();
 		Span(unsigned int n);
 		Span(const Span &other);
 		Span &operator=(const Span &other);
 		~Span();
+
+		void addNumber(int nbr);
+		void printNumbers();
 };
 
 #endif
